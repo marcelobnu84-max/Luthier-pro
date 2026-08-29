@@ -1035,7 +1035,7 @@ body.portal-mode #portalCliente { display: block !important; }
   <div class="logo">
     <h1>LUTHIER PRO</h1>
     <span>Gestão de Oficina</span>
-    <div id="appVersionBadge" style="margin-top:6px;font-size:0.72rem;color:var(--neon-green);letter-spacing:1px;">v26.8.30 · portal visual</div>
+    <div id="appVersionBadge" style="margin-top:6px;font-size:0.72rem;color:var(--neon-green);letter-spacing:1px;">v26.8.32 · orçamento WA</div>
   </div>
   <div class="nav-item active" onclick="navigateTo('dashboard')">
     <div class="nav-icon">📊</div>
@@ -3033,13 +3033,20 @@ function salvarEntradaCompleta() {
   sincronizarServicoFirebase(servico);
 
   const cod = 'OS-' + String(servico.id).slice(-4).toUpperCase();
-  showToast(`Cadastro salvo! Código ${cod} · ${cli.nome} · ${formatMoney(servico.total)} → Kanban`);
+  ultimoServicoSalvoId = servico.id;
+  showToast(`Cadastro salvo! Código ${cod} · ${cli.nome} · ${formatMoney(servico.total)}`);
   limparFormServico();
   setModoCliente('existente');
   initPaginaServicos();
 
-  // Vai para o Kanban para ver o card novo
-  setTimeout(() => navigateTo('kanban'), 600);
+  // Oferece WhatsApp com orçamento completo (mão de obra + materiais + total)
+  setTimeout(() => {
+    if (confirm('Cadastro salvo!\n\nEnviar orçamento no WhatsApp para ' + (cli.nome || 'o cliente') + '?\n\n(Com mão de obra, materiais e total)')) {
+      abrirWhatsAppOrcamento(servico);
+    } else {
+      navigateTo('kanban');
+    }
+  }, 350);
 }
 
 // Mantém compatibilidade com chamadas antigas
@@ -3064,20 +3071,92 @@ function limparFormServico() {
   if (fotoInput) fotoInput.value = '';
 }
 
-function enviarWhatsApp() {
-  const cli = obterDadosClienteForm();
-  if (cli.erro) { showToast(cli.erro, 'error'); return; }
-  const tipo = document.getElementById('servTipoServico').value || 'Serviço';
-  const inst = document.getElementById('servTipoInstrumento').value || 'Instrumento';
-  const total = document.getElementById('servTotal').value || 'R$ 0,00';
-  const msg = encodeURIComponent(
-    `Olá ${cli.nome}! 👋\n\n` +
-    `Segue orçamento para *${tipo}* do seu *${inst}*:\n\n` +
-    `💰 *Valor Total: ${total}*\n\n` +
-    `Aguardo sua aprovação! 🎸`
+let ultimoServicoSalvoId = null;
+
+/** Monta texto de orçamento com mão de obra, materiais e total */
+function montarMensagemOrcamento(dados) {
+  const L = DB.loja || {};
+  const oficina = L.nome || 'Luthier Pro';
+  const nome = dados.clienteNome || dados.nome || 'cliente';
+  const tipo = dados.tipoServico || 'Serviço';
+  const inst = dados.tipoInstrumento || 'Instrumento';
+  const modelo = (dados.modelo || '').trim();
+  const maoObra = Number(dados.maoObra) || 0;
+  const materiais = Number(dados.materiais) || 0;
+  const qtd = Number(dados.quantidade) || 1;
+  const totalCalc = (dados.total != null && !isNaN(dados.total))
+    ? Number(dados.total)
+    : Math.round((maoObra + materiais) * qtd * 100) / 100;
+  const moStr = formatMoney(maoObra);
+  const matStr = formatMoney(materiais);
+  const totalStr = formatMoney(totalCalc);
+  let itensMat = '';
+  const itens = dados.materiaisItens || [];
+  if (itens.length) {
+    itensMat = '\n*Materiais:*\n' + itens.map(m =>
+      '• ' + (m.nome || 'Item') + ' — ' + formatMoney(m.valor || 0)
+    ).join('\n') + '\n';
+  }
+  const instLinha = modelo ? (inst + ' · ' + modelo) : inst;
+  const cod = dados.id ? ('OS-' + String(dados.id).slice(-4).toUpperCase()) : '';
+  return (
+    'Olá ' + nome + '! 👋\n\n' +
+    'Segue o orçamento da *' + oficina + '*:\n\n' +
+    (cod ? ('*Código:* ' + cod + '\n') : '') +
+    '*Instrumento:* ' + instLinha + '\n' +
+    '*Serviço:* ' + tipo + '\n\n' +
+    '🔧 *Mão de obra:* ' + moStr + '\n' +
+    '🔩 *Materiais:* ' + matStr +
+    itensMat +
+    (qtd > 1 ? ('\n*Quantidade:* ' + qtd) : '') +
+    '\n\n💰 *Total: ' + totalStr + '*\n\n' +
+    'Qualquer dúvida, é só responder esta mensagem.\n' +
+    'Aguardo sua aprovação! 🎸'
   );
-  const tel = cli.telefone.replace(/\D/g, '');
-  window.open(`https://wa.me/55${tel}?text=${msg}`, '_blank');
+}
+
+function abrirWhatsAppOrcamento(dados) {
+  let tel = String(dados.clienteTel || dados.telefone || '').replace(/\D/g, '');
+  if (tel.startsWith('55') && tel.length > 11) tel = tel.slice(2);
+  if (!tel || tel.length < 10) {
+    showToast('Cliente sem telefone!', 'error');
+    return;
+  }
+  const msg = encodeURIComponent(montarMensagemOrcamento(dados));
+  window.location.href = 'https://wa.me/55' + tel + '?text=' + msg;
+}
+
+function enviarWhatsApp() {
+  // 1) Formulário preenchido (antes de salvar)
+  const moForm = parseFloat(document.getElementById('servMaoObra') && document.getElementById('servMaoObra').value) || 0;
+  const matForm = parseFloat(document.getElementById('servMateriais') && document.getElementById('servMateriais').value) || 0;
+  const temValoresForm = moForm > 0 || matForm > 0;
+  const cli = obterDadosClienteForm();
+  if (!cli.erro && temValoresForm) {
+    abrirWhatsAppOrcamento({
+      clienteNome: cli.nome,
+      clienteTel: cli.telefone,
+      tipoServico: document.getElementById('servTipoServico').value || 'Serviço',
+      tipoInstrumento: document.getElementById('servTipoInstrumento').value || 'Instrumento',
+      modelo: (document.getElementById('servModelo').value || '').trim(),
+      maoObra: moForm,
+      materiais: matForm,
+      quantidade: parseInt(document.getElementById('servQuantidade').value, 10) || 1,
+      materiaisItens: (materiaisItensAtual || []).slice(),
+      total: Math.round((moForm + matForm) * (parseInt(document.getElementById('servQuantidade').value, 10) || 1) * 100) / 100
+    });
+    return;
+  }
+  // 2) Último serviço salvo (depois do cadastro o form limpa)
+  let s = ultimoServicoSalvoId ? encontrarServicoPorId(ultimoServicoSalvoId) : null;
+  if (!s && DB.servicos && DB.servicos.length) {
+    s = DB.servicos[DB.servicos.length - 1];
+  }
+  if (s) {
+    abrirWhatsAppOrcamento(s);
+    return;
+  }
+  showToast('Preencha os valores ou salve o cadastro antes de enviar o orçamento.', 'error');
 }
 
 async function gerarPDF() {
@@ -3553,6 +3632,7 @@ function verServico(id) {
       ${fotosHtml}
       <div class="actions-row" style="margin-top:20px;">
         <button class="btn btn-green btn-sm" onclick="abrirEditarServico('${s.id}')">💰 Valores</button>
+        <button class="btn btn-green btn-sm" onclick="abrirWhatsAppOrcamento(encontrarServicoPorId('${s.id}'))">📱 Orçamento WhatsApp</button>
         ${normalizarStatus(s.status) === 'concluido' ? `<button class="btn btn-green btn-sm" onclick="avisarClientePronto('${s.id}')">📱 Avisar que está pronto</button>` : ''}
         <button class="btn btn-cyan btn-sm" onclick="fecharModal('modalVerServico');abrirModalCliente('${s.clienteId || ''}')">👤 Só cadastro</button>
         <button class="btn btn-cyan btn-sm" onclick="enviarCodigoCliente('${s.id}')">📱 Código / status</button>
@@ -4524,7 +4604,7 @@ function renderPortalAdmin() {
   });
 }
 
-function salvarConfigLoja() {
+async function salvarConfigLoja() {
   let wa = (document.getElementById('lojaWhatsapp').value || '').replace(/\D/g, '');
   if (wa.startsWith('55') && wa.length > 11) wa = wa.slice(2);
   DB.loja = {
@@ -4534,8 +4614,17 @@ function salvarConfigLoja() {
     welcome: (document.getElementById('lojaWelcome').value || '').trim()
   };
   DB.save();
-  showToast('Dados salvos! Agora gere o portal-data.json e envie ao Netlify.');
   renderPortalAdmin();
+  if (initFirebase(true)) {
+    try {
+      await sincronizarPortalFirebase();
+      showToast('Dados da oficina salvos e enviados ao Firebase!');
+    } catch (e) {
+      showToast('Salvo no celular. Firebase: ' + (e.message || e), 'error');
+    }
+  } else {
+    showToast('Salvo no celular. Configure o Firebase para publicar online.');
+  }
 }
 
 function publicarPortalData() {
@@ -4573,7 +4662,7 @@ function publicarPortalData() {
   a.download = 'portal-data.json';
   a.click();
   URL.revokeObjectURL(a.href);
-  showToast('Arquivo baixado! Envie portal-data.json ao Netlify (mesma pasta do index.html).');
+  showToast('Arquivo baixado! Envie portal-data.json junto com o index.html (GitHub / Netlify / Cloudflare).');
 }
 
 /** Dados públicos do portal (vindos do portal-data.json no servidor) */
@@ -4661,7 +4750,7 @@ function abrirModalCatalogo(id) {
   abrirModal('modalCatalogo');
 }
 
-function salvarCatalogo() {
+async function salvarCatalogo() {
   const nome = document.getElementById('catalogoNome').value.trim();
   const valor = parseFloat(document.getElementById('catalogoValor').value);
   if (!nome || isNaN(valor)) { showToast('Preencha nome e valor!', 'error'); return; }
@@ -4682,14 +4771,31 @@ function salvarCatalogo() {
   DB.save();
   fecharModal('modalCatalogo');
   renderListaCatalogo();
-  showToast('Salvo! Lembre de gerar portal-data.json e enviar ao Netlify.');
+  if (initFirebase(true)) {
+    try {
+      await sincronizarPortalFirebase();
+      showToast('Serviço no catálogo salvo e publicado no Firebase!');
+    } catch (e) {
+      showToast('Salvo no celular. Firebase: ' + (e.message || e), 'error');
+    }
+  } else {
+    showToast('Salvo no celular. Configure o Firebase para aparecer no portal.');
+  }
 }
 
-function excluirCatalogo(id) {
+async function excluirCatalogo(id) {
   if (!confirm('Remover este serviço do catálogo?')) return;
   DB.catalogo = DB.catalogo.filter(c => c.id !== id);
   DB.save();
   renderListaCatalogo();
+  if (initFirebase(true)) {
+    try {
+      await sincronizarPortalFirebase();
+      showToast('Catálogo atualizado no Firebase.');
+    } catch (e) {
+      console.error(e);
+    }
+  }
 }
 
 function renderListaCatalogo() {
@@ -4872,7 +4978,7 @@ function enviarAgendamento() {
   let wa = String(L.whatsapp || '').replace(/\D/g, '');
   if (wa.startsWith('55') && wa.length > 11) wa = wa.slice(2);
   if (!wa || wa.length < 10) {
-    alert('A oficina ainda não publicou o WhatsApp neste site.\nPeça para gerar o portal-data.json e enviar ao Netlify.');
+    alert('A oficina ainda não publicou o WhatsApp neste site.\nGere o portal-data.json e envie ao GitHub (ou sincronize o Firebase).');
     return;
   }
   const novoAgendamento = {
