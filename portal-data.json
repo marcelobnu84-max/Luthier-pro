@@ -1,0 +1,70 @@
+{
+  "versao": 2,
+  "atualizadoEm": "2026-08-25T12:29:27.072Z",
+  "loja": {
+    "nome": "Luthier Pro",
+    "whatsapp": "47996873187",
+    "cidade": "Blumenau/Escola agrícola",
+    "welcome": "Bem-vindo! Confira nossos serviços, agende um horário ou acompanhe o status do seu instrumento."
+  },
+  "catalogo": [
+    {
+      "id": "cat1",
+      "nome": "Troca de cordas",
+      "descricao": "Troca de cordas, higienizacão completa.",
+      "valor": 60,
+      "duracao": "1 a 2"
+    },
+    {
+      "id": "cat2",
+      "nome": "Regulagem completa",
+      "descricao": "Ajuste do tensor , altura das cordas,  rastilho/ponte , pestana,  oitavas,  hidratação da escala,  higienizacão completa.",
+      "valor": 195,
+      "duracao": "3 a 5 dias"
+    },
+    {
+      "id": "cat3",
+      "nome": "Retifica de trastes + regulagem completa",
+      "descricao": "Nivelamento dos trastes para corrigir desnivelamento ou desgastes , corrigindo \nTrastejamentos ao longo da escala .\n+ regulagem completa.",
+      "valor": 280,
+      "duracao": "5 a 7 dias"
+    },
+    {
+      "id": "cat_1787622855489",
+      "nome": "Colagem de cavalete",
+      "descricao": "Devolver funcionalidade ao instrumento, efetuando a colagem do cavalete,  montagem e higienizacão completa.",
+      "valor": 250,
+      "duracao": "10 a 14 dias"
+    },
+    {
+      "id": "cat_1787622966075",
+      "nome": "Colagem de headstock",
+      "descricao": "Devolver funcionalidade ao instrumento , efetuando a colagem necessária,  montagem e higienizacão completa.",
+      "valor": 280,
+      "duracao": "10 a 14 dias"
+    },
+    {
+      "id": "cat_1787623113981",
+      "nome": "Blindagem",
+      "descricao": "Revestimento das cavidades bem como escudo com fita condutiva ( cobre ou alumínio) a fim de reduzir ruídos excessivos .",
+      "valor": 195,
+      "duracao": "7 a 10 dias"
+    },
+    {
+      "id": "cat_1787623208045",
+      "nome": "Troca de trastes",
+      "descricao": "Substituição de todos os trastes,  nivelamento e regulagem geral .",
+      "valor": 580,
+      "duracao": "15 a 20 dias"
+    }
+  ],
+  "firebaseConfig": {
+    "apiKey": "AIzaSyBcsHoBbx3KZqEq80MmFph_TmgI_uQDCNg",
+    "authDomain": "luthier-pro-e5006.firebaseapp.com",
+    "projectId": "luthier-pro-e5006",
+    "storageBucket": "luthier-pro-e5006.firebasestorage.app",
+    "messagingSenderId": "909336747435",
+    "appId": "1:909336747435:web:c386d193d31da21b2d86ee",
+    "measurementId": "G-5HK5M84DLF"
+  }
+}
