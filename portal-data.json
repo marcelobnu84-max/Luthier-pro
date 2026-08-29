@@ -1,59 +1,59 @@
 {
   "versao": 2,
-  "atualizadoEm": "2026-08-25T12:29:27.072Z",
+  "atualizadoEm": "2026-08-29T02:47:26.903Z",
   "loja": {
     "nome": "Luthier Pro",
     "whatsapp": "47996873187",
-    "cidade": "Blumenau/Escola agrícola",
+    "cidade": "Blumenau/ escola agrícola",
     "welcome": "Bem-vindo! Confira nossos serviços, agende um horário ou acompanhe o status do seu instrumento."
   },
   "catalogo": [
     {
       "id": "cat1",
       "nome": "Troca de cordas",
-      "descricao": "Troca de cordas, higienizacão completa.",
+      "descricao": "Troca das cordas , higienizacão completa.",
       "valor": 60,
-      "duracao": "1 a 2"
+      "duracao": "Mesmo dia"
     },
     {
       "id": "cat2",
       "nome": "Regulagem completa",
-      "descricao": "Ajuste do tensor , altura das cordas,  rastilho/ponte , pestana,  oitavas,  hidratação da escala,  higienizacão completa.",
+      "descricao": "Alinhamento do tensor,  regulagem da altura das cordas na pestana , rastilho/ponte , hidratação da escala , polimento dos trastes,  higienizacão completa.",
       "valor": 195,
       "duracao": "3 a 5 dias"
     },
     {
       "id": "cat3",
-      "nome": "Retifica de trastes + regulagem completa",
-      "descricao": "Nivelamento dos trastes para corrigir desnivelamento ou desgastes , corrigindo \nTrastejamentos ao longo da escala .\n+ regulagem completa.",
+      "nome": "Retifica de trastes",
+      "descricao": "Nivelamento dos trastes para correção de desnivelamento ou desgaste excessivo para eliminar trastejamento. \nRegulagem completa",
       "valor": 280,
-      "duracao": "5 a 7 dias"
+      "duracao": "5 a 8 dias"
     },
     {
-      "id": "cat_1787622855489",
+      "id": "cat_1787970911438",
       "nome": "Colagem de cavalete",
-      "descricao": "Devolver funcionalidade ao instrumento, efetuando a colagem do cavalete,  montagem e higienizacão completa.",
+      "descricao": "Devolver funcionalidade ao instrumento , \nFazendo a colagem do cavalete e após  essa etapa,  montagem das cordas , higienizacão completa.",
       "valor": 250,
-      "duracao": "10 a 14 dias"
+      "duracao": "8 a 14 dias"
     },
     {
-      "id": "cat_1787622966075",
+      "id": "cat_1787970995709",
       "nome": "Colagem de headstock",
-      "descricao": "Devolver funcionalidade ao instrumento , efetuando a colagem necessária,  montagem e higienizacão completa.",
+      "descricao": "Devolver funcionalidade ao instrumento efetuando a colagem do headstock,  montagem completa e ajustes necessários.",
       "valor": 280,
-      "duracao": "10 a 14 dias"
+      "duracao": "8 a 14 dias"
     },
     {
-      "id": "cat_1787623113981",
+      "id": "cat_1787971125339",
       "nome": "Blindagem",
-      "descricao": "Revestimento das cavidades bem como escudo com fita condutiva ( cobre ou alumínio) a fim de reduzir ruídos excessivos .",
-      "valor": 195,
-      "duracao": "7 a 10 dias"
+      "descricao": "Revestir as cavidades do instrumento com fita condutiva a fim de eliminar ruídos excessivos .",
+      "valor": 200,
+      "duracao": "4  a 7  dias"
     },
     {
-      "id": "cat_1787623208045",
+      "id": "cat_1787971259360",
       "nome": "Troca de trastes",
-      "descricao": "Substituição de todos os trastes,  nivelamento e regulagem geral .",
+      "descricao": "Substituição de todos os trastes,  por trastes novos escolhidos previamente. \n( tamanho,  marca etc ) \nRegulagem completa , higienizacão.",
       "valor": 580,
       "duracao": "15 a 20 dias"
     }
