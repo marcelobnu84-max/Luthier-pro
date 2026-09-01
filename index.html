@@ -2,32 +2,42 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Luthier Pro — gestão profissional de oficina de luthieria: clientes, Kanban, financeiro, portal do cliente e Firebase.">
+<meta name="theme-color" content="#0a0a0c">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Luthier Pro">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>Luthier Pro - Gestão de Oficina</title>
+<title>Luthier Pro — Gestão profissional de oficina</title>
+<link rel="manifest" href="manifest.webmanifest">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root {
-  --neon-cyan: #00f0ff;
-  --neon-magenta: #ff00ff;
-  --neon-purple: #b829dd;
-  --neon-green: #39ff14;
+  /* Paleta Luthieria — preto + laranja (mesmo estilo do portal) */
+  --neon-cyan: #ff9500;
+  --neon-magenta: #ffb347;
+  --neon-purple: #e8890c;
+  --neon-green: #ff9500;
   --neon-orange: #ff9500;
-  --neon-yellow: #ffe600;
-  --neon-pink: #ff6b9d;
-  --dark-bg: #0a0a0f;
-  --card-bg: rgba(20, 20, 35, 0.85);
-  --glass: rgba(255,255,255,0.03);
+  --neon-yellow: #ffc266;
+  --neon-pink: #ff9f43;
+  --dark-bg: #0a0a0c;
+  --card-bg: rgba(22, 18, 14, 0.95);
+  --glass: rgba(255,149,0,0.04);
+  --accent: #ff9500;
+  --accent-dim: rgba(255,149,0,0.15);
+  --border-soft: rgba(255,149,0,0.14);
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 body {
   font-family: 'Inter', sans-serif;
   background: var(--dark-bg);
-  color: #e0e0e0;
+  color: #e8e2d9;
   min-height: 100vh;
   overflow-x: hidden;
 }
@@ -36,23 +46,23 @@ body::before {
   position: fixed;
   top: 0; left: 0; width: 100%; height: 100%;
   background-image: 
-    linear-gradient(rgba(0,240,255,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,240,255,0.03) 1px, transparent 1px);
+    linear-gradient(rgba(255,149,0,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,149,0,0.04) 1px, transparent 1px);
   background-size: 50px 50px;
   pointer-events: none;
   z-index: 0;
 }
-.neon-text-cyan { color: var(--neon-cyan); text-shadow: 0 0 10px rgba(0,240,255,0.5), 0 0 20px rgba(0,240,255,0.3); }
-.neon-text-magenta { color: var(--neon-magenta); text-shadow: 0 0 10px rgba(255,0,255,0.5), 0 0 20px rgba(255,0,255,0.3); }
-.neon-text-green { color: var(--neon-green); text-shadow: 0 0 10px rgba(57,255,20,0.5), 0 0 20px rgba(57,255,20,0.3); }
-.neon-text-orange { color: var(--neon-orange); text-shadow: 0 0 10px rgba(255,149,0,0.5), 0 0 20px rgba(255,149,0,0.3); }
+.neon-text-cyan { color: #ff9500; text-shadow: 0 0 12px rgba(255,149,0,0.45); }
+.neon-text-magenta { color: #ffb347; text-shadow: 0 0 10px rgba(255,179,71,0.35); }
+.neon-text-green { color: #ff9500; text-shadow: 0 0 12px rgba(255,149,0,0.4); }
+.neon-text-orange { color: #ff9500; text-shadow: 0 0 12px rgba(255,149,0,0.45); }
 .sidebar {
   position: fixed;
   left: 0; top: 0;
   width: 260px;
   height: 100vh;
-  background: linear-gradient(180deg, rgba(10,10,15,0.98) 0%, rgba(20,20,40,0.95) 100%);
-  border-right: 1px solid rgba(0,240,255,0.15);
+  background: linear-gradient(180deg, #0c0a08 0%, #14110e 100%);
+  border-right: 1px solid rgba(255,149,0,0.16);
   z-index: 100;
   padding: 20px 0;
   display: flex;
@@ -61,19 +71,19 @@ body::before {
 .logo {
   text-align: center;
   padding: 0 20px 25px;
-  border-bottom: 1px solid rgba(0,240,255,0.1);
+  border-bottom: 1px solid rgba(255,149,0,0.12);
   margin-bottom: 15px;
 }
 .logo h1 {
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 900;
   letter-spacing: 2px;
-  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta), var(--neon-purple));
+  background: linear-gradient(135deg, #ffb347, #ff9500, #e07b00);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-.logo span { font-size: 0.7rem; color: #666; letter-spacing: 3px; text-transform: uppercase; }
+.logo span { font-size: 0.65rem; color: #ff9500; letter-spacing: 2.5px; text-transform: uppercase; font-weight: 600; }
 .nav-item {
   display: flex;
   align-items: center;
@@ -83,33 +93,33 @@ body::before {
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
-  color: #888;
+  color: #8a8278;
   font-weight: 500;
   font-size: 0.92rem;
   border: 1px solid transparent;
 }
 .nav-item:hover {
-  background: rgba(0,240,255,0.08);
-  color: var(--neon-cyan);
-  border-color: rgba(0,240,255,0.2);
+  background: rgba(255,149,0,0.08);
+  color: #ff9500;
+  border-color: rgba(255,149,0,0.2);
 }
 .nav-item.active {
-  background: linear-gradient(135deg, rgba(0,240,255,0.15), rgba(184,41,221,0.1));
-  color: var(--neon-cyan);
-  border-color: rgba(0,240,255,0.3);
-  box-shadow: 0 0 20px rgba(0,240,255,0.1);
+  background: linear-gradient(135deg, rgba(255,149,0,0.18), rgba(255,149,0,0.06));
+  color: #ff9500;
+  border-color: rgba(255,149,0,0.35);
+  box-shadow: 0 0 22px rgba(255,149,0,0.12);
 }
 .nav-icon {
   width: 36px; height: 36px;
   border-radius: 10px;
   display: flex; align-items: center; justify-content: center;
   font-size: 1.1rem;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,149,0,0.06);
+  border: 1px solid rgba(255,149,0,0.12);
 }
 .nav-item.active .nav-icon {
-  background: rgba(0,240,255,0.15);
-  border-color: rgba(0,240,255,0.3);
+  background: rgba(255,149,0,0.18);
+  border-color: rgba(255,149,0,0.35);
 }
 .main-content {
   margin-left: 260px;
@@ -129,16 +139,16 @@ body::before {
 .page-header p { color: #666; font-size: 0.9rem; }
 .card {
   background: var(--card-bg);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 16px;
+  border: 1px solid rgba(255,149,0,0.12);
+  border-radius: 18px;
   padding: 24px;
   margin-bottom: 20px;
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
 }
 .card:hover {
-  border-color: rgba(0,240,255,0.15);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  border-color: rgba(255,149,0,0.28);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35), 0 0 24px rgba(255,149,0,0.06);
 }
 .card-header {
   display: flex;
@@ -175,11 +185,11 @@ body::before {
 .stat-card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.12); }
 .stat-label { font-size: 0.8rem; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
 .stat-value { font-size: 2rem; font-weight: 800; }
-.stat-value.cyan { color: var(--neon-cyan); text-shadow: 0 0 15px rgba(0,240,255,0.3); }
-.stat-value.magenta { color: var(--neon-magenta); text-shadow: 0 0 15px rgba(255,0,255,0.3); }
-.stat-value.green { color: var(--neon-green); text-shadow: 0 0 15px rgba(57,255,20,0.3); }
-.stat-value.orange { color: var(--neon-orange); text-shadow: 0 0 15px rgba(255,149,0,0.3); }
-.stat-value.purple { color: var(--neon-purple); text-shadow: 0 0 15px rgba(184,41,221,0.3); }
+.stat-value.cyan { color: #ff9500; text-shadow: 0 0 15px rgba(255,149,0,0.35); }
+.stat-value.magenta { color: #ffb347; text-shadow: 0 0 12px rgba(255,179,71,0.3); }
+.stat-value.green { color: #ff9500; text-shadow: 0 0 15px rgba(255,149,0,0.35); }
+.stat-value.orange { color: #ff9500; text-shadow: 0 0 15px rgba(255,149,0,0.35); }
+.stat-value.purple { color: #e8890c; text-shadow: 0 0 12px rgba(232,137,12,0.3); }
 .btn {
   display: inline-flex;
   align-items: center;
@@ -204,16 +214,40 @@ body::before {
   transition: left 0.5s ease;
 }
 .btn:hover::before { left: 100%; }
-.btn-cyan { background: linear-gradient(135deg, rgba(0,240,255,0.2), rgba(0,240,255,0.05)); border: 1px solid rgba(0,240,255,0.4); color: var(--neon-cyan); }
-.btn-cyan:hover { background: linear-gradient(135deg, rgba(0,240,255,0.3), rgba(0,240,255,0.1)); box-shadow: 0 0 25px rgba(0,240,255,0.2); }
-.btn-magenta { background: linear-gradient(135deg, rgba(255,0,255,0.2), rgba(255,0,255,0.05)); border: 1px solid rgba(255,0,255,0.4); color: var(--neon-magenta); }
-.btn-magenta:hover { background: linear-gradient(135deg, rgba(255,0,255,0.3), rgba(255,0,255,0.1)); box-shadow: 0 0 25px rgba(255,0,255,0.2); }
-.btn-green { background: linear-gradient(135deg, rgba(57,255,20,0.2), rgba(57,255,20,0.05)); border: 1px solid rgba(57,255,20,0.4); color: var(--neon-green); }
-.btn-green:hover { background: linear-gradient(135deg, rgba(57,255,20,0.3), rgba(57,255,20,0.1)); box-shadow: 0 0 25px rgba(57,255,20,0.2); }
-.btn-orange { background: linear-gradient(135deg, rgba(255,149,0,0.2), rgba(255,149,0,0.05)); border: 1px solid rgba(255,149,0,0.4); color: var(--neon-orange); }
-.btn-orange:hover { background: linear-gradient(135deg, rgba(255,149,0,0.3), rgba(255,149,0,0.1)); box-shadow: 0 0 25px rgba(255,149,0,0.2); }
-.btn-purple { background: linear-gradient(135deg, rgba(184,41,221,0.2), rgba(184,41,221,0.05)); border: 1px solid rgba(184,41,221,0.4); color: var(--neon-purple); }
-.btn-purple:hover { background: linear-gradient(135deg, rgba(184,41,221,0.3), rgba(184,41,221,0.1)); box-shadow: 0 0 25px rgba(184,41,221,0.2); }
+.btn-cyan {
+  background: linear-gradient(135deg, #ff9500, #e07b00);
+  border: none;
+  color: #0a0a0c;
+  font-weight: 700;
+  box-shadow: 0 4px 18px rgba(255,149,0,0.25);
+}
+.btn-cyan:hover { filter: brightness(1.08); box-shadow: 0 6px 24px rgba(255,149,0,0.35); }
+.btn-magenta {
+  background: rgba(255,149,0,0.12);
+  border: 1px solid rgba(255,149,0,0.35);
+  color: #ffb347;
+}
+.btn-magenta:hover { background: rgba(255,149,0,0.2); box-shadow: 0 0 20px rgba(255,149,0,0.2); }
+.btn-green {
+  background: linear-gradient(135deg, #ff9500, #ff6b00);
+  border: none;
+  color: #0a0a0c;
+  font-weight: 700;
+  box-shadow: 0 4px 18px rgba(255,149,0,0.25);
+}
+.btn-green:hover { filter: brightness(1.08); box-shadow: 0 6px 24px rgba(255,149,0,0.35); }
+.btn-orange {
+  background: rgba(255,149,0,0.14);
+  border: 1px solid rgba(255,149,0,0.4);
+  color: #ff9500;
+}
+.btn-orange:hover { background: rgba(255,149,0,0.22); box-shadow: 0 0 20px rgba(255,149,0,0.2); }
+.btn-purple {
+  background: rgba(232,137,12,0.12);
+  border: 1px solid rgba(232,137,12,0.35);
+  color: #ffb347;
+}
+.btn-purple:hover { background: rgba(232,137,12,0.2); box-shadow: 0 0 20px rgba(255,149,0,0.15); }
 .btn-sm { padding: 8px 16px; font-size: 0.82rem; border-radius: 10px; }
 .form-group { margin-bottom: 18px; }
 .form-label { display: block; font-size: 0.85rem; font-weight: 600; color: #aaa; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
@@ -234,8 +268,8 @@ body::before {
   text-overflow: ellipsis;
 }
 .form-input:focus, .form-select:focus, .form-textarea:focus {
-  border-color: var(--neon-cyan);
-  box-shadow: 0 0 15px rgba(0,240,255,0.1);
+  border-color: #ff9500;
+  box-shadow: 0 0 0 3px rgba(255,149,0,0.15);
   background: rgba(255,255,255,0.06);
 }
 .form-textarea { min-height: 100px; resize: vertical; overflow-y: auto; word-break: break-word; }
@@ -263,6 +297,48 @@ body::before {
 }
 .data-table tr:hover td { background: rgba(255,255,255,0.02); }
 .data-table th, .data-table td { vertical-align: middle; }
+/* Listas em card — legíveis no celular (sem tabela cortada) */
+.mobile-list { display: flex; flex-direction: column; gap: 10px; }
+.list-row {
+  background: rgba(255,149,0,0.04);
+  border: 1px solid rgba(255,149,0,0.12);
+  border-radius: 14px;
+  padding: 12px 14px;
+}
+.list-row-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.list-row-title {
+  font-weight: 700;
+  color: #fff;
+  font-size: 0.95rem;
+  line-height: 1.25;
+}
+.list-row-meta {
+  color: #8a8278;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+.list-row-values {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  align-items: center;
+  font-size: 0.82rem;
+  color: #b8b0a4;
+}
+.list-row-values strong { color: #ff9500; font-weight: 800; }
+.list-row-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
 .tag {
   display: inline-block;
   padding: 4px 12px;
@@ -272,9 +348,9 @@ body::before {
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
-.tag-cyan { background: rgba(0,240,255,0.12); color: var(--neon-cyan); border: 1px solid rgba(0,240,255,0.25); }
+.tag-cyan { background: rgba(255,149,0,0.12); color: #ff9500; border: 1px solid rgba(255,149,0,0.3); }
 .tag-magenta { background: rgba(255,0,255,0.12); color: var(--neon-magenta); border: 1px solid rgba(255,0,255,0.25); }
-.tag-green { background: rgba(57,255,20,0.12); color: var(--neon-green); border: 1px solid rgba(57,255,20,0.25); }
+.tag-green { background: rgba(255,149,0,0.14); color: #ffb347; border: 1px solid rgba(255,149,0,0.32); }
 .tag-orange { background: rgba(255,149,0,0.12); color: var(--neon-orange); border: 1px solid rgba(255,149,0,0.25); }
 .tag-purple { background: rgba(184,41,221,0.12); color: var(--neon-purple); border: 1px solid rgba(184,41,221,0.25); }
 .modal-overlay {
@@ -292,7 +368,7 @@ body::before {
 .modal-overlay.active { display: flex !important; }
 .modal {
   background: linear-gradient(135deg, rgba(20,20,35,0.98), rgba(15,15,30,0.98));
-  border: 1px solid rgba(0,240,255,0.2);
+  border: 1px solid rgba(255,149,0,0.2);
   border-radius: 20px;
   width: 100%;
   max-width: 600px;
@@ -300,7 +376,7 @@ body::before {
   overflow-x: hidden;
   overflow-y: auto;
   padding: 28px;
-  box-shadow: 0 25px 80px rgba(0,0,0,0.6), 0 0 40px rgba(0,240,255,0.05);
+  box-shadow: 0 25px 80px rgba(0,0,0,0.6), 0 0 40px rgba(255,149,0,0.05);
   animation: modalIn 0.3s ease;
   box-sizing: border-box;
 }
@@ -405,7 +481,7 @@ body::before {
   transition: all 0.3s ease;
 }
 .kanban-card:hover {
-  border-color: rgba(0,240,255,0.2);
+  border-color: rgba(255,149,0,0.2);
   box-shadow: 0 4px 20px rgba(0,0,0,0.3);
   transform: translateY(-2px);
 }
@@ -414,17 +490,17 @@ body::before {
 .kanban-card-meta { font-size: 0.8rem; color: #666; margin-bottom: 10px; }
 .kanban-card-value { font-weight: 700; font-size: 1rem; }
 .photo-upload {
-  border: 2px dashed rgba(0,240,255,0.2);
+  border: 2px dashed rgba(255,149,0,0.2);
   border-radius: 16px;
   padding: 30px;
   text-align: center;
   cursor: pointer;
   transition: all 0.3s ease;
-  background: rgba(0,240,255,0.02);
+  background: rgba(255,149,0,0.02);
 }
 .photo-upload:hover {
   border-color: var(--neon-cyan);
-  background: rgba(0,240,255,0.05);
+  background: rgba(255,149,0,0.05);
 }
 .photo-upload input { display: none; }
 .photo-preview {
@@ -464,17 +540,95 @@ body::before {
 }
 ::-webkit-scrollbar { width: 8px; height: 8px; }
 ::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); }
-::-webkit-scrollbar-thumb { background: rgba(0,240,255,0.2); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(0,240,255,0.4); }
+::-webkit-scrollbar-thumb { background: rgba(255,149,0,0.2); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,149,0,0.4); }
 @media (max-width: 1024px) {
   .kanban-board { grid-template-columns: repeat(2, 1fr); }
   .grid-2, .grid-3 { grid-template-columns: 1fr; }
 }
+.mobile-topbar {
+  display: none;
+  position: sticky;
+  top: 0;
+  z-index: 150;
+  background: rgba(10,10,12,0.94);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,149,0,0.14);
+  padding: 12px 16px;
+  padding-top: max(12px, env(safe-area-inset-top));
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.mobile-topbar .brand {
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #ff9500;
+  font-size: 0.95rem;
+}
+.mobile-topbar .menu-btn {
+  width: 42px; height: 42px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,149,0,0.3);
+  background: rgba(255,149,0,0.1);
+  color: #ff9500;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 140;
+}
+.sidebar-overlay.show { display: block; }
+.onboarding-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(0,0,0,0.82);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.onboarding-overlay.show { display: flex; }
+.onboarding-card {
+  max-width: 420px;
+  width: 100%;
+  background: linear-gradient(160deg, #16120e, #0c0a08);
+  border: 1px solid rgba(255,149,0,0.25);
+  border-radius: 20px;
+  padding: 28px 24px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+.onboarding-card h2 {
+  color: #ff9500;
+  font-size: 1.35rem;
+  margin-bottom: 10px;
+}
+.onboarding-card p { color: #a89f93; font-size: 0.9rem; line-height: 1.5; margin-bottom: 14px; }
+.onboarding-card ul { margin: 0 0 18px 18px; color: #d4ccc2; font-size: 0.88rem; line-height: 1.55; }
 @media (max-width: 768px) {
-  .sidebar { width: 100%; height: auto; position: relative; }
-  .main-content { margin-left: 0; }
+  .mobile-topbar { display: flex; }
+  .sidebar {
+    position: fixed;
+    left: 0; top: 0;
+    width: min(300px, 88vw);
+    height: 100vh;
+    height: 100dvh;
+    transform: translateX(-105%);
+    transition: transform 0.28s ease;
+    z-index: 160;
+    overflow-y: auto;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .sidebar.open { transform: translateX(0); }
+  .main-content { margin-left: 0; padding: 16px; padding-bottom: max(24px, env(safe-area-inset-bottom)); }
   .kanban-board { grid-template-columns: 1fr; }
   .form-row { grid-template-columns: 1fr; }
+  .toast { min-width: auto; max-width: calc(100vw - 32px); }
 }
 .toast-container {
   position: fixed;
@@ -486,7 +640,7 @@ body::before {
 }
 .toast {
   background: linear-gradient(135deg, rgba(20,20,35,0.98), rgba(15,15,30,0.98));
-  border: 1px solid rgba(0,240,255,0.3);
+  border: 1px solid rgba(255,149,0,0.3);
   border-radius: 12px;
   padding: 16px 24px;
   box-shadow: 0 10px 40px rgba(0,0,0,0.4);
@@ -534,7 +688,7 @@ body::before {
 }
 .search-input:focus {
   border-color: var(--neon-cyan);
-  box-shadow: 0 0 15px rgba(0,240,255,0.1);
+  box-shadow: 0 0 15px rgba(255,149,0,0.1);
 }
 .action-cards {
   display: grid;
@@ -557,7 +711,7 @@ body::before {
   gap: 14px;
 }
 .action-card:hover {
-  border-color: rgba(0,240,255,0.35);
+  border-color: rgba(255,149,0,0.35);
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(0,0,0,0.25);
 }
@@ -607,9 +761,9 @@ body::before {
   border-radius: 20px;
   font-size: 0.78rem;
   font-weight: 600;
-  background: rgba(0,240,255,0.1);
+  background: rgba(255,149,0,0.1);
   color: var(--neon-cyan);
-  border: 1px solid rgba(0,240,255,0.25);
+  border: 1px solid rgba(255,149,0,0.25);
 }
 .cliente-card-list {
   display: grid;
@@ -627,7 +781,7 @@ body::before {
   transition: all 0.2s ease;
 }
 .cliente-card:hover {
-  border-color: rgba(0,240,255,0.2);
+  border-color: rgba(255,149,0,0.2);
 }
 .cliente-card-info h4 {
   font-size: 1rem;
@@ -675,7 +829,7 @@ body::before {
 }
 .section-divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(0,240,255,0.2), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255,149,0,0.2), transparent);
   margin: 30px 0;
 }
 .icon-3d {
@@ -1030,12 +1184,19 @@ body.portal-mode #portalCliente { display: block !important; }
 </head>
 <body>
 
+<div class="mobile-topbar no-print">
+  <button type="button" class="menu-btn" onclick="toggleSidebar()" aria-label="Menu">☰</button>
+  <div class="brand">LUTHIER PRO</div>
+  <button type="button" class="menu-btn" onclick="navigateTo('portal-admin')" aria-label="Portal" style="font-size:1rem;">🌐</button>
+</div>
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="fecharSidebar()"></div>
+
 <!-- Sidebar -->
-<div class="sidebar">
+<div class="sidebar" id="appSidebar">
   <div class="logo">
     <h1>LUTHIER PRO</h1>
-    <span>Gestão de Oficina</span>
-    <div id="appVersionBadge" style="margin-top:6px;font-size:0.72rem;color:var(--neon-green);letter-spacing:1px;">v26.8.32 · orçamento WA</div>
+    <span>Gestão profissional</span>
+    <div id="appVersionBadge" style="margin-top:6px;font-size:0.72rem;color:var(--neon-green);letter-spacing:1px;">v27.4 · receita na entrega</div>
   </div>
   <div class="nav-item active" onclick="navigateTo('dashboard')">
     <div class="nav-icon">📊</div>
@@ -1065,10 +1226,27 @@ body.portal-mode #portalCliente { display: block !important; }
     <div class="nav-icon" style="position:relative;">🌐<span id="agendaBadge" style="display:none;position:absolute;top:-6px;right:-10px;background:#ff2b6e;color:#fff;font-size:0.65rem;font-weight:700;min-width:16px;height:16px;border-radius:8px;line-height:16px;text-align:center;padding:0 3px;">0</span></div>
     <span>Portal Cliente</span>
   </div>
-  <div style="margin-top: auto; padding: 20px; border-top: 1px solid rgba(0,240,255,0.1);">
+  <div style="margin-top: auto; padding: 20px; border-top: 1px solid rgba(255,149,0,0.1);">
     <button class="btn btn-cyan" style="width:100%; margin-bottom:10px;" onclick="gerarBackup()">💾 Backup</button>
     <button class="btn btn-magenta" style="width:100%;" onclick="document.getElementById('restoreFile').click()">📂 Restaurar</button>
     <input type="file" id="restoreFile" accept=".json" style="display:none" onchange="restaurarBackup(this)">
+    <p style="color:#555;font-size:0.72rem;margin-top:12px;text-align:center;line-height:1.35;">Backup semanal recomendado<br>Dados locais + Firebase</p>
+  </div>
+</div>
+
+<!-- Onboarding primeiro uso -->
+<div class="onboarding-overlay" id="onboardingOverlay">
+  <div class="onboarding-card">
+    <h2>Bem-vindo ao Luthier Pro</h2>
+    <p>Sistema completo para oficina de luthieria — do cadastro ao portal do cliente.</p>
+    <ul>
+      <li>Cadastro único: cliente + instrumento + valores</li>
+      <li>Kanban e financeiro mês a mês</li>
+      <li>WhatsApp com orçamento e aviso de pronto</li>
+      <li>Portal do cliente + Firebase</li>
+      <li>Faça backup em Configurações com frequência</li>
+    </ul>
+    <button type="button" class="btn btn-green" style="width:100%;" onclick="fecharOnboarding()">Começar a usar</button>
   </div>
 </div>
 
@@ -1119,10 +1297,9 @@ body.portal-mode #portalCliente { display: block !important; }
         <span class="card-title neon-text-green">Últimos Serviços</span>
         <button class="btn btn-cyan btn-sm" onclick="navigateTo('kanban')">Ver Todos</button>
       </div>
-      <table class="data-table">
-        <thead><tr><th>Cliente</th><th>Instrumento</th><th>Serviço</th><th>Status</th><th>Valor Total</th></tr></thead>
-        <tbody id="dashUltimosServicos"><tr><td colspan="5" class="empty-state">Nenhum serviço registrado</td></tr></tbody>
-      </table>
+      <div id="dashUltimosServicos" class="mobile-list">
+        <div class="empty-state">Nenhum serviço registrado</div>
+      </div>
     </div>
   </div>
 
@@ -1142,7 +1319,7 @@ body.portal-mode #portalCliente { display: block !important; }
         </div>
       </div>
       <div class="action-card" onclick="novaEntradaClienteExistente()">
-        <div class="action-card-icon" style="background:rgba(0,240,255,0.12);border:1px solid rgba(0,240,255,0.25);">🔁</div>
+        <div class="action-card-icon" style="background:rgba(255,149,0,0.12);border:1px solid rgba(255,149,0,0.25);">🔁</div>
         <div>
           <h4>Novo atendimento (já é cliente)</h4>
           <p>Escolhe o cliente cadastrado e registra instrumento, serviço e valores.</p>
@@ -1180,8 +1357,14 @@ body.portal-mode #portalCliente { display: block !important; }
       <!-- Modo: existente -->
       <div id="blocoClienteExistente">
         <div class="form-group">
+          <label class="form-label">Buscar cliente</label>
+          <input type="search" class="form-input" id="servClienteBusca" placeholder="Digite o nome ou telefone..." autocomplete="off" oninput="filtrarClientesServico()" onkeydown="if(event.key==='Enter'){event.preventDefault();}">
+          <p style="color:#666;font-size:0.75rem;margin-top:6px;">Escreva as primeiras letras do nome para achar rápido</p>
+        </div>
+        <div class="form-group">
           <label class="form-label">Selecionar Cliente *</label>
-          <select class="form-select" id="servCliente" onchange="preencherDadosCliente()"><option value="">-- Selecione um cliente --</option></select>
+          <select class="form-select" id="servCliente" size="6" style="height:auto;min-height:140px;" onchange="preencherDadosCliente()"><option value="">-- Selecione um cliente --</option></select>
+          <p id="servClienteBuscaInfo" style="color:#888;font-size:0.75rem;margin-top:6px;"></p>
         </div>
         <div class="form-row">
           <div class="form-group">
@@ -1193,7 +1376,7 @@ body.portal-mode #portalCliente { display: block !important; }
             <input type="text" class="form-input" id="servClienteTel" readonly placeholder="—">
           </div>
         </div>
-        <div id="servClienteHistorico" style="display:none; margin-top:12px; padding:12px; background:rgba(0,240,255,0.05); border-radius:10px; border:1px solid rgba(0,240,255,0.15); font-size:0.85rem; color:#aaa;"></div>
+        <div id="servClienteHistorico" style="display:none; margin-top:12px; padding:12px; background:rgba(255,149,0,0.05); border-radius:10px; border:1px solid rgba(255,149,0,0.15); font-size:0.85rem; color:#aaa;"></div>
       </div>
 
       <!-- Modo: novo cliente (preenche e cria junto com o serviço) -->
@@ -1404,7 +1587,7 @@ body.portal-mode #portalCliente { display: block !important; }
       <!-- Barra visual mão de obra x materiais -->
       <div style="margin-bottom:8px;font-size:0.8rem;color:#888;">Composição da entrada</div>
       <div style="display:flex;height:18px;border-radius:10px;overflow:hidden;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);">
-        <div id="finBarMaoObra" style="width:0%;background:linear-gradient(90deg,rgba(0,240,255,0.7),rgba(0,240,255,0.4));transition:width 0.4s;"></div>
+        <div id="finBarMaoObra" style="width:0%;background:linear-gradient(90deg,rgba(255,149,0,0.7),rgba(255,149,0,0.4));transition:width 0.4s;"></div>
         <div id="finBarMateriais" style="width:0%;background:linear-gradient(90deg,rgba(255,0,255,0.7),rgba(255,0,255,0.4));transition:width 0.4s;"></div>
       </div>
       <div style="display:flex;justify-content:space-between;margin-top:8px;font-size:0.78rem;color:#777;">
@@ -1427,7 +1610,7 @@ body.portal-mode #portalCliente { display: block !important; }
         <div class="stat-value green" id="finTicketMes">R$ 0,00</div>
       </div>
       <div class="stat-card cyan">
-        <div class="stat-label">Entrada do mês inteiro</div>
+        <div class="stat-label">Receita do mês inteiro (entregas)</div>
         <div class="stat-value cyan" id="finReceitaMesInteiro" style="font-size:1.5rem;">R$ 0,00</div>
       </div>
     </div>
@@ -1445,20 +1628,11 @@ body.portal-mode #portalCliente { display: block !important; }
 
     <div class="card">
       <div class="card-header">
-        <span class="card-title neon-text-orange">Lançamentos do período</span>
-        <span style="color:#666;font-size:0.8rem;">Com acumulado dia a dia</span>
+        <span class="card-title neon-text-orange">Entregas do período</span>
+        <span style="color:#666;font-size:0.8rem;">Receita no mês da entrega</span>
       </div>
-      <div style="overflow-x:auto;">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>Data</th><th>Cliente</th><th>Instrumento</th><th>Serviço</th>
-              <th>Mão de obra</th><th>Materiais</th><th>Total</th>
-              <th>Acumulado até o dia</th><th>Status</th><th></th>
-            </tr>
-          </thead>
-          <tbody id="tabelaFinanceiroMes"><tr><td colspan="10" class="empty-state">Nenhum serviço neste período</td></tr></tbody>
-        </table>
+      <div id="tabelaFinanceiroMes" class="mobile-list">
+        <div class="empty-state">Nenhum serviço neste período</div>
       </div>
     </div>
 
@@ -1559,6 +1733,18 @@ body.portal-mode #portalCliente { display: block !important; }
       </div>
       <p style="color:#666;font-size:0.8rem;margin-top:12px;">Remover fotos <strong>não apaga</strong> clientes, valores nem Kanban — só as imagens guardadas no aparelho.</p>
     </div>
+
+    <div class="card" style="margin-top:16px;border-color:rgba(255,149,0,0.25);">
+      <div class="card-header"><span class="card-title neon-text-orange">Luthier Pro — checklist profissional</span></div>
+      <ul style="color:#a89f93;font-size:0.88rem;line-height:1.65;margin:0 0 12px 18px;">
+        <li>Backup JSON no Drive a cada semana</li>
+        <li>Firebase configurado + regras publicadas</li>
+        <li>Catálogo sincronizado (portal online)</li>
+        <li>WhatsApp da oficina preenchido</li>
+        <li>Fotos comprimidas / limpar fotos se o aparelho encher</li>
+      </ul>
+      <p style="color:#666;font-size:0.8rem;margin:0;">Versão <strong id="configVersaoTxt" style="color:#ff9500;">v27.0</strong> · Uso comercial da sua oficina · Dados sensíveis: proteja o link admin e faça backup.</p>
+    </div>
   </div>
 
   <!-- PORTAL ADMIN -->
@@ -1609,7 +1795,7 @@ body.portal-mode #portalCliente { display: block !important; }
       </div>
     </div>
 
-    <div class="card" style="border-color:rgba(0,240,255,0.3);">
+    <div class="card" style="border-color:rgba(255,149,0,0.3);">
       <div class="card-header"><span class="card-title neon-text-cyan">Firebase (status online para o cliente)</span></div>
       <p style="color:#aaa;font-size:0.88rem;margin-bottom:12px;line-height:1.45;">
         Com Firebase gratuito, o cliente consulta o status do instrumento de qualquer celular.
@@ -2102,7 +2288,45 @@ let materiaisItensAtual = [];
 let editMateriaisItens = [];
 let editFotosAtual = [];
 
+function toggleSidebar() {
+  const sb = document.getElementById('appSidebar');
+  const ov = document.getElementById('sidebarOverlay');
+  if (!sb) return;
+  const open = !sb.classList.contains('open');
+  sb.classList.toggle('open', open);
+  if (ov) ov.classList.toggle('show', open);
+}
+function fecharSidebar() {
+  const sb = document.getElementById('appSidebar');
+  const ov = document.getElementById('sidebarOverlay');
+  if (sb) sb.classList.remove('open');
+  if (ov) ov.classList.remove('show');
+}
+function fecharOnboarding() {
+  localStorage.setItem('luthier_onboarding_v27', '1');
+  const el = document.getElementById('onboardingOverlay');
+  if (el) el.classList.remove('show');
+}
+function mostrarOnboardingSePreciso() {
+  if (localStorage.getItem('luthier_onboarding_v27')) return;
+  const el = document.getElementById('onboardingOverlay');
+  if (el) el.classList.add('show');
+}
+function lembrarBackupSemanal() {
+  try {
+    const key = 'luthier_last_backup_hint';
+    const last = parseInt(localStorage.getItem(key) || '0', 10);
+    const agora = Date.now();
+    if (agora - last < 7 * 24 * 60 * 60 * 1000) return;
+    localStorage.setItem(key, String(agora));
+    setTimeout(() => {
+      showToast('Lembrete: faça um backup JSON e salve no Drive.', 'error');
+    }, 2500);
+  } catch (e) {}
+}
+
 function navigateTo(page) {
+  fecharSidebar();
   document.body.classList.remove('portal-mode');
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
@@ -2367,11 +2591,13 @@ function salvarEdicaoServico() {
 
 function showToast(msg, type='success') {
   const container = document.getElementById('toastContainer');
+  if (!container) return;
   const toast = document.createElement('div');
   toast.className = 'toast ' + type;
-  toast.innerHTML = `<span style="font-size:1.2rem;">${type==='success'?'✅':'❌'}</span><span>${msg}</span>`;
+  const icon = type === 'success' ? '✅' : (type === 'info' ? 'ℹ️' : '⚠️');
+  toast.innerHTML = `<span style="font-size:1.2rem;">${icon}</span><span>${msg}</span>`;
   container.appendChild(toast);
-  setTimeout(() => { toast.remove(); }, 3500);
+  setTimeout(() => { toast.remove(); }, type === 'error' ? 4500 : 3500);
 }
 
 function abrirModal(id) {
@@ -2745,7 +2971,7 @@ function setModoCliente(modo) {
     blocoEx.style.display = 'block';
     blocoNv.style.display = 'none';
     if (btnNv) { btnNv.style.background = 'rgba(255,255,255,0.05)'; btnNv.style.borderColor = 'rgba(255,255,255,0.15)'; btnNv.style.color = '#888'; }
-    if (btnEx) { btnEx.style.background = 'rgba(0,240,255,0.2)'; btnEx.style.borderColor = 'rgba(0,240,255,0.4)'; btnEx.style.color = 'var(--neon-cyan)'; }
+    if (btnEx) { btnEx.style.background = 'rgba(255,149,0,0.2)'; btnEx.style.borderColor = 'rgba(255,149,0,0.4)'; btnEx.style.color = 'var(--neon-cyan)'; }
     if (tit) tit.textContent = 'Novo atendimento';
     if (sub) sub.textContent = 'Cliente já cadastrado: escolha a pessoa e registre instrumento, serviço e valores.';
   }
@@ -2777,11 +3003,62 @@ function novaEntradaClienteExistente(clienteId) {
   }, 50);
 }
 
-function initPaginaServicos() {
+function normalizarBuscaTxt(s) {
+  return String(s || '')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
+}
+
+function filtrarClientesServico() {
   const selCli = document.getElementById('servCliente');
+  const info = document.getElementById('servClienteBuscaInfo');
+  const buscaEl = document.getElementById('servClienteBusca');
+  if (!selCli) return;
+  const qRaw = (buscaEl && buscaEl.value) || '';
+  const q = normalizarBuscaTxt(qRaw).trim();
+  const qDigits = String(qRaw).replace(/\D/g, '');
+  const selecionado = selCli.value;
+  const lista = [...(DB.clientes || [])].sort((a, b) =>
+    String(a.nome || '').localeCompare(String(b.nome || ''), 'pt-BR', { sensitivity: 'base' })
+  );
+  const filtrados = (!q && qDigits.length < 2)
+    ? lista
+    : lista.filter(c => {
+        const nome = normalizarBuscaTxt(c.nome);
+        const tel = String(c.telefone || '').replace(/\D/g, '');
+        if (q && nome.includes(q)) return true;
+        if (qDigits.length >= 2 && tel.includes(qDigits)) return true;
+        if (q && (nome + ' ' + tel).includes(q.replace(/\s+/g, ' '))) return true;
+        return false;
+      });
+  const opts = filtrados.map(c =>
+    `<option value="${c.id}"${String(c.id) === String(selecionado) ? ' selected' : ''}>${c.nome || 'Sem nome'} — ${c.telefone || 's/ tel'}</option>`
+  ).join('');
+  selCli.innerHTML = '<option value="">-- Selecione um cliente --</option>' + opts;
+  if (selecionado && !filtrados.some(c => String(c.id) === String(selecionado))) {
+    selCli.value = '';
+    preencherDadosCliente();
+  } else if (selecionado) {
+    selCli.value = selecionado;
+  }
+  if (filtrados.length === 1) {
+    selCli.value = filtrados[0].id;
+    preencherDadosCliente();
+  }
+  if (info) {
+    if (!q && qDigits.length < 2) info.textContent = lista.length + ' cliente(s) — use a busca para filtrar';
+    else if (!filtrados.length) info.textContent = 'Nenhum cliente encontrado';
+    else info.textContent = filtrados.length + ' resultado(s)';
+  }
+}
+
+function initPaginaServicos() {
   const selTi = document.getElementById('servTipoInstrumento');
   const selTs = document.getElementById('servTipoServico');
-  if (selCli) selCli.innerHTML = '<option value="">-- Selecione um cliente --</option>' + DB.clientes.map(c => `<option value="${c.id}">${c.nome} - ${c.telefone}</option>`).join('');
+  const busca = document.getElementById('servClienteBusca');
+  if (busca) busca.value = '';
+  filtrarClientesServico();
   if (selTi) selTi.innerHTML = '<option value="">-- Selecione --</option>' + DB.tiposInstrumento.map(t => `<option value="${t}">${t}</option>`).join('');
   if (selTs) selTs.innerHTML = '<option value="">-- Selecione --</option>' + DB.tiposServico.map(t => `<option value="${t}">${t}</option>`).join('');
   setModoCliente(modoCliente || 'existente');
@@ -3259,18 +3536,21 @@ function renderDashboard() {
   const agora = new Date();
   const mesAtual = agora.getMonth();
   const anoAtual = agora.getFullYear();
+  garantirDatasEntrega();
+  // Faturamento e entregues = pelo mês da ENTREGA
+  const entreguesMesLista = DB.servicos.filter(s => {
+    if (normalizarStatus(s.status) !== 'entregue') return false;
+    const d = dataRefEntrega(s);
+    return d.getTime() > 0 && d.getMonth() === mesAtual && d.getFullYear() === anoAtual;
+  });
+  const faturamento = entreguesMesLista.reduce((a, s) => a + (s.total || 0), 0);
+  const entreguesMes = entreguesMesLista.length;
+  // Serviços do mês (ainda em andamento ou que entraram) — referência operacional
   const servicosMes = DB.servicos.filter(s => {
     const d = new Date(s.dataEntrada);
-    return d.getMonth() === mesAtual && d.getFullYear() === anoAtual;
-  });
-  const faturamento = servicosMes.reduce((a, s) => a + (s.total || 0), 0);
-  const pendentes = DB.servicos.filter(s => s.status === 'pendente').length;
-  // Entregues no mês (pelo mês de entrada do serviço)
-  const entreguesMes = DB.servicos.filter(s => {
-    if (normalizarStatus(s.status) !== 'entregue') return false;
-    const d = new Date(s.dataEntrada || s.dataEntrega || s.dataConclusao);
     return !isNaN(d) && d.getMonth() === mesAtual && d.getFullYear() === anoAtual;
-  }).length;
+  });
+  const pendentes = DB.servicos.filter(s => s.status === 'pendente').length;
   document.getElementById('dashServicosMes').textContent = servicosMes.length;
   document.getElementById('dashFaturamento').textContent = formatMoney(faturamento);
   document.getElementById('dashClientes').textContent = DB.clientes.length;
@@ -3278,19 +3558,26 @@ function renderDashboard() {
   const elEnt = document.getElementById('dashEntreguesMes');
   if (elEnt) elEnt.textContent = entreguesMes;
 
-  // Últimos serviços
+  // Últimos serviços (cards no celular — sem tabela cortada)
   const ultimos = [...DB.servicos].sort((a, b) => new Date(b.dataEntrada) - new Date(a.dataEntrada)).slice(0, 8);
   const tbody = document.getElementById('dashUltimosServicos');
-  if (ultimos.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="5" class="empty-state">Nenhum serviço registrado</td></tr>';
+  if (!tbody) { /* ignore */ }
+  else if (ultimos.length === 0) {
+    tbody.innerHTML = '<div class="empty-state">Nenhum serviço registrado</div>';
   } else {
-    tbody.innerHTML = ultimos.map(s => `<tr>
-      <td>${s.clienteNome}</td>
-      <td>${s.tipoInstrumento || '-'} ${s.modelo ? '- ' + s.modelo : ''}</td>
-      <td>${s.tipoServico || '-'}</td>
-      <td>${getStatusTag(s.status)}</td>
-      <td class="neon-text-green">${formatMoney(s.total)}</td>
-    </tr>`).join('');
+    tbody.innerHTML = ultimos.map(s => {
+      const inst = (s.tipoInstrumento || '-') + (s.modelo ? ' · ' + s.modelo : '');
+      return `<div class="list-row" onclick="verServico('${s.id}')" style="cursor:pointer;">
+        <div class="list-row-top">
+          <div class="list-row-title">${s.clienteNome || 'Cliente'}</div>
+          ${getStatusTag(s.status)}
+        </div>
+        <div class="list-row-meta">${inst}<br>${s.tipoServico || 'Serviço'}</div>
+        <div class="list-row-values">
+          <span>Total <strong>${formatMoney(s.total)}</strong></span>
+        </div>
+      </div>`;
+    }).join('');
   }
 
   // Chart Faturamento (últimos 6 meses)
@@ -3303,8 +3590,9 @@ function renderDashboard() {
     const nome = d.toLocaleString('pt-BR', { month: 'short' });
     meses.push(nome.charAt(0).toUpperCase() + nome.slice(1));
     const total = DB.servicos.filter(s => {
-      const ds = new Date(s.dataEntrada);
-      return ds.getMonth() === m && ds.getFullYear() === a;
+      if (normalizarStatus(s.status) !== 'entregue') return false;
+      const ds = dataRefEntrega(s);
+      return ds.getTime() > 0 && ds.getMonth() === m && ds.getFullYear() === a;
     }).reduce((acc, s) => acc + (s.total || 0), 0);
     valores.push(total);
   }
@@ -3317,7 +3605,7 @@ function renderDashboard() {
         label: 'Faturamento',
         data: valores,
         borderColor: '#00f0ff',
-        backgroundColor: 'rgba(0,240,255,0.1)',
+        backgroundColor: 'rgba(255,149,0,0.1)',
         fill: true,
         tension: 0.4,
         pointBackgroundColor: '#00f0ff'
@@ -3422,11 +3710,38 @@ function criarCardKanban(s) {
   return card;
 }
 
-function dataRefEntrega(s) {
-  // Agrupa pelo mês de ENTRADA do serviço (não pela data em que arrastou o card).
-  // Assim o que entrou em julho continua em julho, mesmo se marcar "Entregue" em agosto.
-  const d = new Date(s.dataEntrada || s.dataEntrega || s.dataConclusao);
+/** Data de ENTRADA (orçamento / lançamento financeiro) */
+function dataRefEntrada(s) {
+  const d = new Date(s.dataEntrada);
   return isNaN(d) ? new Date(0) : d;
+}
+
+/**
+ * Data real de ENTREGA / conclusão para relatórios do mês.
+ * O que entrou no dia 31 e só entrega no mês seguinte aparece no mês da entrega — não fica no limbo.
+ */
+function dataRefEntrega(s) {
+  const d = new Date(s.dataEntrega || s.dataConclusao || s.dataEntrada);
+  return isNaN(d) ? new Date(0) : d;
+}
+
+/** Preenche dataEntrega em serviços já marcados como entregue sem a data (dados antigos) */
+function garantirDatasEntrega() {
+  let mudou = false;
+  (DB.servicos || []).forEach(s => {
+    const st = normalizarStatus(s.status);
+    if (st === 'entregue' && !s.dataEntrega) {
+      s.dataEntrega = s.dataConclusao || s.dataEntrada || new Date().toISOString();
+      mudou = true;
+    }
+    if ((st === 'concluido' || st === 'entregue') && !s.dataConclusao) {
+      s.dataConclusao = s.dataEntrega || s.dataEntrada || new Date().toISOString();
+      mudou = true;
+    }
+  });
+  if (mudou) {
+    try { DB.save(); } catch (e) {}
+  }
 }
 
 function preencherMesKanban(selectId, listaServicos) {
@@ -3495,7 +3810,7 @@ function renderKanban() {
     cols[status].appendChild(criarCardKanban(s));
   });
 
-  // Concluído: só do mês selecionado (mês de entrada)
+  // Concluído / Entregue: mês pela data de conclusão / entrega (não pela entrada)
   const concluidosMes = concluidos.filter(s => {
     const d = dataRefEntrega(s);
     return d.getFullYear() === filtroConc.ano && d.getMonth() === filtroConc.mes;
@@ -3738,17 +4053,26 @@ function renderFinanceiro() {
       : ('De 1 a ' + diaLimite + ' de ' + mesesNomes[mes] + '/' + ano);
   }
 
-  // Todos os serviços do mês (para "mês inteiro")
-  const servsMesInteiro = DB.servicos.filter(s => {
-    const d = new Date(s.dataEntrada);
-    return !isNaN(d) && d.getFullYear() === ano && d.getMonth() === mes;
-  });
+  garantirDatasEntrega();
 
-  // Serviços até o dia escolhido
-  const servsPeriodo = servsMesInteiro.filter(s => {
-    const d = new Date(s.dataEntrada);
-    return d.getDate() <= diaLimite;
-  }).sort((a, b) => new Date(a.dataEntrada) - new Date(b.dataEntrada)); // crescente p/ acumulado
+  // Financeiro = mês da ENTREGA (só conta quando o cliente retirou)
+  const noPeriodoEntrega = (s, ateDia) => {
+    if (normalizarStatus(s.status) !== 'entregue') return false;
+    const d = dataRefEntrega(s);
+    if (d.getTime() <= 0 || d.getFullYear() !== ano || d.getMonth() !== mes) return false;
+    return d.getDate() <= ateDia;
+  };
+  const noPeriodoEntrada = (s, ateDia) => {
+    const d = dataRefEntrada(s);
+    if (d.getTime() <= 0 || d.getFullYear() !== ano || d.getMonth() !== mes) return false;
+    return d.getDate() <= ateDia;
+  };
+
+  const servsPeriodo = DB.servicos.filter(s => noPeriodoEntrega(s, diaLimite))
+    .sort((a, b) => dataRefEntrega(a) - dataRefEntrega(b));
+  const servsMesInteiro = DB.servicos.filter(s => noPeriodoEntrega(s, 31));
+
+  const listaFinanceiroCards = servsPeriodo.map(s => ({ s, tipo: 'entrega' }));
 
   const receitaMes = servsPeriodo.reduce((a, s) => a + (s.total || 0), 0);
   const moMes = servsPeriodo.reduce((a, s) => a + (s.maoObra || 0) * (s.quantidade || 1), 0);
@@ -3756,10 +4080,11 @@ function renderFinanceiro() {
   const qtdMes = servsPeriodo.length;
   const receitaMesInteiro = servsMesInteiro.reduce((a, s) => a + (s.total || 0), 0);
 
-  // Entregues no mês: entrada no período E status entregue
-  const entreguesMes = servsPeriodo.filter(s => normalizarStatus(s.status) === 'entregue').length;
-  // Em aberto: entrada no período E ainda não entregue
-  const abertoMes = servsPeriodo.filter(s => normalizarStatus(s.status) !== 'entregue').length;
+  const entreguesMes = servsPeriodo.length;
+  // Em aberto: entrou no mês/período e ainda não entregou (não entra na receita)
+  const abertoMes = DB.servicos.filter(s =>
+    noPeriodoEntrada(s, diaLimite) && normalizarStatus(s.status) !== 'entregue'
+  ).length;
 
   const el = (id, v) => { const n = document.getElementById(id); if (n) n.textContent = v; };
   el('finReceitaMes', formatMoney(receitaMes));
@@ -3785,44 +4110,51 @@ function renderFinanceiro() {
   if (barMO) barMO.style.width = (base > 0 ? (moMes / base) * 100 : 0) + '%';
   if (barMat) barMat.style.width = (base > 0 ? (matMes / base) * 100 : 0) + '%';
 
-  // Tabela com acumulado até cada linha
+  // Lançamentos = só o que foi ENTREGUE no período (receita no mês da entrega)
   const tbodyMes = document.getElementById('tabelaFinanceiroMes');
   if (tbodyMes) {
-    if (!servsPeriodo.length) {
-      tbodyMes.innerHTML = '<tr><td colspan="10" class="empty-state">Nenhum serviço neste período</td></tr>';
+    if (!listaFinanceiroCards.length) {
+      tbodyMes.innerHTML = '<div class="empty-state">Nenhuma entrega neste período.<br><span style="font-size:0.85rem;color:#666;">A receita só entra quando o status é Entregue.</span></div>';
     } else {
       let acumulado = 0;
-      // Agrupa acumulado por dia: após cada lançamento soma
-      tbodyMes.innerHTML = servsPeriodo.map(s => {
+      tbodyMes.innerHTML = listaFinanceiroCards.map(({ s }) => {
         const mo = (s.maoObra || 0) * (s.quantidade || 1);
         const mat = (s.materiais || 0) * (s.quantidade || 1);
         const tot = s.total || (mo + mat);
         acumulado += tot;
-        return `<tr>
-          <td>${formatDate(s.dataEntrada)}</td>
-          <td>${s.clienteNome || '-'}</td>
-          <td>${s.tipoInstrumento || '-'}${s.modelo ? ' · ' + s.modelo : ''}</td>
-          <td>${s.tipoServico || '-'}</td>
-          <td>${formatMoney(mo)}</td>
-          <td>${formatMoney(mat)}</td>
-          <td class="neon-text-green">${formatMoney(tot)}</td>
-          <td><strong class="neon-text-cyan">${formatMoney(acumulado)}</strong></td>
-          <td>${getStatusTag(s.status)}</td>
-          <td style="white-space:nowrap;">
-            <button class="btn btn-green btn-sm" title="Editar valores" onclick="abrirEditarServico('${s.id}')">💰</button>
-            <button class="btn btn-cyan btn-sm" title="Dados do cliente" onclick="abrirModalCliente('${s.clienteId || ''}')">✏️</button>
-          </td>
-        </tr>`;
+        const inst = (s.tipoInstrumento || '-') + (s.modelo ? ' · ' + s.modelo : '');
+        const sid = String(s.id).replace(/'/g, "\\'");
+        const cid = String(s.clienteId || '').replace(/'/g, "\\'");
+        const dataEnt = formatDate(s.dataEntrega || s.dataConclusao || s.dataEntrada);
+        const dataIn = formatDate(s.dataEntrada);
+        return `<div class="list-row">
+          <div class="list-row-top">
+            <div class="list-row-title">${s.clienteNome || 'Cliente'}</div>
+            ${getStatusTag(s.status)}
+          </div>
+          <div class="list-row-meta">Entrega: ${dataEnt} · Entrada: ${dataIn}<br>${inst} · ${s.tipoServico || 'Serviço'}</div>
+          <div class="list-row-values">
+            <span>MO <strong>${formatMoney(mo)}</strong></span>
+            <span>Mat <strong>${formatMoney(mat)}</strong></span>
+            <span>Total <strong>${formatMoney(tot)}</strong></span>
+            <span>Acum. <strong>${formatMoney(acumulado)}</strong></span>
+          </div>
+          <div class="list-row-actions">
+            <button type="button" class="btn btn-green btn-sm" onclick="event.stopPropagation();abrirEditarServico('${sid}')">💰 Valores</button>
+            <button type="button" class="btn btn-cyan btn-sm" onclick="event.stopPropagation();abrirModalCliente('${cid}')">✏️ Cliente</button>
+          </div>
+        </div>`;
       }).join('');
     }
   }
 
-  // Dados do ano (comparativo)
+  // Dados do ano (comparativo) — por DATA DE ENTREGA
   let receitaAno = 0, maoObraAno = 0, materiaisAno = 0, qtdAno = 0;
   const dadosMes = mesesNomesCurto.map((nome, m) => {
     const servs = DB.servicos.filter(s => {
-      const d = new Date(s.dataEntrada);
-      return !isNaN(d) && d.getFullYear() === ano && d.getMonth() === m;
+      if (normalizarStatus(s.status) !== 'entregue') return false;
+      const d = dataRefEntrega(s);
+      return d.getTime() > 0 && d.getFullYear() === ano && d.getMonth() === m;
     });
     const total = servs.reduce((a, s) => a + (s.total || 0), 0);
     const mo = servs.reduce((a, s) => a + (s.maoObra || 0) * (s.quantidade || 1), 0);
@@ -3847,7 +4179,7 @@ function renderFinanceiro() {
       tbody.innerHTML = '<tr><td colspan="6" class="empty-state">Nenhum dado financeiro neste ano</td></tr>';
     } else {
       tbody.innerHTML = comDados.map(d => {
-        const destaque = d.mes === mes ? 'style="background:rgba(0,240,255,0.06);"' : '';
+        const destaque = d.mes === mes ? 'style="background:rgba(255,149,0,0.06);"' : '';
         return `<tr ${destaque}>
           <td><strong>${d.nome}/${ano}</strong>${d.mes === mes ? ' ←' : ''}</td>
           <td>${d.qtd}</td>
@@ -3869,7 +4201,7 @@ function renderFinanceiro() {
       data: {
         labels: mesesNomesCurto,
         datasets: [
-          { label: 'Mão de Obra', data: dadosMes.map(d => d.mo), backgroundColor: 'rgba(0,240,255,0.6)' },
+          { label: 'Mão de Obra', data: dadosMes.map(d => d.mo), backgroundColor: 'rgba(255,149,0,0.6)' },
           { label: 'Materiais', data: dadosMes.map(d => d.mat), backgroundColor: 'rgba(255,0,255,0.6)' }
         ]
       },
@@ -4835,7 +5167,7 @@ function renderListaAgendamentos() {
       <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap;">
         <div>
           <strong style="color:var(--neon-cyan);">${a.nome}</strong> · ${a.telefone}
-          ${a.lido === false ? '<span class="tag" style="background:rgba(0,240,255,0.15);color:var(--neon-cyan);margin-left:6px;">Novo</span>' : ''}
+          ${a.lido === false ? '<span class="tag" style="background:rgba(255,149,0,0.15);color:var(--neon-cyan);margin-left:6px;">Novo</span>' : ''}
           <div style="color:#888;margin-top:4px;">${a.servico || '-'} ${a.instrumento ? '· ' + a.instrumento : ''}</div>
           ${a.obs ? '<div style="color:#666;font-size:0.82rem;margin-top:2px;">' + a.obs + '</div>' : ''}
           <div style="color:#555;font-size:0.75rem;margin-top:4px;">${formatDate(a.data)}</div>
@@ -5106,17 +5438,23 @@ const _salvarEntradaCompletaOriginal = typeof salvarEntradaCompleta === 'functio
 
 // Inicialização
 document.addEventListener('DOMContentLoaded', () => {
-  corrigirDadosAkustikNoStorage();
-  initFirebase(true);
+  try { corrigirDadosAkustikNoStorage(); } catch (e) { console.error(e); }
+  try { garantirDatasEntrega(); } catch (e) { console.error(e); }
+  try { initFirebase(true); } catch (e) { console.error(e); }
   const params = new URLSearchParams(window.location.search);
   if (params.get('portal') === '1' || params.get('cliente') === '1') {
     entrarPortalCliente();
   } else {
     renderDashboard();
     atualizarBadgeAgenda();
-    // Checa agendamentos novos ao abrir o app e a cada 2 minutos (apenas lado oficina, com Firebase configurado)
     buscarNovosAgendamentosFirebase();
     setInterval(buscarNovosAgendamentosFirebase, 120000);
+    mostrarOnboardingSePreciso();
+    lembrarBackupSemanal();
+    // PWA: registra service worker se existir
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js').catch(() => {});
+    }
   }
 });
 </script>
