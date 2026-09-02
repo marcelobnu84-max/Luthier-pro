@@ -18,26 +18,22 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root {
-  /* Paleta Luthieria — preto + laranja (mesmo estilo do portal) */
-  --neon-cyan: #ff9500;
-  --neon-magenta: #ffb347;
-  --neon-purple: #e8890c;
-  --neon-green: #ff9500;
+  --neon-cyan: #00f0ff;
+  --neon-magenta: #ff00ff;
+  --neon-purple: #b829dd;
+  --neon-green: #39ff14;
   --neon-orange: #ff9500;
-  --neon-yellow: #ffc266;
-  --neon-pink: #ff9f43;
-  --dark-bg: #0a0a0c;
-  --card-bg: rgba(22, 18, 14, 0.95);
-  --glass: rgba(255,149,0,0.04);
-  --accent: #ff9500;
-  --accent-dim: rgba(255,149,0,0.15);
-  --border-soft: rgba(255,149,0,0.14);
+  --neon-yellow: #ffe600;
+  --neon-pink: #ff6b9d;
+  --dark-bg: #0a0a0f;
+  --card-bg: rgba(20, 20, 35, 0.85);
+  --glass: rgba(255,255,255,0.03);
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 body {
   font-family: 'Inter', sans-serif;
   background: var(--dark-bg);
-  color: #e8e2d9;
+  color: #e0e0e0;
   min-height: 100vh;
   overflow-x: hidden;
 }
@@ -46,23 +42,23 @@ body::before {
   position: fixed;
   top: 0; left: 0; width: 100%; height: 100%;
   background-image: 
-    linear-gradient(rgba(255,149,0,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,149,0,0.04) 1px, transparent 1px);
+    linear-gradient(rgba(0,240,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,240,255,0.03) 1px, transparent 1px);
   background-size: 50px 50px;
   pointer-events: none;
   z-index: 0;
 }
-.neon-text-cyan { color: #ff9500; text-shadow: 0 0 12px rgba(255,149,0,0.45); }
-.neon-text-magenta { color: #ffb347; text-shadow: 0 0 10px rgba(255,179,71,0.35); }
-.neon-text-green { color: #ff9500; text-shadow: 0 0 12px rgba(255,149,0,0.4); }
-.neon-text-orange { color: #ff9500; text-shadow: 0 0 12px rgba(255,149,0,0.45); }
+.neon-text-cyan { color: var(--neon-cyan); text-shadow: 0 0 10px rgba(0,240,255,0.5), 0 0 20px rgba(0,240,255,0.3); }
+.neon-text-magenta { color: var(--neon-magenta); text-shadow: 0 0 10px rgba(255,0,255,0.5), 0 0 20px rgba(255,0,255,0.3); }
+.neon-text-green { color: var(--neon-green); text-shadow: 0 0 10px rgba(57,255,20,0.5), 0 0 20px rgba(57,255,20,0.3); }
+.neon-text-orange { color: var(--neon-orange); text-shadow: 0 0 10px rgba(255,149,0,0.5), 0 0 20px rgba(255,149,0,0.3); }
 .sidebar {
   position: fixed;
   left: 0; top: 0;
   width: 260px;
   height: 100vh;
-  background: linear-gradient(180deg, #0c0a08 0%, #14110e 100%);
-  border-right: 1px solid rgba(255,149,0,0.16);
+  background: linear-gradient(180deg, rgba(10,10,15,0.98) 0%, rgba(20,20,40,0.95) 100%);
+  border-right: 1px solid rgba(0,240,255,0.15);
   z-index: 100;
   padding: 20px 0;
   display: flex;
@@ -71,19 +67,19 @@ body::before {
 .logo {
   text-align: center;
   padding: 0 20px 25px;
-  border-bottom: 1px solid rgba(255,149,0,0.12);
+  border-bottom: 1px solid rgba(0,240,255,0.1);
   margin-bottom: 15px;
 }
 .logo h1 {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 900;
   letter-spacing: 2px;
-  background: linear-gradient(135deg, #ffb347, #ff9500, #e07b00);
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta), var(--neon-purple));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-.logo span { font-size: 0.65rem; color: #ff9500; letter-spacing: 2.5px; text-transform: uppercase; font-weight: 600; }
+.logo span { font-size: 0.7rem; color: #666; letter-spacing: 3px; text-transform: uppercase; }
 .nav-item {
   display: flex;
   align-items: center;
@@ -93,33 +89,33 @@ body::before {
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
-  color: #8a8278;
+  color: #888;
   font-weight: 500;
   font-size: 0.92rem;
   border: 1px solid transparent;
 }
 .nav-item:hover {
-  background: rgba(255,149,0,0.08);
-  color: #ff9500;
-  border-color: rgba(255,149,0,0.2);
+  background: rgba(0,240,255,0.08);
+  color: var(--neon-cyan);
+  border-color: rgba(0,240,255,0.2);
 }
 .nav-item.active {
-  background: linear-gradient(135deg, rgba(255,149,0,0.18), rgba(255,149,0,0.06));
-  color: #ff9500;
-  border-color: rgba(255,149,0,0.35);
-  box-shadow: 0 0 22px rgba(255,149,0,0.12);
+  background: linear-gradient(135deg, rgba(0,240,255,0.15), rgba(184,41,221,0.1));
+  color: var(--neon-cyan);
+  border-color: rgba(0,240,255,0.3);
+  box-shadow: 0 0 20px rgba(0,240,255,0.1);
 }
 .nav-icon {
   width: 36px; height: 36px;
   border-radius: 10px;
   display: flex; align-items: center; justify-content: center;
   font-size: 1.1rem;
-  background: rgba(255,149,0,0.06);
-  border: 1px solid rgba(255,149,0,0.12);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
 }
 .nav-item.active .nav-icon {
-  background: rgba(255,149,0,0.18);
-  border-color: rgba(255,149,0,0.35);
+  background: rgba(0,240,255,0.15);
+  border-color: rgba(0,240,255,0.3);
 }
 .main-content {
   margin-left: 260px;
@@ -139,16 +135,16 @@ body::before {
 .page-header p { color: #666; font-size: 0.9rem; }
 .card {
   background: var(--card-bg);
-  border: 1px solid rgba(255,149,0,0.12);
-  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
   padding: 24px;
   margin-bottom: 20px;
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
 }
 .card:hover {
-  border-color: rgba(255,149,0,0.28);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.35), 0 0 24px rgba(255,149,0,0.06);
+  border-color: rgba(0,240,255,0.15);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
 }
 .card-header {
   display: flex;
@@ -185,11 +181,11 @@ body::before {
 .stat-card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.12); }
 .stat-label { font-size: 0.8rem; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
 .stat-value { font-size: 2rem; font-weight: 800; }
-.stat-value.cyan { color: #ff9500; text-shadow: 0 0 15px rgba(255,149,0,0.35); }
-.stat-value.magenta { color: #ffb347; text-shadow: 0 0 12px rgba(255,179,71,0.3); }
-.stat-value.green { color: #ff9500; text-shadow: 0 0 15px rgba(255,149,0,0.35); }
-.stat-value.orange { color: #ff9500; text-shadow: 0 0 15px rgba(255,149,0,0.35); }
-.stat-value.purple { color: #e8890c; text-shadow: 0 0 12px rgba(232,137,12,0.3); }
+.stat-value.cyan { color: var(--neon-cyan); text-shadow: 0 0 15px rgba(0,240,255,0.3); }
+.stat-value.magenta { color: var(--neon-magenta); text-shadow: 0 0 15px rgba(255,0,255,0.3); }
+.stat-value.green { color: var(--neon-green); text-shadow: 0 0 15px rgba(57,255,20,0.3); }
+.stat-value.orange { color: var(--neon-orange); text-shadow: 0 0 15px rgba(255,149,0,0.3); }
+.stat-value.purple { color: var(--neon-purple); text-shadow: 0 0 15px rgba(184,41,221,0.3); }
 .btn {
   display: inline-flex;
   align-items: center;
@@ -214,40 +210,16 @@ body::before {
   transition: left 0.5s ease;
 }
 .btn:hover::before { left: 100%; }
-.btn-cyan {
-  background: linear-gradient(135deg, #ff9500, #e07b00);
-  border: none;
-  color: #0a0a0c;
-  font-weight: 700;
-  box-shadow: 0 4px 18px rgba(255,149,0,0.25);
-}
-.btn-cyan:hover { filter: brightness(1.08); box-shadow: 0 6px 24px rgba(255,149,0,0.35); }
-.btn-magenta {
-  background: rgba(255,149,0,0.12);
-  border: 1px solid rgba(255,149,0,0.35);
-  color: #ffb347;
-}
-.btn-magenta:hover { background: rgba(255,149,0,0.2); box-shadow: 0 0 20px rgba(255,149,0,0.2); }
-.btn-green {
-  background: linear-gradient(135deg, #ff9500, #ff6b00);
-  border: none;
-  color: #0a0a0c;
-  font-weight: 700;
-  box-shadow: 0 4px 18px rgba(255,149,0,0.25);
-}
-.btn-green:hover { filter: brightness(1.08); box-shadow: 0 6px 24px rgba(255,149,0,0.35); }
-.btn-orange {
-  background: rgba(255,149,0,0.14);
-  border: 1px solid rgba(255,149,0,0.4);
-  color: #ff9500;
-}
-.btn-orange:hover { background: rgba(255,149,0,0.22); box-shadow: 0 0 20px rgba(255,149,0,0.2); }
-.btn-purple {
-  background: rgba(232,137,12,0.12);
-  border: 1px solid rgba(232,137,12,0.35);
-  color: #ffb347;
-}
-.btn-purple:hover { background: rgba(232,137,12,0.2); box-shadow: 0 0 20px rgba(255,149,0,0.15); }
+.btn-cyan { background: linear-gradient(135deg, rgba(0,240,255,0.2), rgba(0,240,255,0.05)); border: 1px solid rgba(0,240,255,0.4); color: var(--neon-cyan); }
+.btn-cyan:hover { background: linear-gradient(135deg, rgba(0,240,255,0.3), rgba(0,240,255,0.1)); box-shadow: 0 0 25px rgba(0,240,255,0.2); }
+.btn-magenta { background: linear-gradient(135deg, rgba(255,0,255,0.2), rgba(255,0,255,0.05)); border: 1px solid rgba(255,0,255,0.4); color: var(--neon-magenta); }
+.btn-magenta:hover { background: linear-gradient(135deg, rgba(255,0,255,0.3), rgba(255,0,255,0.1)); box-shadow: 0 0 25px rgba(255,0,255,0.2); }
+.btn-green { background: linear-gradient(135deg, rgba(57,255,20,0.2), rgba(57,255,20,0.05)); border: 1px solid rgba(57,255,20,0.4); color: var(--neon-green); }
+.btn-green:hover { background: linear-gradient(135deg, rgba(57,255,20,0.3), rgba(57,255,20,0.1)); box-shadow: 0 0 25px rgba(57,255,20,0.2); }
+.btn-orange { background: linear-gradient(135deg, rgba(255,149,0,0.2), rgba(255,149,0,0.05)); border: 1px solid rgba(255,149,0,0.4); color: var(--neon-orange); }
+.btn-orange:hover { background: linear-gradient(135deg, rgba(255,149,0,0.3), rgba(255,149,0,0.1)); box-shadow: 0 0 25px rgba(255,149,0,0.2); }
+.btn-purple { background: linear-gradient(135deg, rgba(184,41,221,0.2), rgba(184,41,221,0.05)); border: 1px solid rgba(184,41,221,0.4); color: var(--neon-purple); }
+.btn-purple:hover { background: linear-gradient(135deg, rgba(184,41,221,0.3), rgba(184,41,221,0.1)); box-shadow: 0 0 25px rgba(184,41,221,0.2); }
 .btn-sm { padding: 8px 16px; font-size: 0.82rem; border-radius: 10px; }
 .form-group { margin-bottom: 18px; }
 .form-label { display: block; font-size: 0.85rem; font-weight: 600; color: #aaa; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
@@ -268,8 +240,8 @@ body::before {
   text-overflow: ellipsis;
 }
 .form-input:focus, .form-select:focus, .form-textarea:focus {
-  border-color: #ff9500;
-  box-shadow: 0 0 0 3px rgba(255,149,0,0.15);
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 15px rgba(0,240,255,0.1);
   background: rgba(255,255,255,0.06);
 }
 .form-textarea { min-height: 100px; resize: vertical; overflow-y: auto; word-break: break-word; }
@@ -300,8 +272,8 @@ body::before {
 /* Listas em card — legíveis no celular (sem tabela cortada) */
 .mobile-list { display: flex; flex-direction: column; gap: 10px; }
 .list-row {
-  background: rgba(255,149,0,0.04);
-  border: 1px solid rgba(255,149,0,0.12);
+  background: rgba(0,240,255,0.04);
+  border: 1px solid rgba(0,240,255,0.12);
   border-radius: 14px;
   padding: 12px 14px;
 }
@@ -319,7 +291,7 @@ body::before {
   line-height: 1.25;
 }
 .list-row-meta {
-  color: #8a8278;
+  color: #888;
   font-size: 0.8rem;
   line-height: 1.4;
   margin-bottom: 8px;
@@ -330,9 +302,9 @@ body::before {
   gap: 8px 14px;
   align-items: center;
   font-size: 0.82rem;
-  color: #b8b0a4;
+  color: #aaa;
 }
-.list-row-values strong { color: #ff9500; font-weight: 800; }
+.list-row-values strong { color: var(--neon-green); font-weight: 800; }
 .list-row-actions {
   display: flex;
   gap: 8px;
@@ -348,9 +320,9 @@ body::before {
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
-.tag-cyan { background: rgba(255,149,0,0.12); color: #ff9500; border: 1px solid rgba(255,149,0,0.3); }
+.tag-cyan { background: rgba(0,240,255,0.12); color: var(--neon-cyan); border: 1px solid rgba(0,240,255,0.25); }
 .tag-magenta { background: rgba(255,0,255,0.12); color: var(--neon-magenta); border: 1px solid rgba(255,0,255,0.25); }
-.tag-green { background: rgba(255,149,0,0.14); color: #ffb347; border: 1px solid rgba(255,149,0,0.32); }
+.tag-green { background: rgba(57,255,20,0.12); color: var(--neon-green); border: 1px solid rgba(57,255,20,0.25); }
 .tag-orange { background: rgba(255,149,0,0.12); color: var(--neon-orange); border: 1px solid rgba(255,149,0,0.25); }
 .tag-purple { background: rgba(184,41,221,0.12); color: var(--neon-purple); border: 1px solid rgba(184,41,221,0.25); }
 .modal-overlay {
@@ -551,9 +523,9 @@ body::before {
   position: sticky;
   top: 0;
   z-index: 150;
-  background: rgba(10,10,12,0.94);
+  background: rgba(10,10,15,0.94);
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255,149,0,0.14);
+  border-bottom: 1px solid rgba(0,240,255,0.15);
   padding: 12px 16px;
   padding-top: max(12px, env(safe-area-inset-top));
   align-items: center;
@@ -563,15 +535,15 @@ body::before {
 .mobile-topbar .brand {
   font-weight: 800;
   letter-spacing: 1px;
-  color: #ff9500;
+  color: var(--neon-cyan);
   font-size: 0.95rem;
 }
 .mobile-topbar .menu-btn {
   width: 42px; height: 42px;
   border-radius: 12px;
-  border: 1px solid rgba(255,149,0,0.3);
-  background: rgba(255,149,0,0.1);
-  color: #ff9500;
+  border: 1px solid rgba(0,240,255,0.3);
+  background: rgba(0,240,255,0.1);
+  color: var(--neon-cyan);
   font-size: 1.2rem;
   cursor: pointer;
 }
@@ -688,7 +660,7 @@ body::before {
 }
 .search-input:focus {
   border-color: var(--neon-cyan);
-  box-shadow: 0 0 15px rgba(255,149,0,0.1);
+  box-shadow: 0 0 15px rgba(0,240,255,0.15);
 }
 .action-cards {
   display: grid;
@@ -781,7 +753,7 @@ body::before {
   transition: all 0.2s ease;
 }
 .cliente-card:hover {
-  border-color: rgba(255,149,0,0.2);
+  border-color: rgba(0,240,255,0.25);
 }
 .cliente-card-info h4 {
   font-size: 1rem;
@@ -829,7 +801,7 @@ body::before {
 }
 .section-divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,149,0,0.2), transparent);
+  background: linear-gradient(90deg, transparent, rgba(0,240,255,0.2), transparent);
   margin: 30px 0;
 }
 .icon-3d {
@@ -1196,7 +1168,7 @@ body.portal-mode #portalCliente { display: block !important; }
   <div class="logo">
     <h1>LUTHIER PRO</h1>
     <span>Gestão profissional</span>
-    <div id="appVersionBadge" style="margin-top:6px;font-size:0.72rem;color:var(--neon-green);letter-spacing:1px;">v27.4 · receita na entrega</div>
+    <div id="appVersionBadge" style="margin-top:6px;font-size:0.72rem;color:var(--neon-green);letter-spacing:1px;">v27.6 · busca limpa</div>
   </div>
   <div class="nav-item active" onclick="navigateTo('dashboard')">
     <div class="nav-icon">📊</div>
@@ -1356,27 +1328,15 @@ body.portal-mode #portalCliente { display: block !important; }
 
       <!-- Modo: existente -->
       <div id="blocoClienteExistente">
+        <input type="hidden" id="servCliente" value="">
+        <input type="hidden" id="servClienteNome" value="">
+        <input type="hidden" id="servClienteTel" value="">
         <div class="form-group">
-          <label class="form-label">Buscar cliente</label>
-          <input type="search" class="form-input" id="servClienteBusca" placeholder="Digite o nome ou telefone..." autocomplete="off" oninput="filtrarClientesServico()" onkeydown="if(event.key==='Enter'){event.preventDefault();}">
-          <p style="color:#666;font-size:0.75rem;margin-top:6px;">Escreva as primeiras letras do nome para achar rápido</p>
+          <input type="search" class="search-input" id="servClienteBusca" style="width:100%;" placeholder="Buscar por nome, telefone ou email..." autocomplete="off" oninput="filtrarClientesServico()" onkeydown="if(event.key==='Enter'){event.preventDefault();}">
         </div>
-        <div class="form-group">
-          <label class="form-label">Selecionar Cliente *</label>
-          <select class="form-select" id="servCliente" size="6" style="height:auto;min-height:140px;" onchange="preencherDadosCliente()"><option value="">-- Selecione um cliente --</option></select>
-          <p id="servClienteBuscaInfo" style="color:#888;font-size:0.75rem;margin-top:6px;"></p>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Nome</label>
-            <input type="text" class="form-input" id="servClienteNome" readonly placeholder="Selecione o cliente">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Telefone</label>
-            <input type="text" class="form-input" id="servClienteTel" readonly placeholder="—">
-          </div>
-        </div>
-        <div id="servClienteHistorico" style="display:none; margin-top:12px; padding:12px; background:rgba(255,149,0,0.05); border-radius:10px; border:1px solid rgba(255,149,0,0.15); font-size:0.85rem; color:#aaa;"></div>
+        <div id="servClienteSelecionado" style="display:none;margin-bottom:12px;"></div>
+        <div id="servClienteResultados" class="cliente-card-list" style="max-height:280px;overflow-y:auto;"></div>
+        <div id="servClienteHistorico" style="display:none; margin-top:12px; padding:12px; background:rgba(0,240,255,0.05); border-radius:10px; border:1px solid rgba(0,240,255,0.15); font-size:0.85rem; color:#aaa;"></div>
       </div>
 
       <!-- Modo: novo cliente (preenche e cria junto com o serviço) -->
@@ -1743,7 +1703,7 @@ body.portal-mode #portalCliente { display: block !important; }
         <li>WhatsApp da oficina preenchido</li>
         <li>Fotos comprimidas / limpar fotos se o aparelho encher</li>
       </ul>
-      <p style="color:#666;font-size:0.8rem;margin:0;">Versão <strong id="configVersaoTxt" style="color:#ff9500;">v27.0</strong> · Uso comercial da sua oficina · Dados sensíveis: proteja o link admin e faça backup.</p>
+      <p style="color:#666;font-size:0.8rem;margin:0;">Versão <strong id="configVersaoTxt" style="color:var(--neon-cyan);">v27.5</strong> · Uso comercial da sua oficina · Dados sensíveis: proteja o link admin e faça backup.</p>
     </div>
   </div>
 
@@ -2703,6 +2663,7 @@ function salvarCliente() {
       if (sel) {
         sel.value = novoId;
         preencherDadosCliente();
+        filtrarClientesServico();
       }
     }
     if (pendingAgendamentoId) {
@@ -2746,6 +2707,7 @@ function salvarSomenteClienteNovo() {
     if (sel) {
       sel.value = data.id;
       preencherDadosCliente();
+      filtrarClientesServico();
     }
     renderClientes();
   } catch (e) {
@@ -2971,7 +2933,7 @@ function setModoCliente(modo) {
     blocoEx.style.display = 'block';
     blocoNv.style.display = 'none';
     if (btnNv) { btnNv.style.background = 'rgba(255,255,255,0.05)'; btnNv.style.borderColor = 'rgba(255,255,255,0.15)'; btnNv.style.color = '#888'; }
-    if (btnEx) { btnEx.style.background = 'rgba(255,149,0,0.2)'; btnEx.style.borderColor = 'rgba(255,149,0,0.4)'; btnEx.style.color = 'var(--neon-cyan)'; }
+    if (btnEx) { btnEx.style.background = 'rgba(0,240,255,0.2)'; btnEx.style.borderColor = 'rgba(0,240,255,0.4)'; btnEx.style.color = 'var(--neon-cyan)'; }
     if (tit) tit.textContent = 'Novo atendimento';
     if (sub) sub.textContent = 'Cliente já cadastrado: escolha a pessoa e registre instrumento, serviço e valores.';
   }
@@ -2998,6 +2960,7 @@ function novaEntradaClienteExistente(clienteId) {
       if (sel) {
         sel.value = clienteId;
         preencherDadosCliente();
+        filtrarClientesServico();
       }
     }
   }, 50);
@@ -3010,47 +2973,101 @@ function normalizarBuscaTxt(s) {
     .replace(/[\u0300-\u036f]/g, '');
 }
 
+function selecionarClienteServico(id) {
+  const sel = document.getElementById('servCliente');
+  if (sel) sel.value = id || '';
+  const busca = document.getElementById('servClienteBusca');
+  if (busca) busca.value = '';
+  preencherDadosCliente();
+  filtrarClientesServico();
+}
+
 function filtrarClientesServico() {
   const selCli = document.getElementById('servCliente');
-  const info = document.getElementById('servClienteBuscaInfo');
   const buscaEl = document.getElementById('servClienteBusca');
-  if (!selCli) return;
+  const results = document.getElementById('servClienteResultados');
+  const selBox = document.getElementById('servClienteSelecionado');
+  if (!results) return;
+
+  const selecionado = selCli ? selCli.value : '';
+  // Card do cliente já escolhido
+  if (selBox) {
+    if (selecionado) {
+      const c = (DB.clientes || []).find(x => String(x.id) === String(selecionado));
+      if (c) {
+        const st = getClienteStats(c.id);
+        selBox.style.display = 'block';
+        selBox.innerHTML = `<div class="cliente-card" style="border-color:rgba(0,240,255,0.35);">
+          <div class="cliente-card-info">
+            <h4>${c.nome || 'Cliente'}</h4>
+            <div class="cliente-card-meta">${c.telefone || ''}${c.cidade ? ' · ' + c.cidade : ''}</div>
+            <div style="margin-top:6px;font-size:0.8rem;color:#666;">${st.qtd} serviço(s) · ${formatMoney(st.totalGasto)}</div>
+          </div>
+          <div class="cliente-card-actions">
+            <button type="button" class="btn btn-magenta btn-sm" onclick="selecionarClienteServico('')">Trocar</button>
+          </div>
+        </div>`;
+      } else {
+        selBox.style.display = 'none';
+        selBox.innerHTML = '';
+      }
+    } else {
+      selBox.style.display = 'none';
+      selBox.innerHTML = '';
+    }
+  }
+
+  // Com cliente selecionado, não precisa listar todos
+  if (selecionado) {
+    results.innerHTML = '';
+    return;
+  }
+
   const qRaw = (buscaEl && buscaEl.value) || '';
   const q = normalizarBuscaTxt(qRaw).trim();
   const qDigits = String(qRaw).replace(/\D/g, '');
-  const selecionado = selCli.value;
+
+  // Sem texto: não mostra lista bagunçada — só o campo de busca
+  if (!q && qDigits.length < 2) {
+    results.innerHTML = '';
+    return;
+  }
+
   const lista = [...(DB.clientes || [])].sort((a, b) =>
     String(a.nome || '').localeCompare(String(b.nome || ''), 'pt-BR', { sensitivity: 'base' })
   );
-  const filtrados = (!q && qDigits.length < 2)
-    ? lista
-    : lista.filter(c => {
-        const nome = normalizarBuscaTxt(c.nome);
-        const tel = String(c.telefone || '').replace(/\D/g, '');
-        if (q && nome.includes(q)) return true;
-        if (qDigits.length >= 2 && tel.includes(qDigits)) return true;
-        if (q && (nome + ' ' + tel).includes(q.replace(/\s+/g, ' '))) return true;
-        return false;
-      });
-  const opts = filtrados.map(c =>
-    `<option value="${c.id}"${String(c.id) === String(selecionado) ? ' selected' : ''}>${c.nome || 'Sem nome'} — ${c.telefone || 's/ tel'}</option>`
-  ).join('');
-  selCli.innerHTML = '<option value="">-- Selecione um cliente --</option>' + opts;
-  if (selecionado && !filtrados.some(c => String(c.id) === String(selecionado))) {
-    selCli.value = '';
-    preencherDadosCliente();
-  } else if (selecionado) {
-    selCli.value = selecionado;
+  const filtrados = lista.filter(c => {
+    const nome = normalizarBuscaTxt(c.nome);
+    const email = normalizarBuscaTxt(c.email || '');
+    const tel = String(c.telefone || '').replace(/\D/g, '');
+    if (q && nome.includes(q)) return true;
+    if (q && email.includes(q)) return true;
+    if (qDigits.length >= 2 && tel.includes(qDigits)) return true;
+    if (q && (nome + ' ' + tel).includes(q.replace(/\s+/g, ' '))) return true;
+    return false;
+  }).slice(0, 20);
+
+  if (!filtrados.length) {
+    results.innerHTML = '<div class="empty-state" style="padding:16px;">Nenhum cliente encontrado</div>';
+    return;
   }
-  if (filtrados.length === 1) {
-    selCli.value = filtrados[0].id;
-    preencherDadosCliente();
-  }
-  if (info) {
-    if (!q && qDigits.length < 2) info.textContent = lista.length + ' cliente(s) — use a busca para filtrar';
-    else if (!filtrados.length) info.textContent = 'Nenhum cliente encontrado';
-    else info.textContent = filtrados.length + ' resultado(s)';
-  }
+
+  results.innerHTML = filtrados.map(c => {
+    const st = getClienteStats(c.id);
+    const cid = String(c.id).replace(/'/g, "\\'");
+    return `<div class="cliente-card" style="cursor:pointer;" onclick="selecionarClienteServico('${cid}')">
+      <div class="cliente-card-info">
+        <h4>${c.nome || 'Sem nome'}</h4>
+        <div class="cliente-card-meta">${c.telefone || ''}${c.cidade ? ' · ' + c.cidade : ''}</div>
+      </div>
+      <div class="cliente-card-stats">
+        <div class="stat-mini"><span>Serviços</span><strong class="neon-text-cyan">${st.qtd}</strong></div>
+        <div class="stat-mini"><span>Total</span><strong class="neon-text-green">${formatMoney(st.totalGasto)}</strong></div>
+      </div>
+    </div>`;
+  }).join('');
+
+  // Um único resultado: ainda deixa o usuário tocar; não força seleção automática (mais controle)
 }
 
 function initPaginaServicos() {
@@ -3346,6 +3363,9 @@ function limparFormServico() {
   if (hist) { hist.style.display = 'none'; hist.innerHTML = ''; }
   const fotoInput = document.getElementById('servFotos');
   if (fotoInput) fotoInput.value = '';
+  const busca = document.getElementById('servClienteBusca');
+  if (busca) busca.value = '';
+  try { filtrarClientesServico(); } catch (e) {}
 }
 
 let ultimoServicoSalvoId = null;
