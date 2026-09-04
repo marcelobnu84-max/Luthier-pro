@@ -1149,6 +1149,141 @@ body.portal-mode #portalCliente { display: block !important; }
   color: #8a8278;
 }
 .portal-secure strong { color: #c9c0b4; display: block; font-size: 0.85rem; }
+
+/* OS badge — número da ordem sempre visível */
+.os-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  background: rgba(0,240,255,0.12);
+  color: var(--neon-cyan);
+  border: 1px solid rgba(0,240,255,0.35);
+  font-variant-numeric: tabular-nums;
+}
+.os-badge-lg {
+  font-size: 0.95rem;
+  padding: 6px 14px;
+}
+.kanban-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.kanban-status-tabs {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 4px;
+}
+.kanban-status-tab {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 8px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.03);
+  color: #888;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.75rem;
+  cursor: pointer;
+  white-space: nowrap;
+  text-align: center;
+}
+.kanban-status-tab.active {
+  color: #0a0a0c;
+  background: linear-gradient(135deg, var(--neon-cyan), #00b8c4);
+  border-color: transparent;
+  box-shadow: 0 4px 16px rgba(0,240,255,0.25);
+}
+.kanban-status-tab .tab-count {
+  display: block;
+  font-size: 1rem;
+  margin-top: 2px;
+}
+.kanban-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.btn-status-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+.btn-status {
+  flex: 1;
+  min-width: 90px;
+  padding: 10px 8px !important;
+  font-size: 0.78rem !important;
+  border-radius: 10px !important;
+  font-weight: 700 !important;
+}
+@media (max-width: 768px) {
+  .kanban-board {
+    display: block !important;
+  }
+  .kanban-column {
+    display: none;
+    min-height: auto;
+    margin-bottom: 0;
+  }
+  .kanban-column.mobile-show {
+    display: block;
+  }
+  .kanban-card {
+    padding: 14px;
+  }
+  .kanban-card-title { font-size: 1rem; }
+}
+
+
+.kanban-arrow-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-shrink: 0;
+}
+.btn-kanban-arrow {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  border: 1px solid rgba(0,240,255,0.35);
+  background: rgba(0,240,255,0.12);
+  color: var(--neon-cyan);
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font-family: inherit;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-kanban-arrow:active:not(.disabled):not(:disabled) {
+  transform: scale(0.94);
+  background: rgba(0,240,255,0.25);
+}
+.btn-kanban-arrow.disabled,
+.btn-kanban-arrow:disabled {
+  opacity: 0.28;
+  cursor: default;
+  border-color: rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.03);
+  color: #666;
+}
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
@@ -1168,7 +1303,7 @@ body.portal-mode #portalCliente { display: block !important; }
   <div class="logo">
     <h1>LUTHIER PRO</h1>
     <span>Gestão profissional</span>
-    <div id="appVersionBadge" style="margin-top:6px;font-size:0.72rem;color:var(--neon-green);letter-spacing:1px;">v27.6 · busca limpa</div>
+    <div id="appVersionBadge" style="margin-top:6px;font-size:0.72rem;color:var(--neon-green);letter-spacing:1px;">v27.8 · flechas status</div>
   </div>
   <div class="nav-item active" onclick="navigateTo('dashboard')">
     <div class="nav-icon">📊</div>
@@ -1460,7 +1595,16 @@ body.portal-mode #portalCliente { display: block !important; }
   <div class="page" id="page-kanban">
     <div class="page-header">
       <h2 class="neon-text-cyan">Kanban de Serviços</h2>
-      <p>Arraste os cards para mudar o status</p>
+      <p>No celular use as abas e os botões de status · OS sempre visível</p>
+    </div>
+    <div class="kanban-toolbar">
+      <input type="search" class="search-input" id="kanbanBusca" placeholder="Buscar nome, telefone ou OS-1234..." oninput="renderKanban()" style="width:100%;">
+      <div class="kanban-status-tabs" id="kanbanStatusTabs">
+        <button type="button" class="kanban-status-tab active" data-filter="pendente" onclick="setKanbanFiltroMobile('pendente')">Pendente<span class="tab-count" id="tabCountPendente">0</span></button>
+        <button type="button" class="kanban-status-tab" data-filter="em_andamento" onclick="setKanbanFiltroMobile('em_andamento')">Andamento<span class="tab-count" id="tabCountAndamento">0</span></button>
+        <button type="button" class="kanban-status-tab" data-filter="concluido" onclick="setKanbanFiltroMobile('concluido')">Pronto<span class="tab-count" id="tabCountConcluido">0</span></button>
+        <button type="button" class="kanban-status-tab" data-filter="entregue" onclick="setKanbanFiltroMobile('entregue')">Entregue<span class="tab-count" id="tabCountEntregue">0</span></button>
+      </div>
     </div>
     <div class="kanban-board" id="kanbanBoard">
       <div class="kanban-column" data-status="pendente" ondrop="drop(event)" ondragover="allowDrop(event)">
@@ -1703,7 +1847,7 @@ body.portal-mode #portalCliente { display: block !important; }
         <li>WhatsApp da oficina preenchido</li>
         <li>Fotos comprimidas / limpar fotos se o aparelho encher</li>
       </ul>
-      <p style="color:#666;font-size:0.8rem;margin:0;">Versão <strong id="configVersaoTxt" style="color:var(--neon-cyan);">v27.5</strong> · Uso comercial da sua oficina · Dados sensíveis: proteja o link admin e faça backup.</p>
+      <p style="color:#666;font-size:0.8rem;margin:0;">Versão <strong id="configVersaoTxt" style="color:var(--neon-cyan);">v27.8</strong> · Uso comercial da sua oficina · Dados sensíveis: proteja o link admin e faça backup.</p>
     </div>
   </div>
 
@@ -2808,7 +2952,7 @@ function verHistoricoCliente(id) {
           ? s.materiaisItens.map(m => (m.nome || '') + ' ' + formatMoney(m.valor || 0)).join(' · ')
           : '';
         return `<tr>
-        <td>${formatDate(s.dataEntrada)}</td>
+        <td><span class="os-badge">${codigoOSDe(s)}</span><br><span style="font-size:0.75rem;color:#888;">${formatDate(s.dataEntrada)}</span></td>
         <td>${s.tipoInstrumento || '-'}${s.modelo ? ' • ' + s.modelo : ''}</td>
         <td>${s.tipoServico || '-'}</td>
         <td>${getStatusTag(s.status)}</td>
@@ -3399,7 +3543,7 @@ function montarMensagemOrcamento(dados) {
   return (
     'Olá ' + nome + '! 👋\n\n' +
     'Segue o orçamento da *' + oficina + '*:\n\n' +
-    (cod ? ('*Código:* ' + cod + '\n') : '') +
+    (cod ? ('*Ordem de serviço:* ' + cod + '\n') : '') +
     '*Instrumento:* ' + instLinha + '\n' +
     '*Serviço:* ' + tipo + '\n\n' +
     '🔧 *Mão de obra:* ' + moStr + '\n' +
@@ -3587,12 +3731,13 @@ function renderDashboard() {
   } else {
     tbody.innerHTML = ultimos.map(s => {
       const inst = (s.tipoInstrumento || '-') + (s.modelo ? ' · ' + s.modelo : '');
+      const cod = codigoOSDe(s);
       return `<div class="list-row" onclick="verServico('${s.id}')" style="cursor:pointer;">
         <div class="list-row-top">
           <div class="list-row-title">${s.clienteNome || 'Cliente'}</div>
-          ${getStatusTag(s.status)}
+          <span class="os-badge">${cod}</span>
         </div>
-        <div class="list-row-meta">${inst}<br>${s.tipoServico || 'Serviço'}</div>
+        <div class="list-row-meta">${inst}<br>${s.tipoServico || 'Serviço'} · ${getStatusTag(s.status)}</div>
         <div class="list-row-values">
           <span>Total <strong>${formatMoney(s.total)}</strong></span>
         </div>
@@ -3668,13 +3813,63 @@ function renderDashboard() {
   });
 }
 
+function codigoOSDe(s) {
+  if (!s) return 'OS-????';
+  if (s.codigo) return String(s.codigo).toUpperCase();
+  return 'OS-' + String(s.id || '').slice(-4).toUpperCase();
+}
+
+let kanbanFiltroMobile = 'pendente';
+
+function setKanbanFiltroMobile(st) {
+  kanbanFiltroMobile = st || 'pendente';
+  document.querySelectorAll('.kanban-status-tab').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.filter === kanbanFiltroMobile);
+  });
+  document.querySelectorAll('.kanban-column').forEach(col => {
+    const match = col.dataset.status === kanbanFiltroMobile;
+    col.classList.toggle('mobile-show', match);
+  });
+}
+
+function mudarStatusServico(id, novoStatus, e) {
+  if (e) { e.preventDefault(); e.stopPropagation(); }
+  const servico = encontrarServicoPorId(id);
+  if (!servico) { showToast('Serviço não encontrado.', 'error'); return; }
+  const statusAnterior = normalizarStatus(servico.status);
+  const newStatus = normalizarStatus(novoStatus);
+  if (statusAnterior === newStatus) return;
+  servico.status = newStatus;
+  if (newStatus === 'concluido' && !servico.dataConclusao) {
+    servico.dataConclusao = new Date().toISOString();
+  }
+  if (newStatus === 'entregue') {
+    if (!servico.dataEntrega) servico.dataEntrega = new Date().toISOString();
+    if (!servico.dataConclusao) servico.dataConclusao = servico.dataEntrega;
+  }
+  DB.save();
+  try { sincronizarServicoFirebase(servico); } catch (err) {}
+  showToast('Status: ' + (newStatus === 'em_andamento' ? 'Em andamento' : newStatus === 'concluido' ? 'Pronto' : newStatus === 'entregue' ? 'Entregue' : 'Pendente'));
+  if (newStatus === 'concluido' && statusAnterior !== 'concluido') {
+    setTimeout(() => {
+      if (confirm('Instrumento pronto!\n\nAbrir WhatsApp para avisar ' + (servico.clienteNome || 'o cliente') + '?\n(Com código ' + codigoOSDe(servico) + ')')) {
+        avisarClientePronto(servico.id);
+      }
+    }, 250);
+  }
+  // no mobile, acompanha a coluna do novo status
+  if (window.matchMedia && window.matchMedia('(max-width: 768px)').matches) {
+    kanbanFiltroMobile = newStatus;
+  }
+  renderKanban();
+}
+
 function criarCardKanban(s) {
   const card = document.createElement('div');
   card.className = 'kanban-card';
   card.draggable = true;
   card.dataset.id = String(s.id);
   card.ondragstart = (e) => {
-    // Não inicia arraste se o toque começou em um botão
     if (e.target && e.target.closest && e.target.closest('button')) {
       e.preventDefault();
       return false;
@@ -3690,14 +3885,47 @@ function criarCardKanban(s) {
   const mo = Number(s.maoObra) || 0;
   const mat = Number(s.materiais) || 0;
   const st = normalizarStatus(s.status);
+  const cod = codigoOSDe(s);
+  const fluxo = ['pendente', 'em_andamento', 'concluido', 'entregue'];
+  const idx = Math.max(0, fluxo.indexOf(st));
+  const stAnterior = idx > 0 ? fluxo[idx - 1] : null;
+  const stProximo = idx < fluxo.length - 1 ? fluxo[idx + 1] : null;
+
   card.innerHTML = `
-    <div class="kanban-card-title">${s.clienteNome || ''}</div>
+    <div class="kanban-card-top">
+      <div class="kanban-card-title" style="margin:0;">${s.clienteNome || ''}</div>
+      <span class="os-badge" title="Código da ordem de serviço">${cod}</span>
+    </div>
     <div class="kanban-card-meta">${s.tipoInstrumento || ''} ${s.modelo ? '• ' + s.modelo : ''}</div>
     <div class="kanban-card-meta">${s.tipoServico || ''} • ${formatDate(s.dataEntrada)}</div>
     <div class="kanban-card-meta" style="font-size:0.75rem;color:#888;">MO ${formatMoney(mo)} · Mat ${formatMoney(mat)}</div>
-    <div class="kanban-card-value neon-text-green">${formatMoney(s.total)}</div>
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:8px;">
+      <div class="kanban-card-value neon-text-green" style="margin:0;">${formatMoney(s.total)}</div>
+      <div class="kanban-arrow-row" data-actions="status"></div>
+    </div>
     <div class="kanban-card-actions" style="margin-top:8px;display:flex;flex-direction:column;gap:6px;"></div>
   `;
+
+  const statusRow = card.querySelector('[data-actions="status"]');
+  const mkArrow = (dir, targetSt, enabled) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'btn-kanban-arrow' + (enabled ? '' : ' disabled');
+    b.textContent = dir === 'left' ? '◀' : '▶';
+    b.title = dir === 'left' ? 'Voltar status' : 'Avançar status';
+    b.setAttribute('aria-label', b.title);
+    if (!enabled || !targetSt) {
+      b.disabled = true;
+    } else {
+      const go = (ev) => mudarStatusServico(s.id, targetSt, ev);
+      b.addEventListener('click', go);
+      b.addEventListener('touchend', go, { passive: false });
+    }
+    statusRow.appendChild(b);
+  };
+  mkArrow('left', stAnterior, !!stAnterior);
+  mkArrow('right', stProximo, !!stProximo);
+
   const actions = card.querySelector('.kanban-card-actions');
   const btnEdit = document.createElement('button');
   btnEdit.type = 'button';
@@ -3712,6 +3940,7 @@ function criarCardKanban(s) {
   btnEdit.addEventListener('click', abrirEdit);
   btnEdit.addEventListener('touchend', abrirEdit, { passive: false });
   actions.appendChild(btnEdit);
+
   if (st === 'concluido') {
     const btnAvisar = document.createElement('button');
     btnAvisar.type = 'button';
@@ -3730,7 +3959,7 @@ function criarCardKanban(s) {
   return card;
 }
 
-/** Data de ENTRADA (orçamento / lançamento financeiro) */
+
 function dataRefEntrada(s) {
   const d = new Date(s.dataEntrada);
   return isNaN(d) ? new Date(0) : d;
@@ -3821,11 +4050,30 @@ function renderKanban() {
   const filtroConc = preencherMesKanban('kanbanMesConcluido', concluidos);
   const filtroEnt = preencherMesKanban('kanbanMesEntregue', entregues);
 
+  // Busca por nome / telefone / OS
+  const buscaEl = document.getElementById('kanbanBusca');
+  const qRaw = (buscaEl && buscaEl.value) || '';
+  const q = String(qRaw).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+  const qDigits = String(qRaw).replace(/\D/g, '');
+  const matchBusca = (s) => {
+    if (!q && qDigits.length < 2) return true;
+    const nome = String(s.clienteNome || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    const tel = String(s.clienteTel || '').replace(/\D/g, '');
+    const cod = codigoOSDe(s).toLowerCase();
+    if (q && nome.includes(q)) return true;
+    if (q && cod.includes(q.replace(/\s/g, ''))) return true;
+    if (qDigits.length >= 2 && tel.includes(qDigits)) return true;
+    if (q && String(s.tipoInstrumento || '').toLowerCase().includes(q)) return true;
+    if (q && String(s.tipoServico || '').toLowerCase().includes(q)) return true;
+    return false;
+  };
+
   // Pendente e Em andamento (todos os ativos)
   DB.servicos.forEach(s => {
     const status = normalizarStatus(s.status);
     if (status === 'concluido' || status === 'entregue') return;
     if (!cols[status]) return;
+    if (!matchBusca(s)) return;
     counts[status]++;
     cols[status].appendChild(criarCardKanban(s));
   });
@@ -3833,7 +4081,7 @@ function renderKanban() {
   // Concluído / Entregue: mês pela data de conclusão / entrega (não pela entrada)
   const concluidosMes = concluidos.filter(s => {
     const d = dataRefEntrega(s);
-    return d.getFullYear() === filtroConc.ano && d.getMonth() === filtroConc.mes;
+    return d.getFullYear() === filtroConc.ano && d.getMonth() === filtroConc.mes && matchBusca(s);
   }).sort((a, b) => dataRefEntrega(b) - dataRefEntrega(a));
   counts.concluido = concluidosMes.length;
   concluidosMes.forEach(s => { if (cols.concluido) cols.concluido.appendChild(criarCardKanban(s)); });
@@ -3844,7 +4092,7 @@ function renderKanban() {
   // Entregue: só do mês selecionado
   const entreguesMes = entregues.filter(s => {
     const d = dataRefEntrega(s);
-    return d.getFullYear() === filtroEnt.ano && d.getMonth() === filtroEnt.mes;
+    return d.getFullYear() === filtroEnt.ano && d.getMonth() === filtroEnt.mes && matchBusca(s);
   }).sort((a, b) => dataRefEntrega(b) - dataRefEntrega(a));
   counts.entregue = entreguesMes.length;
   entreguesMes.forEach(s => { if (cols.entregue) cols.entregue.appendChild(criarCardKanban(s)); });
@@ -3857,6 +4105,13 @@ function renderKanban() {
   document.getElementById('countConcluido').textContent = counts.concluido;
   const ce = document.getElementById('countEntregue');
   if (ce) ce.textContent = counts.entregue;
+  // Abas mobile
+  const setTab = (id, n) => { const el = document.getElementById(id); if (el) el.textContent = n; };
+  setTab('tabCountPendente', counts.pendente);
+  setTab('tabCountAndamento', counts.em_andamento);
+  setTab('tabCountConcluido', counts.concluido);
+  setTab('tabCountEntregue', counts.entregue);
+  setKanbanFiltroMobile(kanbanFiltroMobile || 'pendente');
 }
 
 function allowDrop(e) { e.preventDefault(); }
@@ -3913,11 +4168,12 @@ function avisarClientePronto(id) {
     '',
     'Seu instrumento ficou *pronto* e já pode ser retirado.',
     '',
+    '*Ordem de serviço:* ' + cod,
     inst ? ('*Instrumento:* ' + inst) : null,
     s.tipoServico ? ('*Serviço:* ' + s.tipoServico) : null,
-    '*Código:* ' + cod,
     '',
-    'Acompanhe o status: ' + link,
+    'Para acompanhar, use o código *' + cod + '* no portal:',
+    link,
     '',
     'Qualquer dúvida, é só responder esta mensagem.',
     '— ' + oficina
@@ -3950,7 +4206,11 @@ function verServico(id) {
   document.getElementById('conteudoVerServico').innerHTML = `
     <div style="display:grid; gap:12px;">
       <button type="button" class="btn btn-green" style="width:100%;font-size:1rem;padding:14px;" onclick="abrirEditarServico('${s.id}')">💰 Editar valores e dados</button>
-      <div><strong class="neon-text-cyan">Código acompanhamento:</strong> <span class="tag tag-green">${cod}</span></div>
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <strong class="neon-text-cyan">Ordem de serviço:</strong>
+        <span class="os-badge os-badge-lg">${cod}</span>
+        <button type="button" class="btn btn-cyan btn-sm" onclick="navigator.clipboard&&navigator.clipboard.writeText('${cod}').then(()=>showToast('${cod} copiado!'))">📋 Copiar</button>
+      </div>
       <div><strong class="neon-text-cyan">Cliente:</strong> ${s.clienteNome} (${s.clienteTel})</div>
       <div><strong class="neon-text-cyan">Instrumento:</strong> ${s.tipoInstrumento || '-'} ${s.modelo ? '- ' + s.modelo : ''} ${s.serial ? '(S/N: ' + s.serial + ')' : ''}</div>
       <div><strong class="neon-text-cyan">Serviço:</strong> ${s.tipoServico || '-'}</div>
@@ -3989,11 +4249,11 @@ function enviarCodigoCliente(id) {
   const msg = encodeURIComponent(
     `Olá ${s.clienteNome}! 🎸\n\n` +
     `Seu instrumento está em nossa oficina.\n\n` +
-    `*Código de acompanhamento:* ${cod}\n` +
+    `*Ordem de serviço:* ${cod}\n` +
     `*Serviço:* ${s.tipoServico || '-'}\n` +
     `*Status:* ${statusLabelPortal(s.status)}\n\n` +
     `Acompanhe online:\n${link}\n\n` +
-    `Na aba "Meu instrumento", use o telefone ou o código ${cod}.`
+    `Na aba "Meu instrumento", digite o telefone ou o código *${cod}*.`
   );
   window.open(`https://wa.me/55${tel}?text=${msg}`, '_blank');
 }
