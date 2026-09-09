@@ -1150,138 +1150,264 @@ body.portal-mode #portalCliente { display: block !important; }
 }
 .portal-secure strong { color: #c9c0b4; display: block; font-size: 0.85rem; }
 
-/* OS badge — número da ordem sempre visível */
-.os-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 3px 10px;
-  border-radius: 8px;
-  font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 0.5px;
-  background: rgba(0,240,255,0.12);
-  color: var(--neon-cyan);
-  border: 1px solid rgba(0,240,255,0.35);
-  font-variant-numeric: tabular-nums;
-}
-.os-badge-lg {
-  font-size: 0.95rem;
-  padding: 6px 14px;
-}
-.kanban-toolbar {
+
+
+
+/* ===== Kanban premium (visual mobile) ===== */
+#page-kanban .page-header h2 {
+  font-size: 1.45rem;
   display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: 16px;
+  align-items: center;
+  gap: 10px;
+}
+.kb-title-ico {
+  width: 40px; height: 40px;
+  border-radius: 12px;
+  background: linear-gradient(145deg, rgba(0,240,255,0.2), rgba(0,240,255,0.05));
+  border: 1px solid rgba(0,240,255,0.3);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 1.2rem;
+}
+.kanban-toolbar { display: flex; flex-direction: column; gap: 14px; margin-bottom: 18px; }
+.kb-search-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.kb-search-row .search-input {
+  flex: 1;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 14px;
+  padding: 14px 16px 14px 42px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='%23666' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85zm-5.242.656a5 5 0 1 1 0-10 5 5 0 0 1 0 10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 14px center;
 }
 .kanban-status-tabs {
-  display: flex;
-  gap: 6px;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: 4px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
 }
 .kanban-status-tab {
-  flex: 1;
-  min-width: 0;
-  padding: 10px 8px;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.1);
-  background: rgba(255,255,255,0.03);
-  color: #888;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 12px 6px 10px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(18,22,28,0.9);
+  color: #8a93a0;
   font-family: inherit;
-  font-weight: 700;
-  font-size: 0.75rem;
+  font-weight: 600;
+  font-size: 0.72rem;
   cursor: pointer;
-  white-space: nowrap;
-  text-align: center;
+  transition: all 0.2s ease;
+  min-height: 72px;
 }
-.kanban-status-tab.active {
-  color: #0a0a0c;
-  background: linear-gradient(135deg, var(--neon-cyan), #00b8c4);
-  border-color: transparent;
-  box-shadow: 0 4px 16px rgba(0,240,255,0.25);
-}
+.kanban-status-tab .tab-ico { font-size: 1.25rem; line-height: 1; opacity: 0.85; }
 .kanban-status-tab .tab-count {
-  display: block;
-  font-size: 1rem;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #c5cdd8;
   margin-top: 2px;
 }
-.kanban-card-top {
+.kanban-status-tab.active {
+  background: linear-gradient(160deg, #00e5ff 0%, #00b8d4 100%);
+  border-color: transparent;
+  color: #061018;
+  box-shadow: 0 8px 24px rgba(0,229,255,0.28);
+}
+.kanban-status-tab.active .tab-count { color: #061018; }
+.kanban-status-tab.active .tab-ico { opacity: 1; }
+
+.kanban-column {
+  background: transparent;
+  border: none;
+  padding: 0;
+  min-height: auto;
+}
+.kanban-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  padding: 0 2px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.kanban-title { font-weight: 800; font-size: 1.05rem; }
+.kanban-count {
+  margin-left: auto;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #aab;
+}
+
+/* Card premium */
+.kanban-card {
+  background: linear-gradient(165deg, rgba(22,28,36,0.98), rgba(14,16,22,0.98));
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 14px;
+  margin-bottom: 14px;
+  cursor: pointer;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.35);
+  transition: border-color 0.2s, transform 0.15s;
+}
+.kanban-card:active { transform: scale(0.99); }
+.kanban-card:hover { border-color: rgba(0,240,255,0.25); }
+.kb-card-main {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.kb-thumb {
+  width: 64px;
+  height: 64px;
+  border-radius: 14px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.kb-thumb-ph {
+  width: 64px;
+  height: 64px;
+  border-radius: 14px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  background: linear-gradient(145deg, rgba(0,240,255,0.12), rgba(0,240,255,0.03));
+  border: 1px solid rgba(0,240,255,0.2);
+}
+.kb-card-body { flex: 1; min-width: 0; }
+.kb-card-top {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   gap: 8px;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
-.btn-status-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 8px;
+.kb-card-name {
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: #fff;
+  line-height: 1.2;
 }
-.btn-status {
-  flex: 1;
-  min-width: 90px;
-  padding: 10px 8px !important;
-  font-size: 0.78rem !important;
-  border-radius: 10px !important;
-  font-weight: 700 !important;
-}
-@media (max-width: 768px) {
-  .kanban-board {
-    display: block !important;
-  }
-  .kanban-column {
-    display: none;
-    min-height: auto;
-    margin-bottom: 0;
-  }
-  .kanban-column.mobile-show {
-    display: block;
-  }
-  .kanban-card {
-    padding: 14px;
-  }
-  .kanban-card-title { font-size: 1rem; }
-}
-
-
-.kanban-arrow-row {
-  display: flex;
-  gap: 8px;
+.os-badge {
+  display: inline-flex;
   align-items: center;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  background: transparent;
+  color: var(--neon-cyan);
+  border: 1.5px solid rgba(0,240,255,0.45);
+  font-variant-numeric: tabular-nums;
   flex-shrink: 0;
 }
+.kb-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: #8b94a3;
+  margin-bottom: 3px;
+  line-height: 1.35;
+}
+.kb-line .ico { font-size: 0.85rem; opacity: 0.9; flex-shrink: 0; }
+.kb-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  padding-top: 4px;
+}
+.kb-total {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #39ff14;
+  text-shadow: 0 0 12px rgba(57,255,20,0.25);
+}
+.kanban-arrow-row { display: flex; gap: 8px; flex-shrink: 0; }
 .btn-kanban-arrow {
-  width: 42px;
-  height: 42px;
+  width: 44px; height: 44px;
   border-radius: 12px;
-  border: 1px solid rgba(0,240,255,0.35);
-  background: rgba(0,240,255,0.12);
-  color: var(--neon-cyan);
-  font-size: 1.1rem;
-  font-weight: 700;
+  border: none;
+  background: #1a2330;
+  color: #5a6575;
+  font-size: 1rem;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 0;
   font-family: inherit;
-  transition: background 0.2s, transform 0.15s;
+  transition: all 0.15s;
 }
-.btn-kanban-arrow:active:not(.disabled):not(:disabled) {
-  transform: scale(0.94);
-  background: rgba(0,240,255,0.25);
+.btn-kanban-arrow:not(.disabled):not(:disabled) {
+  background: linear-gradient(145deg, #00e5ff, #00b4d8);
+  color: #061018;
+  box-shadow: 0 4px 14px rgba(0,229,255,0.3);
 }
+.btn-kanban-arrow:active:not(.disabled):not(:disabled) { transform: scale(0.94); }
 .btn-kanban-arrow.disabled,
 .btn-kanban-arrow:disabled {
-  opacity: 0.28;
+  opacity: 0.5;
   cursor: default;
-  border-color: rgba(255,255,255,0.08);
-  background: rgba(255,255,255,0.03);
-  color: #666;
+  background: #151c26;
+  color: #3d4654;
+}
+.btn-kb-valores {
+  width: 100%;
+  margin-top: 12px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(57,255,20,0.35);
+  background: linear-gradient(90deg, rgba(57,255,20,0.12), rgba(57,255,20,0.04));
+  color: #9dff9a;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.92rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.btn-kb-valores:active { filter: brightness(1.1); }
+.btn-kb-avisar {
+  width: 100%;
+  margin-top: 8px;
+  padding: 11px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(0,240,255,0.35);
+  background: rgba(0,240,255,0.08);
+  color: var(--neon-cyan);
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.88rem;
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  .kanban-board { display: block !important; }
+  .kanban-column { display: none; min-height: auto; margin-bottom: 0; }
+  .kanban-column.mobile-show { display: block; }
+}
+@media (min-width: 769px) {
+  .kanban-board { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .kanban-column { display: block !important; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 14px; min-height: 400px; }
 }
 
 </style>
@@ -1303,7 +1429,7 @@ body.portal-mode #portalCliente { display: block !important; }
   <div class="logo">
     <h1>LUTHIER PRO</h1>
     <span>Gestão profissional</span>
-    <div id="appVersionBadge" style="margin-top:6px;font-size:0.72rem;color:var(--neon-green);letter-spacing:1px;">v27.8 · flechas status</div>
+    <div id="appVersionBadge" style="margin-top:6px;font-size:0.72rem;color:var(--neon-green);letter-spacing:1px;">v27.9 · Kanban premium</div>
   </div>
   <div class="nav-item active" onclick="navigateTo('dashboard')">
     <div class="nav-icon">📊</div>
@@ -1594,16 +1720,18 @@ body.portal-mode #portalCliente { display: block !important; }
   <!-- KANBAN -->
   <div class="page" id="page-kanban">
     <div class="page-header">
-      <h2 class="neon-text-cyan">Kanban de Serviços</h2>
-      <p>No celular use as abas e os botões de status · OS sempre visível</p>
+      <h2 class="neon-text-cyan"><span class="kb-title-ico">🔧</span> Kanban de Serviços</h2>
+      <p>Abas + flechas de status · OS sempre visível no card</p>
     </div>
     <div class="kanban-toolbar">
-      <input type="search" class="search-input" id="kanbanBusca" placeholder="Buscar nome, telefone ou OS-1234..." oninput="renderKanban()" style="width:100%;">
+      <div class="kb-search-row">
+        <input type="search" class="search-input" id="kanbanBusca" placeholder="Buscar nome, telefone ou OS-1234..." oninput="renderKanban()" autocomplete="off">
+      </div>
       <div class="kanban-status-tabs" id="kanbanStatusTabs">
-        <button type="button" class="kanban-status-tab active" data-filter="pendente" onclick="setKanbanFiltroMobile('pendente')">Pendente<span class="tab-count" id="tabCountPendente">0</span></button>
-        <button type="button" class="kanban-status-tab" data-filter="em_andamento" onclick="setKanbanFiltroMobile('em_andamento')">Andamento<span class="tab-count" id="tabCountAndamento">0</span></button>
-        <button type="button" class="kanban-status-tab" data-filter="concluido" onclick="setKanbanFiltroMobile('concluido')">Pronto<span class="tab-count" id="tabCountConcluido">0</span></button>
-        <button type="button" class="kanban-status-tab" data-filter="entregue" onclick="setKanbanFiltroMobile('entregue')">Entregue<span class="tab-count" id="tabCountEntregue">0</span></button>
+        <button type="button" class="kanban-status-tab active" data-filter="pendente" onclick="setKanbanFiltroMobile('pendente')"><span class="tab-ico">🕐</span>Pendente<span class="tab-count" id="tabCountPendente">0</span></button>
+        <button type="button" class="kanban-status-tab" data-filter="em_andamento" onclick="setKanbanFiltroMobile('em_andamento')"><span class="tab-ico">📅</span>Andamento<span class="tab-count" id="tabCountAndamento">0</span></button>
+        <button type="button" class="kanban-status-tab" data-filter="concluido" onclick="setKanbanFiltroMobile('concluido')"><span class="tab-ico">✓</span>Pronto<span class="tab-count" id="tabCountConcluido">0</span></button>
+        <button type="button" class="kanban-status-tab" data-filter="entregue" onclick="setKanbanFiltroMobile('entregue')"><span class="tab-ico">🚚</span>Entregue<span class="tab-count" id="tabCountEntregue">0</span></button>
       </div>
     </div>
     <div class="kanban-board" id="kanbanBoard">
@@ -1847,7 +1975,7 @@ body.portal-mode #portalCliente { display: block !important; }
         <li>WhatsApp da oficina preenchido</li>
         <li>Fotos comprimidas / limpar fotos se o aparelho encher</li>
       </ul>
-      <p style="color:#666;font-size:0.8rem;margin:0;">Versão <strong id="configVersaoTxt" style="color:var(--neon-cyan);">v27.8</strong> · Uso comercial da sua oficina · Dados sensíveis: proteja o link admin e faça backup.</p>
+      <p style="color:#666;font-size:0.8rem;margin:0;">Versão <strong id="configVersaoTxt" style="color:var(--neon-cyan);">v27.9</strong> · Uso comercial da sua oficina · Dados sensíveis: proteja o link admin e faça backup.</p>
     </div>
   </div>
 
@@ -3890,20 +4018,32 @@ function criarCardKanban(s) {
   const idx = Math.max(0, fluxo.indexOf(st));
   const stAnterior = idx > 0 ? fluxo[idx - 1] : null;
   const stProximo = idx < fluxo.length - 1 ? fluxo[idx + 1] : null;
+  const foto = (Array.isArray(s.fotos) && s.fotos[0]) ? s.fotos[0] : '';
+  const inst = [s.tipoInstrumento, s.modelo].filter(Boolean).join(' · ') || 'Instrumento';
+  const servLinha = (s.tipoServico || 'Serviço') + (s.dataEntrada ? ' · ' + formatDate(s.dataEntrada) : '');
+
+  const thumbHtml = foto
+    ? `<img class="kb-thumb" src="${foto}" alt="" loading="lazy">`
+    : `<div class="kb-thumb-ph">🎸</div>`;
 
   card.innerHTML = `
-    <div class="kanban-card-top">
-      <div class="kanban-card-title" style="margin:0;">${s.clienteNome || ''}</div>
-      <span class="os-badge" title="Código da ordem de serviço">${cod}</span>
+    <div class="kb-card-main">
+      ${thumbHtml}
+      <div class="kb-card-body">
+        <div class="kb-card-top">
+          <div class="kb-card-name">${s.clienteNome || 'Cliente'}</div>
+          <span class="os-badge">${cod}</span>
+        </div>
+        <div class="kb-line"><span class="ico">🎸</span><span>${inst}</span></div>
+        <div class="kb-line"><span class="ico">📅</span><span>${servLinha}</span></div>
+        <div class="kb-line"><span class="ico">💰</span><span>MO ${formatMoney(mo)} · Mat ${formatMoney(mat)}</span></div>
+      </div>
     </div>
-    <div class="kanban-card-meta">${s.tipoInstrumento || ''} ${s.modelo ? '• ' + s.modelo : ''}</div>
-    <div class="kanban-card-meta">${s.tipoServico || ''} • ${formatDate(s.dataEntrada)}</div>
-    <div class="kanban-card-meta" style="font-size:0.75rem;color:#888;">MO ${formatMoney(mo)} · Mat ${formatMoney(mat)}</div>
-    <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:8px;">
-      <div class="kanban-card-value neon-text-green" style="margin:0;">${formatMoney(s.total)}</div>
+    <div class="kb-footer">
+      <div class="kb-total">${formatMoney(s.total)}</div>
       <div class="kanban-arrow-row" data-actions="status"></div>
     </div>
-    <div class="kanban-card-actions" style="margin-top:8px;display:flex;flex-direction:column;gap:6px;"></div>
+    <div class="kanban-card-actions"></div>
   `;
 
   const statusRow = card.querySelector('[data-actions="status"]');
@@ -3911,12 +4051,10 @@ function criarCardKanban(s) {
     const b = document.createElement('button');
     b.type = 'button';
     b.className = 'btn-kanban-arrow' + (enabled ? '' : ' disabled');
-    b.textContent = dir === 'left' ? '◀' : '▶';
+    b.innerHTML = dir === 'left' ? '◀' : '▶';
     b.title = dir === 'left' ? 'Voltar status' : 'Avançar status';
-    b.setAttribute('aria-label', b.title);
-    if (!enabled || !targetSt) {
-      b.disabled = true;
-    } else {
+    if (!enabled || !targetSt) b.disabled = true;
+    else {
       const go = (ev) => mudarStatusServico(s.id, targetSt, ev);
       b.addEventListener('click', go);
       b.addEventListener('touchend', go, { passive: false });
@@ -3929,9 +4067,8 @@ function criarCardKanban(s) {
   const actions = card.querySelector('.kanban-card-actions');
   const btnEdit = document.createElement('button');
   btnEdit.type = 'button';
-  btnEdit.className = 'btn btn-green btn-sm';
-  btnEdit.style.width = '100%';
-  btnEdit.textContent = '💰 Valores';
+  btnEdit.className = 'btn-kb-valores';
+  btnEdit.innerHTML = '<span>💰 Valores</span><span>›</span>';
   const abrirEdit = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -3944,9 +4081,8 @@ function criarCardKanban(s) {
   if (st === 'concluido') {
     const btnAvisar = document.createElement('button');
     btnAvisar.type = 'button';
-    btnAvisar.className = 'btn btn-green btn-sm';
-    btnAvisar.style.width = '100%';
-    btnAvisar.textContent = '📱 Avisar pronto';
+    btnAvisar.className = 'btn-kb-avisar';
+    btnAvisar.textContent = '📱 Avisar pronto no WhatsApp';
     const avisar = (e) => {
       e.preventDefault();
       e.stopPropagation();
