@@ -1410,6 +1410,242 @@ body.portal-mode #portalCliente { display: block !important; }
   .kanban-column { display: block !important; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 14px; min-height: 400px; }
 }
 
+
+/* ===== Clientes premium ===== */
+#page-clientes .cli-hero {
+  margin-bottom: 20px;
+  padding: 8px 2px 4px;
+}
+.cli-hero-label {
+  margin-bottom: 8px;
+}
+.cli-hero-ico {
+  font-size: 1.6rem;
+  filter: drop-shadow(0 0 10px rgba(255,149,0,0.45));
+}
+.cli-hero-title {
+  font-size: 2rem !important;
+  font-weight: 900 !important;
+  color: #fff !important;
+  margin: 0 0 6px !important;
+  letter-spacing: -0.5px;
+}
+.cli-hero-sub {
+  color: #8a93a0 !important;
+  font-size: 0.92rem !important;
+  margin: 0 !important;
+  max-width: 280px;
+  line-height: 1.4;
+  border-bottom: 2px solid rgba(255,149,0,0.55);
+  padding-bottom: 12px;
+  display: inline-block;
+}
+.cli-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.cli-action {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 16px 16px 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: linear-gradient(120deg, rgba(22,26,34,0.98), rgba(14,16,22,0.98));
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  color: #fff;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.3);
+  transition: transform 0.15s, border-color 0.2s, box-shadow 0.2s;
+}
+.cli-action:active { transform: scale(0.985); }
+.cli-action-novo {
+  border-color: rgba(255,149,0,0.35);
+  background: linear-gradient(115deg, rgba(255,149,0,0.14) 0%, rgba(18,20,28,0.98) 42%);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,149,0,0.08);
+}
+.cli-action-existente {
+  border-color: rgba(0,240,255,0.28);
+  background: linear-gradient(115deg, rgba(0,240,255,0.1) 0%, rgba(18,20,28,0.98) 42%);
+}
+.cli-action-ico {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 1.65rem;
+}
+.cli-action-novo .cli-action-ico {
+  background: linear-gradient(145deg, rgba(255,149,0,0.25), rgba(255,149,0,0.08));
+  border: 1px solid rgba(255,149,0,0.35);
+  box-shadow: 0 0 18px rgba(255,149,0,0.15);
+}
+.cli-action-existente .cli-action-ico {
+  background: linear-gradient(145deg, rgba(0,240,255,0.2), rgba(0,240,255,0.06));
+  border: 1px solid rgba(0,240,255,0.3);
+  box-shadow: 0 0 18px rgba(0,240,255,0.12);
+}
+.cli-ico-anim {
+  display: inline-block;
+  animation: cliIcoFloat 2.4s ease-in-out infinite;
+  transform-origin: center;
+}
+.cli-action-existente .cli-ico-anim {
+  animation-delay: 0.4s;
+}
+@keyframes cliIcoFloat {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-4px) scale(1.08); }
+}
+.cli-action-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.cli-action-text strong {
+  font-size: 1.12rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.2px;
+  line-height: 1.2;
+}
+.cli-action-text span {
+  font-size: 0.84rem;
+  color: #8a93a0;
+  font-weight: 500;
+}
+.cli-action-novo .cli-action-text span { color: rgba(255,179,71,0.85); }
+.cli-action-existente .cli-action-text span { color: rgba(0,220,240,0.8); }
+.cli-action-arrow {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: #666;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.cli-action-novo .cli-action-arrow { color: #ff9500; }
+.cli-action-existente .cli-action-arrow { color: #00e5ff; }
+.cli-search-wrap { margin-bottom: 16px; }
+.cli-search {
+  width: 100%;
+  border-radius: 14px !important;
+  padding: 14px 16px 14px 42px !important;
+  background-color: rgba(255,255,255,0.04) !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='%23666' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85zm-5.242.656a5 5 0 1 1 0-10 5 5 0 0 1 0 10z'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: 14px center !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+}
+
+/* Card cliente lista */
+.cli-card {
+  background: linear-gradient(165deg, rgba(22,28,36,0.98), rgba(14,16,22,0.98));
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  padding: 14px 14px 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 6px 22px rgba(0,0,0,0.28);
+}
+.cli-card-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.cli-avatar {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, rgba(0,240,255,0.2), rgba(0,240,255,0.06));
+  border: 1px solid rgba(0,240,255,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.35rem;
+  flex-shrink: 0;
+  color: #00e5ff;
+}
+.cli-card-info { flex: 1; min-width: 0; }
+.cli-card-name {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 4px;
+  cursor: pointer;
+  line-height: 1.2;
+}
+.cli-card-meta {
+  font-size: 0.8rem;
+  color: #8a93a0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  line-height: 1.35;
+}
+.cli-card-menu {
+  background: transparent;
+  border: none;
+  color: #666;
+  font-size: 1.2rem;
+  padding: 4px 6px;
+  cursor: pointer;
+  line-height: 1;
+}
+.cli-card-stats {
+  display: flex;
+  align-items: stretch;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  gap: 0;
+}
+.cli-stat {
+  flex: 1;
+  text-align: left;
+  padding: 0 8px;
+}
+.cli-stat:first-child { padding-left: 4px; }
+.cli-stat + .cli-stat {
+  border-left: 1px solid rgba(255,255,255,0.08);
+}
+.cli-stat label {
+  display: block;
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #666;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+.cli-stat strong {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #fff;
+}
+.cli-stat strong.total { color: #39ff14; text-shadow: 0 0 10px rgba(57,255,20,0.2); }
+.cli-card-go {
+  display: flex;
+  align-items: center;
+  padding: 0 4px 0 10px;
+  color: #555;
+  font-size: 1.3rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+.cli-card-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+.cli-card-actions .btn { flex: 1; min-width: 70px; justify-content: center; }
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
@@ -1429,7 +1665,7 @@ body.portal-mode #portalCliente { display: block !important; }
   <div class="logo">
     <h1>LUTHIER PRO</h1>
     <span>Gestão profissional</span>
-    <div id="appVersionBadge" style="margin-top:6px;font-size:0.72rem;color:var(--neon-green);letter-spacing:1px;">v27.9 · Kanban premium</div>
+    <div id="appVersionBadge" style="margin-top:6px;font-size:0.72rem;color:var(--neon-green);letter-spacing:1px;">v28.0 · Clientes premium</div>
   </div>
   <div class="nav-item active" onclick="navigateTo('dashboard')">
     <div class="nav-icon">📊</div>
@@ -1538,31 +1774,37 @@ body.portal-mode #portalCliente { display: block !important; }
 
   <!-- CLIENTES -->
   <div class="page" id="page-clientes">
-    <div class="page-header">
-      <h2 class="neon-text-cyan">Clientes</h2>
-      <p>Cadastre, busque e veja o histórico de cada cliente</p>
+    <div class="cli-hero">
+      <div class="cli-hero-label"><span class="cli-hero-ico">👥</span></div>
+      <h2 class="cli-hero-title">Clientes</h2>
+      <p class="cli-hero-sub">Cadastre, busque e veja o histórico de cada cliente</p>
     </div>
 
-    <div class="action-cards">
-      <div class="action-card" onclick="novaEntradaComClienteNovo()">
-        <div class="action-card-icon" style="background:rgba(57,255,20,0.12);border:1px solid rgba(57,255,20,0.25);">🎸</div>
-        <div>
-          <h4>Cadastro completo (novo cliente)</h4>
-          <p>Sequência única: dados do cliente → instrumento → serviço → valores. Salva tudo junto.</p>
+    <div class="cli-actions">
+      <button type="button" class="cli-action cli-action-novo" onclick="novaEntradaComClienteNovo()">
+        <div class="cli-action-ico" aria-hidden="true">
+          <span class="cli-ico-anim">📋</span>
         </div>
-      </div>
-      <div class="action-card" onclick="novaEntradaClienteExistente()">
-        <div class="action-card-icon" style="background:rgba(255,149,0,0.12);border:1px solid rgba(255,149,0,0.25);">🔁</div>
-        <div>
-          <h4>Novo atendimento (já é cliente)</h4>
-          <p>Escolhe o cliente cadastrado e registra instrumento, serviço e valores.</p>
+        <div class="cli-action-text">
+          <strong>Cadastro completo</strong>
+          <span>Novo cliente</span>
         </div>
-      </div>
+        <span class="cli-action-arrow">›</span>
+      </button>
+      <button type="button" class="cli-action cli-action-existente" onclick="novaEntradaClienteExistente()">
+        <div class="cli-action-ico" aria-hidden="true">
+          <span class="cli-ico-anim">📅</span>
+        </div>
+        <div class="cli-action-text">
+          <strong>Novo atendimento</strong>
+          <span>Já é cliente</span>
+        </div>
+        <span class="cli-action-arrow">›</span>
+      </button>
     </div>
-    <p style="color:#555;font-size:0.8rem;margin:8px 0 16px;">Para só corrigir nome/telefone de alguém, use o lápis ✏️ no card do cliente.</p>
 
-    <div class="search-bar">
-      <input type="text" class="search-input" id="searchClientes" placeholder="Buscar por nome, telefone ou email..." oninput="renderClientes()">
+    <div class="cli-search-wrap">
+      <input type="search" class="search-input cli-search" id="searchClientes" placeholder="Buscar por nome, telefone ou email..." oninput="renderClientes()" autocomplete="off">
     </div>
 
     <div id="listaClientesCards" class="cliente-card-list">
@@ -1975,7 +2217,7 @@ body.portal-mode #portalCliente { display: block !important; }
         <li>WhatsApp da oficina preenchido</li>
         <li>Fotos comprimidas / limpar fotos se o aparelho encher</li>
       </ul>
-      <p style="color:#666;font-size:0.8rem;margin:0;">Versão <strong id="configVersaoTxt" style="color:var(--neon-cyan);">v27.9</strong> · Uso comercial da sua oficina · Dados sensíveis: proteja o link admin e faça backup.</p>
+      <p style="color:#666;font-size:0.8rem;margin:0;">Versão <strong id="configVersaoTxt" style="color:var(--neon-cyan);">v28.0</strong> · Uso comercial da sua oficina · Dados sensíveis: proteja o link admin e faça backup.</p>
     </div>
   </div>
 
@@ -3027,37 +3269,45 @@ function renderClientes() {
     container.innerHTML = '<div class="empty-state">Nenhum cliente encontrado</div>';
     return;
   }
-  // Ordena por nome
   filtrados.sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR'));
   container.innerHTML = filtrados.map(c => {
     const st = getClienteStats(c.id);
     const instLabel = st.instrumentos.length
       ? st.instrumentos.slice(0, 2).join(', ') + (st.instrumentos.length > 2 ? ' +' + (st.instrumentos.length - 2) : '')
       : 'Nenhum instrumento ainda';
-    const metaParts = [c.telefone];
-    if (c.email) metaParts.push(c.email);
-    if (c.cidade) metaParts.push(c.cidade);
-    return `<div class="cliente-card">
-      <div class="cliente-card-info">
-        <h4 onclick="verHistoricoCliente('${c.id}')">${c.nome}</h4>
-        <div class="cliente-card-meta">${metaParts.join(' · ')}</div>
-        <div style="margin-top:6px;font-size:0.8rem;color:#666;">${instLabel}</div>
-      </div>
-      <div>
-        <div class="cliente-card-stats">
-          <div class="stat-mini"><span>Serviços</span><strong class="neon-text-cyan">${st.qtd}</strong></div>
-          <div class="stat-mini"><span>Total</span><strong class="neon-text-green">${formatMoney(st.totalGasto)}</strong></div>
-          <div class="cliente-card-actions">
-            <button class="btn btn-green btn-sm" title="Novo atendimento" onclick="novaEntradaClienteExistente('${c.id}')">🎸</button>
-            <button class="btn btn-cyan btn-sm" title="Histórico" onclick="verHistoricoCliente('${c.id}')">📋</button>
-            <button class="btn btn-cyan btn-sm" title="Editar dados" onclick="abrirModalCliente('${c.id}')">✏️</button>
-            <button class="btn btn-magenta btn-sm" title="Excluir" onclick="excluirCliente('${c.id}')">🗑️</button>
+    return `<div class="cli-card">
+      <div class="cli-card-top">
+        <div class="cli-avatar">👤</div>
+        <div class="cli-card-info">
+          <h4 class="cli-card-name" onclick="verHistoricoCliente('${c.id}')">${c.nome}</h4>
+          <div class="cli-card-meta">
+            <span>📞 ${c.telefone || '—'}</span>
+            <span>📍 ${instLabel}</span>
           </div>
         </div>
+        <button type="button" class="cli-card-menu" onclick="event.stopPropagation();abrirModalCliente('${c.id}')" title="Editar">⋮</button>
+      </div>
+      <div class="cli-card-stats" onclick="verHistoricoCliente('${c.id}')">
+        <div class="cli-stat">
+          <label>Serviços</label>
+          <strong>${st.qtd}</strong>
+        </div>
+        <div class="cli-stat">
+          <label>Total</label>
+          <strong class="total">${formatMoney(st.totalGasto)}</strong>
+        </div>
+        <button type="button" class="cli-card-go" onclick="event.stopPropagation();verHistoricoCliente('${c.id}')">›</button>
+      </div>
+      <div class="cli-card-actions">
+        <button type="button" class="btn btn-green btn-sm" onclick="novaEntradaClienteExistente('${c.id}')">🎸 Atender</button>
+        <button type="button" class="btn btn-cyan btn-sm" onclick="verHistoricoCliente('${c.id}')">📋 Histórico</button>
+        <button type="button" class="btn btn-cyan btn-sm" onclick="abrirModalCliente('${c.id}')">✏️</button>
+        <button type="button" class="btn btn-magenta btn-sm" onclick="excluirCliente('${c.id}')">🗑️</button>
       </div>
     </div>`;
   }).join('');
 }
+
 
 function verHistoricoCliente(id) {
   const c = DB.clientes.find(x => x.id === id);
