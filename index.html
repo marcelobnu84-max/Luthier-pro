@@ -1646,6 +1646,172 @@ body.portal-mode #portalCliente { display: block !important; }
 }
 .cli-card-actions .btn { flex: 1; min-width: 70px; justify-content: center; }
 
+
+/* ===== Wizard cadastro ===== */
+.wz-head { margin-bottom: 18px; }
+.wz-step-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--neon-cyan);
+  margin-bottom: 8px;
+}
+.wz-title {
+  font-size: 1.45rem !important;
+  font-weight: 800 !important;
+  color: #fff !important;
+  margin: 0 0 6px !important;
+  line-height: 1.25;
+}
+.wz-sub { color: #8a93a0 !important; font-size: 0.9rem !important; margin: 0 !important; }
+.wz-progress {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  margin-bottom: 22px;
+  padding: 12px 8px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+}
+.wz-prog-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex: 0 0 auto;
+  opacity: 0.45;
+}
+.wz-prog-item.active, .wz-prog-item.done { opacity: 1; }
+.wz-dot {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 800;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: #888;
+}
+.wz-prog-item.active .wz-dot {
+  background: linear-gradient(145deg, #00e5ff, #00b4d8);
+  border-color: transparent;
+  color: #061018;
+  box-shadow: 0 0 14px rgba(0,229,255,0.35);
+}
+.wz-prog-item.done .wz-dot {
+  background: rgba(57,255,20,0.15);
+  border-color: rgba(57,255,20,0.4);
+  color: #39ff14;
+}
+.wz-prog-txt { font-size: 0.65rem; color: #888; font-weight: 600; }
+.wz-prog-item.active .wz-prog-txt { color: var(--neon-cyan); }
+.wz-prog-line {
+  flex: 1;
+  height: 2px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 2px;
+  min-width: 8px;
+}
+.wz-panel { display: none; animation: fadeIn 0.3s ease; }
+.wz-panel.active { display: block; }
+.wz-choice-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.wz-choice {
+  padding: 22px 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(18,22,28,0.95);
+  color: #fff;
+  font-family: inherit;
+  cursor: pointer;
+  text-align: center;
+  transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+.wz-choice:active { transform: scale(0.98); }
+.wz-choice:hover, .wz-choice.active-choice {
+  border-color: rgba(0,240,255,0.45);
+  box-shadow: 0 0 24px rgba(0,240,255,0.12);
+}
+.wz-choice-ico { font-size: 1.8rem; margin-bottom: 10px; }
+.wz-choice strong { display: block; font-size: 1rem; margin-bottom: 4px; }
+.wz-choice span { display: block; font-size: 0.78rem; color: #8a93a0; line-height: 1.3; }
+.wz-nav { margin-top: 20px; }
+.wz-nav-split { display: flex; gap: 10px; }
+.wz-nav-split .btn { flex: 1; }
+.wz-btn-next { width: 100%; padding: 14px !important; font-size: 1rem !important; font-weight: 800 !important; }
+.wz-details {
+  margin: 8px 0 16px;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 10px 14px;
+  color: #aaa;
+  font-size: 0.88rem;
+}
+.wz-details summary { cursor: pointer; color: var(--neon-cyan); font-weight: 600; }
+.wz-photo {
+  border-style: dashed !important;
+  border-color: rgba(0,240,255,0.3) !important;
+}
+.wz-review {
+  background: rgba(18,22,28,0.95);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  padding: 16px;
+  margin-bottom: 8px;
+}
+.wz-review-row {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  align-items: flex-start;
+}
+.wz-review-row:last-child { border-bottom: none; }
+.wz-review-row .ico { font-size: 1.2rem; flex-shrink: 0; }
+.wz-review-row strong { display: block; color: #888; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
+.wz-review-row span { color: #fff; font-size: 0.95rem; font-weight: 600; }
+.wz-extra-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+.wz-extra-actions .btn { flex: 1; }
+.wz-success {
+  text-align: center;
+  padding: 28px 12px 12px;
+}
+.wz-success-ico {
+  width: 72px; height: 72px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  border: 3px solid #39ff14;
+  color: #39ff14;
+  font-size: 2rem;
+  font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 28px rgba(57,255,20,0.25);
+}
+.wz-success h3 { color: #fff; font-size: 1.35rem; margin-bottom: 8px; }
+.wz-success p { color: #8a93a0; font-size: 0.9rem; margin-bottom: 16px; }
+.wz-success-meta {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 14px;
+  text-align: left;
+  font-size: 0.88rem;
+  color: #aaa;
+  line-height: 1.5;
+}
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
@@ -1665,7 +1831,7 @@ body.portal-mode #portalCliente { display: block !important; }
   <div class="logo">
     <h1>LUTHIER PRO</h1>
     <span>Gestão profissional</span>
-    <div id="appVersionBadge" style="margin-top:6px;font-size:0.72rem;color:var(--neon-green);letter-spacing:1px;">v28.0 · Clientes premium</div>
+    <div id="appVersionBadge" style="margin-top:6px;font-size:0.72rem;color:var(--neon-green);letter-spacing:1px;">v28.1 · Cadastro wizard</div>
   </div>
   <div class="nav-item active" onclick="navigateTo('dashboard')">
     <div class="nav-icon">📊</div>
@@ -1814,149 +1980,187 @@ body.portal-mode #portalCliente { display: block !important; }
 
   <!-- NOVA ENTRADA (cadastro unificado) -->
   <div class="page" id="page-servicos">
-    <div class="page-header">
-      <h2 class="neon-text-cyan" id="tituloNovaEntrada">Cadastro completo</h2>
-      <p id="subtituloNovaEntrada">Preencha em sequência: cliente → instrumento → serviço → valores. Um único salvamento.</p>
+    <div class="wz-head">
+      <div class="wz-step-label" id="wzStepLabel">01 — Cliente</div>
+      <h2 class="wz-title" id="tituloNovaEntrada">Comece pelo cadastro do cliente</h2>
+      <p class="wz-sub" id="subtituloNovaEntrada">Escolha como deseja continuar</p>
     </div>
 
-    <!-- Passo 1: Cliente -->
-    <div class="card">
-      <div class="card-header">
-        <span class="card-title neon-text-cyan">1. Cliente</span>
-        <div style="display:flex; gap:8px; flex-wrap:wrap;">
-          <button type="button" class="btn btn-sm" id="btnClienteNovo" onclick="setModoCliente('novo')" style="background:rgba(57,255,20,0.2); border:1px solid rgba(57,255,20,0.4); color:var(--neon-green);">Cliente novo</button>
-          <button type="button" class="btn btn-sm" id="btnClienteExistente" onclick="setModoCliente('existente')" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.15); color:#888;">Já é cliente</button>
-        </div>
+    <div class="wz-progress" id="wzProgress" aria-label="Progresso do cadastro">
+      <div class="wz-prog-item active" data-step="1"><span class="wz-dot">1</span><span class="wz-prog-txt">Cliente</span></div>
+      <div class="wz-prog-line"></div>
+      <div class="wz-prog-item" data-step="2"><span class="wz-dot">2</span><span class="wz-prog-txt">Instrumento</span></div>
+      <div class="wz-prog-line"></div>
+      <div class="wz-prog-item" data-step="3"><span class="wz-dot">3</span><span class="wz-prog-txt">Serviço</span></div>
+      <div class="wz-prog-line"></div>
+      <div class="wz-prog-item" data-step="4"><span class="wz-dot">4</span><span class="wz-prog-txt">Revisão</span></div>
+    </div>
+
+    <!-- PASSO 1: Cliente -->
+    <div class="wz-panel active" id="wzPanel1">
+      <div class="wz-choice-grid" id="wzChoiceGrid">
+        <button type="button" class="wz-choice" id="btnClienteNovo" onclick="setModoCliente('novo'); wzShowClientForm();">
+          <div class="wz-choice-ico">👤</div>
+          <strong>Cliente novo</strong>
+          <span>Cadastrar no sistema</span>
+        </button>
+        <button type="button" class="wz-choice" id="btnClienteExistente" onclick="setModoCliente('existente'); wzShowClientForm();">
+          <div class="wz-choice-ico">🔍</div>
+          <strong>Já é cliente</strong>
+          <span>Buscar existente</span>
+        </button>
       </div>
 
-      <!-- Modo: existente -->
-      <div id="blocoClienteExistente">
-        <input type="hidden" id="servCliente" value="">
-        <input type="hidden" id="servClienteNome" value="">
-        <input type="hidden" id="servClienteTel" value="">
-        <div class="form-group">
-          <input type="search" class="search-input" id="servClienteBusca" style="width:100%;" placeholder="Buscar por nome, telefone ou email..." autocomplete="off" oninput="filtrarClientesServico()" onkeydown="if(event.key==='Enter'){event.preventDefault();}">
-        </div>
-        <div id="servClienteSelecionado" style="display:none;margin-bottom:12px;"></div>
-        <div id="servClienteResultados" class="cliente-card-list" style="max-height:280px;overflow-y:auto;"></div>
-        <div id="servClienteHistorico" style="display:none; margin-top:12px; padding:12px; background:rgba(0,240,255,0.05); border-radius:10px; border:1px solid rgba(0,240,255,0.15); font-size:0.85rem; color:#aaa;"></div>
-      </div>
-
-      <!-- Modo: novo cliente (preenche e cria junto com o serviço) -->
-      <div id="blocoClienteNovo" style="display:none;">
-        <div class="form-row">
+      <div id="wzClientForm" style="display:none;">
+        <div id="blocoClienteExistente" style="display:none;">
+          <input type="hidden" id="servCliente" value="">
+          <input type="hidden" id="servClienteNome" value="">
+          <input type="hidden" id="servClienteTel" value="">
           <div class="form-group">
-            <label class="form-label">Nome Completo *</label>
+            <label class="form-label">Buscar cliente *</label>
+            <input type="search" class="form-input" id="servClienteBusca" placeholder="Nome, telefone ou email..." autocomplete="off" oninput="filtrarClientesServico()" onkeydown="if(event.key==='Enter'){event.preventDefault();}">
+          </div>
+          <div id="servClienteSelecionado" style="display:none;margin-bottom:12px;"></div>
+          <div id="servClienteResultados" class="cliente-card-list" style="max-height:260px;overflow-y:auto;"></div>
+          <div id="servClienteHistorico" style="display:none; margin-top:12px; padding:12px; background:rgba(0,240,255,0.05); border-radius:10px; border:1px solid rgba(0,240,255,0.15); font-size:0.85rem; color:#aaa;"></div>
+        </div>
+
+        <div id="blocoClienteNovo" style="display:none;">
+          <div class="form-group">
+            <label class="form-label">Nome completo *</label>
             <input type="text" class="form-input" id="novoCliNome" placeholder="Nome do cliente">
           </div>
           <div class="form-group">
-            <label class="form-label">Telefone *</label>
+            <label class="form-label">WhatsApp *</label>
             <input type="text" class="form-input" id="novoCliTel" placeholder="(00) 00000-0000">
           </div>
-        </div>
-        <div class="form-row">
           <div class="form-group">
-            <label class="form-label">Email</label>
+            <label class="form-label">E-mail</label>
             <input type="email" class="form-input" id="novoCliEmail" placeholder="email@exemplo.com">
           </div>
-          <div class="form-group">
-            <label class="form-label">Cidade</label>
-            <input type="text" class="form-input" id="novoCliCidade" placeholder="Cidade/UF">
-          </div>
+          <details class="wz-details">
+            <summary>Informações adicionais (opcional)</summary>
+            <div class="form-group" style="margin-top:12px;">
+              <label class="form-label">Cidade</label>
+              <input type="text" class="form-input" id="novoCliCidade" placeholder="Cidade/UF">
+            </div>
+            <div class="form-group">
+              <label class="form-label">CPF/CNPJ</label>
+              <input type="text" class="form-input" id="novoCliDoc" placeholder="Opcional">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Endereço</label>
+              <input type="text" class="form-input" id="novoCliEndereco" placeholder="Rua, número, bairro">
+            </div>
+          </details>
         </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">CPF/CNPJ</label>
-            <input type="text" class="form-input" id="novoCliDoc" placeholder="Opcional">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Endereço</label>
-            <input type="text" class="form-input" id="novoCliEndereco" placeholder="Rua, número, bairro">
-          </div>
+
+        <div class="wz-nav">
+          <button type="button" class="btn btn-cyan wz-btn-next" onclick="wzNextFrom1()">Próximo →</button>
         </div>
-        <p style="color:#666; font-size:0.82rem; margin-top:4px;">Continue nos passos 2 e 3. Tudo será salvo junto no final.</p>
       </div>
     </div>
 
-    <div class="grid-2">
-      <div>
-        <!-- Passo 2: Instrumento -->
-        <div class="card">
-          <div class="card-header"><span class="card-title neon-text-magenta">2. Instrumento</span></div>
-          <div class="form-group">
-            <label class="form-label">Tipo de Instrumento *</label>
-            <select class="form-select" id="servTipoInstrumento"><option value="">-- Selecione --</option></select>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Marca/Modelo</label>
-            <input type="text" class="form-input" id="servModelo" placeholder="Ex: Fender Stratocaster">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Número de Série</label>
-            <input type="text" class="form-input" id="servSerial" placeholder="Opcional">
-          </div>
+    <!-- PASSO 2: Instrumento + fotos -->
+    <div class="wz-panel" id="wzPanel2">
+      <div class="card" style="border:none;background:transparent;padding:0;margin:0;">
+        <div class="form-group">
+          <label class="form-label">Tipo de instrumento *</label>
+          <select class="form-select" id="servTipoInstrumento"><option value="">-- Selecione --</option></select>
         </div>
-        <div class="card">
-          <div class="card-header"><span class="card-title">Fotos do Instrumento</span></div>
-          <div class="photo-upload" onclick="document.getElementById('servFotos').click()">
-            <div class="icon-3d" style="font-size:2.5rem; margin-bottom:10px;">📷</div>
-            <p style="color:#888; font-size:0.9rem;">Clique para adicionar fotos</p>
-            <p style="color:#555; font-size:0.8rem; margin-top:6px;">Até 4 fotos · comprimidas automaticamente</p>
+        <div class="form-group">
+          <label class="form-label">Marca / modelo</label>
+          <input type="text" class="form-input" id="servModelo" placeholder="Ex: Fender Stratocaster">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Nº de série (opcional)</label>
+          <input type="text" class="form-input" id="servSerial" placeholder="Ex: SN123456">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Fotos do instrumento *</label>
+          <div class="photo-upload wz-photo" onclick="document.getElementById('servFotos').click()">
+            <div style="font-size:2rem;margin-bottom:8px;">📷</div>
+            <p style="color:#ccc;font-size:0.92rem;font-weight:600;">Adicionar fotos</p>
+            <p style="color:#666;font-size:0.78rem;margin-top:4px;">Até 4 fotos · essenciais para o atendimento</p>
           </div>
-          <input type="file" id="servFotos" multiple accept="image/*" onchange="previewFotos(event)">
+          <input type="file" id="servFotos" multiple accept="image/*" onchange="previewFotos(event)" style="display:none">
           <div class="photo-preview" id="servFotosPreview"></div>
         </div>
       </div>
-      <div>
-        <!-- Passo 3: Serviço + Valores -->
-        <div class="card">
-          <div class="card-header"><span class="card-title neon-text-green">3. Serviço e Valores</span></div>
-          <div class="form-group">
-            <label class="form-label">Tipo de Serviço *</label>
-            <select class="form-select" id="servTipoServico"><option value="">-- Selecione --</option></select>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">Mão de Obra (R$) *</label>
-              <input type="number" class="form-input" id="servMaoObra" step="0.01" placeholder="0,00" oninput="calcularTotal()">
-            </div>
-            <div class="form-group">
-              <label class="form-label">Materiais (R$) — total</label>
-              <input type="number" class="form-input" id="servMateriais" step="0.01" placeholder="0,00" oninput="calcularTotal()">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Materiais usados (lista)</label>
-            <div id="servMateriaisItensLista" style="margin-bottom:8px;"></div>
-            <div style="display:flex;gap:8px;flex-wrap:wrap;">
-              <input type="text" class="form-input" id="servMatItemNome" placeholder="Ex: Cordas" style="flex:1;min-width:120px;">
-              <input type="number" class="form-input" id="servMatItemValor" step="0.01" placeholder="R$" style="width:110px;">
-              <button type="button" class="btn btn-green btn-sm" onclick="adicionarMaterialItem()">+ Item</button>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Quantidade</label>
-            <input type="number" class="form-input" id="servQuantidade" value="1" min="1" oninput="calcularTotal()">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Valor Total (mão de obra + materiais)</label>
-            <input type="text" class="form-input" id="servTotal" readonly style="font-size:1.2rem; font-weight:800; color:var(--neon-green);">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Observações / Problema relatado</label>
-            <textarea class="form-textarea" id="servObs" placeholder="Descreva o problema ou o serviço a ser realizado..."></textarea>
-          </div>
-        </div>
+      <div class="wz-nav wz-nav-split">
+        <button type="button" class="btn btn-magenta" onclick="wzGo(1)">← Voltar</button>
+        <button type="button" class="btn btn-cyan wz-btn-next" onclick="wzNextFrom2()">Próximo →</button>
       </div>
     </div>
 
-    <div class="actions-row no-print">
-      <button class="btn btn-green" style="font-size:1rem;padding:14px 20px;" onclick="salvarEntradaCompleta()">💾 Salvar cadastro completo</button>
-      <button class="btn btn-cyan" onclick="enviarWhatsApp()">📱 Enviar WhatsApp</button>
-      <button class="btn btn-orange" onclick="gerarPDF()">📄 Gerar Orçamento PDF</button>
-      <button class="btn btn-purple" onclick="limparFormServico()">🔄 Limpar</button>
+    <!-- PASSO 3: Serviço e valores -->
+    <div class="wz-panel" id="wzPanel3">
+      <div class="form-group">
+        <label class="form-label">Tipo de serviço *</label>
+        <select class="form-select" id="servTipoServico"><option value="">-- Selecione --</option></select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Mão de obra (R$) *</label>
+          <input type="number" class="form-input" id="servMaoObra" step="0.01" placeholder="0,00" oninput="calcularTotal()">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Materiais (R$)</label>
+          <input type="number" class="form-input" id="servMateriais" step="0.01" placeholder="0,00" oninput="calcularTotal()">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Materiais usados (lista)</label>
+        <div id="servMateriaisItensLista" style="margin-bottom:8px;"></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <input type="text" class="form-input" id="servMatItemNome" placeholder="Ex: Cordas" style="flex:1;min-width:120px;">
+          <input type="number" class="form-input" id="servMatItemValor" step="0.01" placeholder="R$" style="width:110px;">
+          <button type="button" class="btn btn-green btn-sm" onclick="adicionarMaterialItem()">+ Item</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Quantidade</label>
+        <input type="number" class="form-input" id="servQuantidade" value="1" min="1" oninput="calcularTotal()">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Total</label>
+        <input type="text" class="form-input" id="servTotal" readonly style="font-size:1.25rem;font-weight:800;color:var(--neon-green);">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Observações</label>
+        <textarea class="form-textarea" id="servObs" placeholder="Problema relatado, preferências..."></textarea>
+      </div>
+      <div class="wz-nav wz-nav-split">
+        <button type="button" class="btn btn-magenta" onclick="wzGo(2)">← Voltar</button>
+        <button type="button" class="btn btn-cyan wz-btn-next" onclick="wzNextFrom3()">Próximo →</button>
+      </div>
     </div>
-    <p style="color:#555; font-size:0.8rem; margin-top:12px;">Ao salvar, a entrada aparece no <strong style="color:var(--neon-orange)">Kanban (Pendente)</strong>, no <strong style="color:var(--neon-green)">Financeiro</strong> e no histórico do cliente.</p>
+
+    <!-- PASSO 4: Revisão -->
+    <div class="wz-panel" id="wzPanel4">
+      <div class="wz-review" id="wzReviewBox"></div>
+      <div class="wz-nav wz-nav-split">
+        <button type="button" class="btn btn-magenta" onclick="wzGo(3)">← Voltar</button>
+        <button type="button" class="btn btn-green wz-btn-next" onclick="salvarEntradaCompleta()">✓ Finalizar</button>
+      </div>
+      <div class="wz-extra-actions">
+        <button type="button" class="btn btn-cyan btn-sm" onclick="enviarWhatsApp()">📱 WhatsApp</button>
+        <button type="button" class="btn btn-orange btn-sm" onclick="gerarPDF()">📄 PDF</button>
+      </div>
+    </div>
+
+    <!-- Sucesso -->
+    <div class="wz-panel" id="wzPanelOk" style="display:none;">
+      <div class="wz-success">
+        <div class="wz-success-ico">✓</div>
+        <h3>Cadastro realizado com sucesso!</h3>
+        <p id="wzSuccessMsg">O atendimento foi registrado e já está no Kanban.</p>
+        <div class="wz-success-meta" id="wzSuccessMeta"></div>
+        <button type="button" class="btn btn-cyan" style="width:100%;margin-top:16px;" onclick="navigateTo('kanban')">Ver no Kanban</button>
+        <button type="button" class="btn btn-green" style="width:100%;margin-top:10px;" onclick="wzNovoAtendimento()">Novo atendimento</button>
+        <button type="button" class="btn btn-magenta btn-sm" style="width:100%;margin-top:10px;" id="wzBtnEditarUltimo" onclick="wzEditarUltimo()">✏️ Editar este atendimento</button>
+      </div>
+    </div>
   </div>
 
   <!-- KANBAN -->
@@ -2217,7 +2421,7 @@ body.portal-mode #portalCliente { display: block !important; }
         <li>WhatsApp da oficina preenchido</li>
         <li>Fotos comprimidas / limpar fotos se o aparelho encher</li>
       </ul>
-      <p style="color:#666;font-size:0.8rem;margin:0;">Versão <strong id="configVersaoTxt" style="color:var(--neon-cyan);">v28.0</strong> · Uso comercial da sua oficina · Dados sensíveis: proteja o link admin e faça backup.</p>
+      <p style="color:#666;font-size:0.8rem;margin:0;">Versão <strong id="configVersaoTxt" style="color:var(--neon-cyan);">v28.1</strong> · Uso comercial da sua oficina · Dados sensíveis: proteja o link admin e faça backup.</p>
     </div>
   </div>
 
@@ -3441,33 +3645,198 @@ function setModoCliente(modo) {
   const blocoNv = document.getElementById('blocoClienteNovo');
   const btnEx = document.getElementById('btnClienteExistente');
   const btnNv = document.getElementById('btnClienteNovo');
-  const tit = document.getElementById('tituloNovaEntrada');
-  const sub = document.getElementById('subtituloNovaEntrada');
   if (!blocoEx || !blocoNv) return;
   if (modo === 'novo') {
     blocoEx.style.display = 'none';
     blocoNv.style.display = 'block';
-    if (btnEx) { btnEx.style.background = 'rgba(255,255,255,0.05)'; btnEx.style.borderColor = 'rgba(255,255,255,0.15)'; btnEx.style.color = '#888'; }
-    if (btnNv) { btnNv.style.background = 'rgba(57,255,20,0.2)'; btnNv.style.borderColor = 'rgba(57,255,20,0.4)'; btnNv.style.color = 'var(--neon-green)'; }
-    if (tit) tit.textContent = 'Cadastro completo';
-    if (sub) sub.textContent = 'Cliente novo em sequência: dados → instrumento → serviço → valores. Um único salvamento.';
+    if (btnNv) btnNv.classList.add('active-choice');
+    if (btnEx) btnEx.classList.remove('active-choice');
   } else {
     blocoEx.style.display = 'block';
     blocoNv.style.display = 'none';
-    if (btnNv) { btnNv.style.background = 'rgba(255,255,255,0.05)'; btnNv.style.borderColor = 'rgba(255,255,255,0.15)'; btnNv.style.color = '#888'; }
-    if (btnEx) { btnEx.style.background = 'rgba(0,240,255,0.2)'; btnEx.style.borderColor = 'rgba(0,240,255,0.4)'; btnEx.style.color = 'var(--neon-cyan)'; }
-    if (tit) tit.textContent = 'Novo atendimento';
-    if (sub) sub.textContent = 'Cliente já cadastrado: escolha a pessoa e registre instrumento, serviço e valores.';
+    if (btnEx) btnEx.classList.add('active-choice');
+    if (btnNv) btnNv.classList.remove('active-choice');
+    try { filtrarClientesServico(); } catch (e) {}
   }
 }
+
+function wzShowClientForm() {
+  const form = document.getElementById('wzClientForm');
+  const grid = document.getElementById('wzChoiceGrid');
+  if (form) form.style.display = 'block';
+  const sub = document.getElementById('subtituloNovaEntrada');
+  const tit = document.getElementById('tituloNovaEntrada');
+  if (modoCliente === 'novo') {
+    if (tit) tit.textContent = 'Dados do cliente';
+    if (sub) sub.textContent = 'Preencha as informações principais';
+  } else {
+    if (tit) tit.textContent = 'Cliente existente';
+    if (sub) sub.textContent = 'Busque e selecione o cliente';
+  }
+}
+
+let wzStep = 1;
+
+function wzGo(step) {
+  wzStep = step;
+  const labels = {
+    1: ['01 — Cliente', 'Cadastro do cliente', 'Escolha como deseja continuar'],
+    2: ['02 — Instrumento', 'Dados do instrumento', 'Informe o instrumento e adicione fotos'],
+    3: ['03 — Serviço', 'Serviço e valores', 'Defina o serviço, mão de obra e materiais'],
+    4: ['04 — Revisão', 'Resumo do atendimento', 'Confira antes de finalizar']
+  };
+  const L = labels[step] || labels[1];
+  const sl = document.getElementById('wzStepLabel');
+  const tit = document.getElementById('tituloNovaEntrada');
+  const sub = document.getElementById('subtituloNovaEntrada');
+  if (sl) sl.textContent = L[0];
+  if (tit) tit.textContent = L[1];
+  if (sub) sub.textContent = L[2];
+  if (step === 1 && modoCliente) {
+    wzShowClientForm();
+  }
+  document.querySelectorAll('.wz-panel').forEach(p => {
+    p.classList.remove('active');
+    p.style.display = 'none';
+  });
+  const panel = document.getElementById('wzPanel' + step);
+  if (panel) {
+    panel.style.display = 'block';
+    panel.classList.add('active');
+  }
+  const ok = document.getElementById('wzPanelOk');
+  if (ok) ok.style.display = 'none';
+  document.querySelectorAll('.wz-prog-item').forEach(it => {
+    const s = parseInt(it.dataset.step, 10);
+    it.classList.toggle('active', s === step);
+    it.classList.toggle('done', s < step);
+    if (s < step) {
+      const d = it.querySelector('.wz-dot');
+      if (d) d.textContent = '✓';
+    } else {
+      const d = it.querySelector('.wz-dot');
+      if (d) d.textContent = String(s);
+    }
+  });
+  if (step === 4) wzMontarRevisao();
+  try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) {}
+}
+
+function wzNextFrom1() {
+  const cli = obterDadosClienteForm();
+  if (cli.erro) { showToast(cli.erro, 'error'); return; }
+  wzGo(2);
+}
+
+function wzNextFrom2() {
+  const tipoInst = (document.getElementById('servTipoInstrumento').value || '').trim();
+  if (!tipoInst) { showToast('Selecione o tipo de instrumento!', 'error'); return; }
+  // foto recomendada, não bloqueia
+  wzGo(3);
+}
+
+function wzNextFrom3() {
+  const tipoServ = (document.getElementById('servTipoServico').value || '').trim();
+  if (!tipoServ) { showToast('Selecione o tipo de serviço!', 'error'); return; }
+  const mo = parseFloat(document.getElementById('servMaoObra').value) || 0;
+  const mat = parseFloat(document.getElementById('servMateriais').value) || 0;
+  if (mo <= 0 && mat <= 0) {
+    showToast('Informe mão de obra ou materiais!', 'error');
+    return;
+  }
+  calcularTotal();
+  wzGo(4);
+}
+
+function wzMontarRevisao() {
+  const box = document.getElementById('wzReviewBox');
+  if (!box) return;
+  const cli = obterDadosClienteForm();
+  const inst = document.getElementById('servTipoInstrumento').value || '—';
+  const modelo = (document.getElementById('servModelo').value || '').trim();
+  const serial = (document.getElementById('servSerial').value || '').trim();
+  const serv = document.getElementById('servTipoServico').value || '—';
+  const mo = parseFloat(document.getElementById('servMaoObra').value) || 0;
+  const mat = parseFloat(document.getElementById('servMateriais').value) || 0;
+  const total = document.getElementById('servTotal').value || formatMoney(mo + mat);
+  const obs = (document.getElementById('servObs').value || '').trim();
+  const nFotos = (fotosServicoAtual || []).length;
+  box.innerHTML = `
+    <div class="wz-review-row"><span class="ico">👤</span><div><strong>Cliente</strong><span>${cli.erro ? '—' : (cli.nome + ' · ' + cli.telefone)}</span></div></div>
+    <div class="wz-review-row"><span class="ico">🎸</span><div><strong>Instrumento</strong><span>${inst}${modelo ? ' · ' + modelo : ''}${serial ? ' · S/N ' + serial : ''}</span></div></div>
+    <div class="wz-review-row"><span class="ico">📷</span><div><strong>Fotos</strong><span>${nFotos ? nFotos + ' foto(s)' : 'Nenhuma foto'}</span></div></div>
+    <div class="wz-review-row"><span class="ico">🔧</span><div><strong>Serviço</strong><span>${serv}</span></div></div>
+    <div class="wz-review-row"><span class="ico">💰</span><div><strong>Valores</strong><span>MO ${formatMoney(mo)} · Mat ${formatMoney(mat)} · <span class="neon-text-green">${total}</span></span></div></div>
+    ${obs ? `<div class="wz-review-row"><span class="ico">📝</span><div><strong>Obs</strong><span>${obs}</span></div></div>` : ''}
+  `;
+}
+
+function wzNovoAtendimento() {
+  limparFormServico();
+  modoCliente = 'novo';
+  const form = document.getElementById('wzClientForm');
+  if (form) form.style.display = 'none';
+  document.querySelectorAll('.wz-choice').forEach(c => c.classList.remove('active-choice'));
+  wzGo(1);
+  const grid = document.getElementById('wzChoiceGrid');
+  if (grid) grid.style.display = 'grid';
+}
+
+function wzEditarUltimo() {
+  if (ultimoServicoSalvoId) {
+    navigateTo('kanban');
+    setTimeout(() => abrirEditarServico(ultimoServicoSalvoId), 200);
+  } else {
+    navigateTo('kanban');
+  }
+}
+
+function wzShowSuccess(servico) {
+  document.querySelectorAll('.wz-panel').forEach(p => {
+    p.classList.remove('active');
+    p.style.display = 'none';
+  });
+  const ok = document.getElementById('wzPanelOk');
+  if (ok) {
+    ok.style.display = 'block';
+    ok.classList.add('active');
+  }
+  const cod = codigoOSDe(servico);
+  const meta = document.getElementById('wzSuccessMeta');
+  if (meta) {
+    meta.innerHTML = `<div><strong style="color:var(--neon-cyan)">OS</strong> ${cod}</div>
+      <div><strong style="color:var(--neon-cyan)">Cliente</strong> ${servico.clienteNome || ''}</div>
+      <div><strong style="color:var(--neon-cyan)">Total</strong> ${formatMoney(servico.total)}</div>`;
+  }
+  const sl = document.getElementById('wzStepLabel');
+  const tit = document.getElementById('tituloNovaEntrada');
+  const sub = document.getElementById('subtituloNovaEntrada');
+  if (sl) sl.textContent = 'Concluído';
+  if (tit) tit.textContent = 'Cadastro realizado!';
+  if (sub) sub.textContent = 'Atendimento disponível no sistema';
+  document.querySelectorAll('.wz-prog-item').forEach(it => {
+    it.classList.add('done');
+    it.classList.remove('active');
+    const d = it.querySelector('.wz-dot');
+    if (d) d.textContent = '✓';
+  });
+}
+
 
 function novaEntradaComClienteNovo() {
   navigateTo('servicos');
   setTimeout(() => {
     limparFormServico();
+    modoCliente = 'novo';
+    const form = document.getElementById('wzClientForm');
+    if (form) form.style.display = 'none';
+    document.querySelectorAll('.wz-choice').forEach(c => c.classList.remove('active-choice'));
     setModoCliente('novo');
+    wzGo(1);
     const nome = document.getElementById('novoCliNome');
-    if (nome) nome.focus();
+    // mostra escolha primeiro
+    const form2 = document.getElementById('wzClientForm');
+    if (form2) form2.style.display = 'none';
   }, 50);
 }
 
@@ -3475,15 +3844,19 @@ function novaEntradaClienteExistente(clienteId) {
   navigateTo('servicos');
   setTimeout(() => {
     limparFormServico();
+    modoCliente = 'existente';
     setModoCliente('existente');
+    wzShowClientForm();
+    wzGo(1);
     initPaginaServicos();
     if (clienteId) {
       const sel = document.getElementById('servCliente');
       if (sel) {
         sel.value = clienteId;
         preencherDadosCliente();
-        filtrarClientesServico();
       }
+      // seleciona no card UI se existir
+      try { filtrarClientesServico(); } catch (e) {}
     }
   }, 50);
 }
@@ -3600,7 +3973,16 @@ function initPaginaServicos() {
   filtrarClientesServico();
   if (selTi) selTi.innerHTML = '<option value="">-- Selecione --</option>' + DB.tiposInstrumento.map(t => `<option value="${t}">${t}</option>`).join('');
   if (selTs) selTs.innerHTML = '<option value="">-- Selecione --</option>' + DB.tiposServico.map(t => `<option value="${t}">${t}</option>`).join('');
-  setModoCliente(modoCliente || 'existente');
+  if (typeof setModoCliente === 'function') setModoCliente(modoCliente || 'novo');
+  // Wizard: se ainda não escolheu modo na sessão, mostra escolha
+  const form = document.getElementById('wzClientForm');
+  if (form && !document.getElementById('servCliente').value && !(document.getElementById('novoCliNome') && document.getElementById('novoCliNome').value)) {
+    // mantém estado se já estiver no meio do fluxo
+  }
+  if (typeof wzGo === 'function' && typeof wzStep === 'number' && wzStep >= 1 && wzStep <= 4) {
+    // re-render painel atual
+    try { wzGo(wzStep); } catch (e) {}
+  }
 }
 
 function preencherDadosCliente() {
@@ -3855,14 +4237,13 @@ function salvarEntradaCompleta() {
   setModoCliente('existente');
   initPaginaServicos();
 
-  // Oferece WhatsApp com orçamento completo (mão de obra + materiais + total)
+  // Tela de sucesso do wizard + opção WhatsApp
+  try { wzShowSuccess(servico); } catch (e) { console.error(e); }
   setTimeout(() => {
-    if (confirm('Cadastro salvo!\n\nEnviar orçamento no WhatsApp para ' + (cli.nome || 'o cliente') + '?\n\n(Com mão de obra, materiais e total)')) {
+    if (confirm('Cadastro salvo!\n\nEnviar orçamento no WhatsApp para ' + (cli.nome || 'o cliente') + '?\n\n(Com OS, mão de obra, materiais e total)')) {
       abrirWhatsAppOrcamento(servico);
-    } else {
-      navigateTo('kanban');
     }
-  }, 350);
+  }, 400);
 }
 
 // Mantém compatibilidade com chamadas antigas
