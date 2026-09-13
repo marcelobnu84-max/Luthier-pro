@@ -55,68 +55,254 @@ body::before {
 .sidebar {
   position: fixed;
   left: 0; top: 0;
-  width: 260px;
+  width: 300px;
   height: 100vh;
-  background: linear-gradient(180deg, rgba(10,10,15,0.98) 0%, rgba(20,20,40,0.95) 100%);
-  border-right: 1px solid rgba(0,240,255,0.15);
+  background:
+    radial-gradient(ellipse 120% 60% at 0% 0%, rgba(0,240,255,0.12), transparent 55%),
+    radial-gradient(ellipse 80% 40% at 100% 100%, rgba(255,0,255,0.08), transparent 50%),
+    linear-gradient(165deg, #0a0c12 0%, #10141c 45%, #0c0e14 100%);
+  border-right: 1px solid rgba(255,255,255,0.06);
   z-index: 100;
-  padding: 20px 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  box-shadow: 12px 0 48px rgba(0,0,0,0.55);
 }
 .logo {
-  text-align: center;
-  padding: 0 20px 25px;
-  border-bottom: 1px solid rgba(0,240,255,0.1);
-  margin-bottom: 15px;
+  text-align: left;
+  padding: 22px 20px 18px;
+  border-bottom: none;
+  margin-bottom: 0;
+  flex-shrink: 0;
+  position: relative;
+}
+.logo::after {
+  content: '';
+  display: block;
+  height: 1px;
+  margin-top: 16px;
+  background: linear-gradient(90deg, rgba(0,240,255,0.35), transparent 80%);
+}
+.logo-mark {
+  width: 44px; height: 44px;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #00e5ff, #7b2ff7);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.35rem;
+  margin-bottom: 12px;
+  box-shadow: 0 8px 24px rgba(0,229,255,0.25);
+  animation: logoPulse 3s ease-in-out infinite;
+}
+@keyframes logoPulse {
+  0%, 100% { box-shadow: 0 8px 24px rgba(0,229,255,0.25); transform: scale(1); }
+  50% { box-shadow: 0 8px 32px rgba(123,47,247,0.35); transform: scale(1.04); }
 }
 .logo h1 {
-  font-size: 1.6rem;
+  font-size: 1.35rem;
   font-weight: 900;
-  letter-spacing: 2px;
-  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta), var(--neon-purple));
+  letter-spacing: 1.5px;
+  background: linear-gradient(90deg, #fff 20%, #00e5ff 70%, #ff4ecd 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  margin: 0;
+  line-height: 1.15;
 }
-.logo span { font-size: 0.7rem; color: #666; letter-spacing: 3px; text-transform: uppercase; }
+.logo span {
+  font-size: 0.65rem;
+  color: #6b7485;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: block;
+  margin-top: 5px;
+  font-weight: 600;
+}
+#appVersionBadge {
+  display: inline-block !important;
+  margin-top: 10px !important;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: rgba(57,255,20,0.1);
+  border: 1px solid rgba(57,255,20,0.25);
+  font-size: 0.68rem !important;
+  color: #39ff14 !important;
+  letter-spacing: 0.5px !important;
+}
+.sidebar-nav {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 14px 12px;
+  -webkit-overflow-scrolling: touch;
+}
 .nav-item {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 14px 24px;
-  margin: 4px 12px;
-  border-radius: 12px;
+  gap: 14px;
+  padding: 11px 12px;
+  margin: 0 0 6px;
+  border-radius: 16px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  color: #888;
-  font-weight: 500;
-  font-size: 0.92rem;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+  color: #9aa3b2;
+  font-weight: 600;
+  font-size: 0.95rem;
   border: 1px solid transparent;
+  background: transparent;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
 }
 .nav-item:hover {
-  background: rgba(0,240,255,0.08);
-  color: var(--neon-cyan);
-  border-color: rgba(0,240,255,0.2);
+  background: rgba(255,255,255,0.04);
+  color: #e8eef6;
+  border-color: rgba(255,255,255,0.06);
 }
+.nav-item:active { transform: scale(0.98); }
 .nav-item.active {
-  background: linear-gradient(135deg, rgba(0,240,255,0.15), rgba(184,41,221,0.1));
-  color: var(--neon-cyan);
-  border-color: rgba(0,240,255,0.3);
-  box-shadow: 0 0 20px rgba(0,240,255,0.1);
+  background: linear-gradient(105deg, rgba(0,229,255,0.16) 0%, rgba(123,47,247,0.1) 100%);
+  color: #fff;
+  border-color: rgba(0,229,255,0.28);
+  box-shadow: 0 4px 20px rgba(0,229,255,0.1);
+}
+.nav-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 12px; bottom: 12px;
+  width: 3px;
+  border-radius: 0 4px 4px 0;
+  background: linear-gradient(180deg, #00e5ff, #7b2ff7);
+  box-shadow: 0 0 12px rgba(0,229,255,0.5);
 }
 .nav-icon {
-  width: 36px; height: 36px;
-  border-radius: 10px;
+  width: 46px; height: 46px;
+  border-radius: 14px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 1.1rem;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.08);
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.04);
+  position: relative;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
+.nav-icon .nav-emoji {
+  display: inline-block;
+  animation: navIcoFloat 2.6s ease-in-out infinite;
+  transform-origin: center;
+  filter: grayscale(0.15);
+}
+.nav-item.active .nav-emoji { filter: none; animation: navIcoPulse 1.6s ease-in-out infinite; }
+.nav-item:nth-child(1) .nav-icon { background: linear-gradient(145deg, rgba(0,229,255,0.2), rgba(0,229,255,0.05)); border-color: rgba(0,229,255,0.25); }
+.nav-item:nth-child(2) .nav-icon { background: linear-gradient(145deg, rgba(255,149,0,0.18), rgba(255,149,0,0.04)); border-color: rgba(255,149,0,0.22); }
+.nav-item:nth-child(3) .nav-icon { background: linear-gradient(145deg, rgba(57,255,20,0.16), rgba(57,255,20,0.04)); border-color: rgba(57,255,20,0.22); }
+.nav-item:nth-child(4) .nav-icon { background: linear-gradient(145deg, rgba(123,47,247,0.2), rgba(123,47,247,0.05)); border-color: rgba(123,47,247,0.25); }
+.nav-item:nth-child(5) .nav-icon { background: linear-gradient(145deg, rgba(57,255,20,0.18), rgba(0,229,255,0.06)); border-color: rgba(57,255,20,0.2); }
+.nav-item:nth-child(6) .nav-icon { background: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)); border-color: rgba(255,255,255,0.1); }
+.nav-item:nth-child(7) .nav-icon { background: linear-gradient(145deg, rgba(0,140,255,0.2), rgba(0,140,255,0.05)); border-color: rgba(0,140,255,0.25); }
+.nav-item:nth-child(1) .nav-emoji { animation-delay: 0s; }
+.nav-item:nth-child(2) .nav-emoji { animation-delay: 0.2s; }
+.nav-item:nth-child(3) .nav-emoji { animation-delay: 0.35s; }
+.nav-item:nth-child(4) .nav-emoji { animation-delay: 0.5s; }
+.nav-item:nth-child(5) .nav-emoji { animation-delay: 0.65s; }
+.nav-item:nth-child(6) .nav-emoji { animation-delay: 0.8s; }
+.nav-item:nth-child(7) .nav-emoji { animation-delay: 0.95s; }
+@keyframes navIcoFloat {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-4px) scale(1.12); }
+}
+@keyframes navIcoPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.16); }
+}
+.nav-item:hover .nav-icon { transform: scale(1.08); }
 .nav-item.active .nav-icon {
-  background: rgba(0,240,255,0.15);
-  border-color: rgba(0,240,255,0.3);
+  box-shadow: 0 0 20px rgba(0,229,255,0.22);
+  transform: scale(1.04);
 }
+.nav-label {
+  flex: 1;
+  min-width: 0;
+  line-height: 1.15;
+  font-size: 0.98rem;
+  letter-spacing: -0.2px;
+}
+.nav-sub {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: #5c6575;
+  margin-top: 2px;
+  letter-spacing: 0;
+}
+.nav-item.active .nav-sub { color: rgba(0,229,255,0.7); }
+.nav-item .nav-chevron {
+  color: #3a4250;
+  font-size: 1.15rem;
+  font-weight: 300;
+  transition: color 0.2s, transform 0.2s;
+}
+.nav-item.active .nav-chevron {
+  color: #00e5ff;
+  transform: translateX(2px);
+}
+.sidebar-foot {
+  flex-shrink: 0;
+  padding: 12px 14px 16px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.25));
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.sidebar-foot-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 12px;
+  border-radius: 14px;
+  border: 1px solid transparent;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.2s, filter 0.2s;
+  text-align: left;
+}
+.sidebar-foot-btn:active { transform: scale(0.98); }
+.sidebar-foot-btn .nav-icon {
+  width: 40px; height: 40px;
+  font-size: 1.2rem;
+  border-radius: 12px;
+}
+.sidebar-foot-btn.backup {
+  background: rgba(0,229,255,0.08);
+  border-color: rgba(0,229,255,0.22);
+  color: #7ef0ff;
+}
+.sidebar-foot-btn.backup .nav-icon {
+  background: linear-gradient(145deg, rgba(0,229,255,0.25), rgba(0,229,255,0.06));
+  border-color: rgba(0,229,255,0.3);
+}
+.sidebar-foot-btn.restore {
+  background: rgba(255,0,255,0.07);
+  border-color: rgba(255,0,255,0.2);
+  color: #f0a0ff;
+}
+.sidebar-foot-btn.restore .nav-icon {
+  background: linear-gradient(145deg, rgba(255,0,255,0.2), rgba(255,0,255,0.05));
+  border-color: rgba(255,0,255,0.28);
+}
+.sidebar-foot-hint {
+  color: #4a5260;
+  font-size: 0.68rem;
+  text-align: center;
+  line-height: 1.4;
+  margin: 2px 0 0;
+}
+@media (max-width: 768px) {
+  .sidebar { width: min(88vw, 310px); }
+}
+
 .main-content {
   margin-left: 260px;
   padding: 30px;
@@ -1829,43 +2015,59 @@ body.portal-mode #portalCliente { display: block !important; }
 <!-- Sidebar -->
 <div class="sidebar" id="appSidebar">
   <div class="logo">
+    <div class="logo-mark">🎸</div>
     <h1>LUTHIER PRO</h1>
-    <span>Gestão profissional</span>
-    <div id="appVersionBadge" style="margin-top:6px;font-size:0.72rem;color:var(--neon-green);letter-spacing:1px;">v28.1 · Cadastro wizard</div>
+    <span>Gestão inteligente</span>
+    <div id="appVersionBadge">v28.3 · Menu pro</div>
   </div>
-  <div class="nav-item active" onclick="navigateTo('dashboard')">
-    <div class="nav-icon">📊</div>
-    <span>Dashboard</span>
+  <div class="sidebar-nav">
+    <div class="nav-item active" onclick="navigateTo('dashboard')">
+      <div class="nav-icon"><span class="nav-emoji">📊</span></div>
+      <span class="nav-label">Dashboard<span class="nav-sub">Visão geral</span></span>
+      <span class="nav-chevron">›</span>
+    </div>
+    <div class="nav-item" onclick="navigateTo('clientes')">
+      <div class="nav-icon"><span class="nav-emoji">👥</span></div>
+      <span class="nav-label">Clientes<span class="nav-sub">Cadastros e histórico</span></span>
+      <span class="nav-chevron">›</span>
+    </div>
+    <div class="nav-item" onclick="navigateTo('servicos')">
+      <div class="nav-icon"><span class="nav-emoji">🔧</span></div>
+      <span class="nav-label">Nova Entrada<span class="nav-sub">Atendimento completo</span></span>
+      <span class="nav-chevron">›</span>
+    </div>
+    <div class="nav-item" onclick="navigateTo('kanban')">
+      <div class="nav-icon"><span class="nav-emoji">📋</span></div>
+      <span class="nav-label">Kanban<span class="nav-sub">Status dos serviços</span></span>
+      <span class="nav-chevron">›</span>
+    </div>
+    <div class="nav-item" onclick="navigateTo('financeiro')">
+      <div class="nav-icon"><span class="nav-emoji">💰</span></div>
+      <span class="nav-label">Financeiro<span class="nav-sub">Receitas do mês</span></span>
+      <span class="nav-chevron">›</span>
+    </div>
+    <div class="nav-item" onclick="navigateTo('config')">
+      <div class="nav-icon"><span class="nav-emoji">⚙️</span></div>
+      <span class="nav-label">Configurações<span class="nav-sub">Oficina e catálogo</span></span>
+      <span class="nav-chevron">›</span>
+    </div>
+    <div class="nav-item" onclick="navigateTo('portal-admin')">
+      <div class="nav-icon" style="position:relative;"><span class="nav-emoji">🌐</span><span id="agendaBadge" style="display:none;position:absolute;top:-4px;right:-6px;background:#ff2b6e;color:#fff;font-size:0.65rem;font-weight:700;min-width:16px;height:16px;border-radius:8px;line-height:16px;text-align:center;padding:0 3px;z-index:2;">0</span></div>
+      <span class="nav-label">Portal Cliente<span class="nav-sub">Agenda e catálogo</span></span>
+      <span class="nav-chevron">›</span>
+    </div>
   </div>
-  <div class="nav-item" onclick="navigateTo('clientes')">
-    <div class="nav-icon">👥</div>
-    <span>Clientes</span>
-  </div>
-  <div class="nav-item" onclick="navigateTo('servicos')">
-    <div class="nav-icon">🔧</div>
-    <span>Nova Entrada</span>
-  </div>
-  <div class="nav-item" onclick="navigateTo('kanban')">
-    <div class="nav-icon">📋</div>
-    <span>Kanban</span>
-  </div>
-  <div class="nav-item" onclick="navigateTo('financeiro')">
-    <div class="nav-icon">💰</div>
-    <span>Financeiro</span>
-  </div>
-  <div class="nav-item" onclick="navigateTo('config')">
-    <div class="nav-icon">⚙️</div>
-    <span>Configurações</span>
-  </div>
-  <div class="nav-item" onclick="navigateTo('portal-admin')">
-    <div class="nav-icon" style="position:relative;">🌐<span id="agendaBadge" style="display:none;position:absolute;top:-6px;right:-10px;background:#ff2b6e;color:#fff;font-size:0.65rem;font-weight:700;min-width:16px;height:16px;border-radius:8px;line-height:16px;text-align:center;padding:0 3px;">0</span></div>
-    <span>Portal Cliente</span>
-  </div>
-  <div style="margin-top: auto; padding: 20px; border-top: 1px solid rgba(255,149,0,0.1);">
-    <button class="btn btn-cyan" style="width:100%; margin-bottom:10px;" onclick="gerarBackup()">💾 Backup</button>
-    <button class="btn btn-magenta" style="width:100%;" onclick="document.getElementById('restoreFile').click()">📂 Restaurar</button>
+  <div class="sidebar-foot">
+    <button type="button" class="sidebar-foot-btn backup" onclick="gerarBackup()">
+      <div class="nav-icon"><span class="nav-emoji">💾</span></div>
+      <span>Backup</span>
+    </button>
+    <button type="button" class="sidebar-foot-btn restore" onclick="document.getElementById('restoreFile').click()">
+      <div class="nav-icon"><span class="nav-emoji">📂</span></div>
+      <span>Restaurar</span>
+    </button>
     <input type="file" id="restoreFile" accept=".json" style="display:none" onchange="restaurarBackup(this)">
-    <p style="color:#555;font-size:0.72rem;margin-top:12px;text-align:center;line-height:1.35;">Backup semanal recomendado<br>Dados locais + Firebase</p>
+    <p class="sidebar-foot-hint">Backup semanal · Local + Firebase</p>
   </div>
 </div>
 
@@ -2421,7 +2623,7 @@ body.portal-mode #portalCliente { display: block !important; }
         <li>WhatsApp da oficina preenchido</li>
         <li>Fotos comprimidas / limpar fotos se o aparelho encher</li>
       </ul>
-      <p style="color:#666;font-size:0.8rem;margin:0;">Versão <strong id="configVersaoTxt" style="color:var(--neon-cyan);">v28.1</strong> · Uso comercial da sua oficina · Dados sensíveis: proteja o link admin e faça backup.</p>
+      <p style="color:#666;font-size:0.8rem;margin:0;">Versão <strong id="configVersaoTxt" style="color:var(--neon-cyan);">v28.3</strong> · Uso comercial da sua oficina · Dados sensíveis: proteja o link admin e faça backup.</p>
     </div>
   </div>
 
