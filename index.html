@@ -55,254 +55,68 @@ body::before {
 .sidebar {
   position: fixed;
   left: 0; top: 0;
-  width: 300px;
+  width: 260px;
   height: 100vh;
-  background:
-    radial-gradient(ellipse 120% 60% at 0% 0%, rgba(0,240,255,0.12), transparent 55%),
-    radial-gradient(ellipse 80% 40% at 100% 100%, rgba(255,0,255,0.08), transparent 50%),
-    linear-gradient(165deg, #0a0c12 0%, #10141c 45%, #0c0e14 100%);
-  border-right: 1px solid rgba(255,255,255,0.06);
+  background: linear-gradient(180deg, rgba(10,10,15,0.98) 0%, rgba(20,20,40,0.95) 100%);
+  border-right: 1px solid rgba(0,240,255,0.15);
   z-index: 100;
-  padding: 0;
+  padding: 20px 0;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  box-shadow: 12px 0 48px rgba(0,0,0,0.55);
 }
 .logo {
-  text-align: left;
-  padding: 22px 20px 18px;
-  border-bottom: none;
-  margin-bottom: 0;
-  flex-shrink: 0;
-  position: relative;
-}
-.logo::after {
-  content: '';
-  display: block;
-  height: 1px;
-  margin-top: 16px;
-  background: linear-gradient(90deg, rgba(0,240,255,0.35), transparent 80%);
-}
-.logo-mark {
-  width: 44px; height: 44px;
-  border-radius: 14px;
-  background: linear-gradient(145deg, #00e5ff, #7b2ff7);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.35rem;
-  margin-bottom: 12px;
-  box-shadow: 0 8px 24px rgba(0,229,255,0.25);
-  animation: logoPulse 3s ease-in-out infinite;
-}
-@keyframes logoPulse {
-  0%, 100% { box-shadow: 0 8px 24px rgba(0,229,255,0.25); transform: scale(1); }
-  50% { box-shadow: 0 8px 32px rgba(123,47,247,0.35); transform: scale(1.04); }
+  text-align: center;
+  padding: 0 20px 25px;
+  border-bottom: 1px solid rgba(0,240,255,0.1);
+  margin-bottom: 15px;
 }
 .logo h1 {
-  font-size: 1.35rem;
+  font-size: 1.6rem;
   font-weight: 900;
-  letter-spacing: 1.5px;
-  background: linear-gradient(90deg, #fff 20%, #00e5ff 70%, #ff4ecd 100%);
+  letter-spacing: 2px;
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta), var(--neon-purple));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin: 0;
-  line-height: 1.15;
 }
-.logo span {
-  font-size: 0.65rem;
-  color: #6b7485;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  display: block;
-  margin-top: 5px;
-  font-weight: 600;
-}
-#appVersionBadge {
-  display: inline-block !important;
-  margin-top: 10px !important;
-  padding: 3px 10px;
-  border-radius: 20px;
-  background: rgba(57,255,20,0.1);
-  border: 1px solid rgba(57,255,20,0.25);
-  font-size: 0.68rem !important;
-  color: #39ff14 !important;
-  letter-spacing: 0.5px !important;
-}
-.sidebar-nav {
-  flex: 1;
-  overflow-y: auto;
-  padding: 8px 14px 12px;
-  -webkit-overflow-scrolling: touch;
-}
+.logo span { font-size: 0.7rem; color: #666; letter-spacing: 3px; text-transform: uppercase; }
 .nav-item {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 11px 12px;
-  margin: 0 0 6px;
-  border-radius: 16px;
+  gap: 12px;
+  padding: 14px 24px;
+  margin: 4px 12px;
+  border-radius: 12px;
   cursor: pointer;
-  transition: background 0.2s, border-color 0.2s, transform 0.15s, box-shadow 0.2s;
-  color: #9aa3b2;
-  font-weight: 600;
-  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  color: #888;
+  font-weight: 500;
+  font-size: 0.92rem;
   border: 1px solid transparent;
-  background: transparent;
-  position: relative;
-  -webkit-tap-highlight-color: transparent;
 }
 .nav-item:hover {
-  background: rgba(255,255,255,0.04);
-  color: #e8eef6;
-  border-color: rgba(255,255,255,0.06);
+  background: rgba(0,240,255,0.08);
+  color: var(--neon-cyan);
+  border-color: rgba(0,240,255,0.2);
 }
-.nav-item:active { transform: scale(0.98); }
 .nav-item.active {
-  background: linear-gradient(105deg, rgba(0,229,255,0.16) 0%, rgba(123,47,247,0.1) 100%);
-  color: #fff;
-  border-color: rgba(0,229,255,0.28);
-  box-shadow: 0 4px 20px rgba(0,229,255,0.1);
-}
-.nav-item.active::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 12px; bottom: 12px;
-  width: 3px;
-  border-radius: 0 4px 4px 0;
-  background: linear-gradient(180deg, #00e5ff, #7b2ff7);
-  box-shadow: 0 0 12px rgba(0,229,255,0.5);
+  background: linear-gradient(135deg, rgba(0,240,255,0.15), rgba(184,41,221,0.1));
+  color: var(--neon-cyan);
+  border-color: rgba(0,240,255,0.3);
+  box-shadow: 0 0 20px rgba(0,240,255,0.1);
 }
 .nav-icon {
-  width: 46px; height: 46px;
-  border-radius: 14px;
+  width: 36px; height: 36px;
+  border-radius: 10px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 1.4rem;
-  flex-shrink: 0;
-  border: 1px solid rgba(255,255,255,0.06);
-  background: rgba(255,255,255,0.04);
-  position: relative;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  font-size: 1.1rem;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
 }
-.nav-icon .nav-emoji {
-  display: inline-block;
-  animation: navIcoFloat 2.6s ease-in-out infinite;
-  transform-origin: center;
-  filter: grayscale(0.15);
-}
-.nav-item.active .nav-emoji { filter: none; animation: navIcoPulse 1.6s ease-in-out infinite; }
-.nav-item:nth-child(1) .nav-icon { background: linear-gradient(145deg, rgba(0,229,255,0.2), rgba(0,229,255,0.05)); border-color: rgba(0,229,255,0.25); }
-.nav-item:nth-child(2) .nav-icon { background: linear-gradient(145deg, rgba(255,149,0,0.18), rgba(255,149,0,0.04)); border-color: rgba(255,149,0,0.22); }
-.nav-item:nth-child(3) .nav-icon { background: linear-gradient(145deg, rgba(57,255,20,0.16), rgba(57,255,20,0.04)); border-color: rgba(57,255,20,0.22); }
-.nav-item:nth-child(4) .nav-icon { background: linear-gradient(145deg, rgba(123,47,247,0.2), rgba(123,47,247,0.05)); border-color: rgba(123,47,247,0.25); }
-.nav-item:nth-child(5) .nav-icon { background: linear-gradient(145deg, rgba(57,255,20,0.18), rgba(0,229,255,0.06)); border-color: rgba(57,255,20,0.2); }
-.nav-item:nth-child(6) .nav-icon { background: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)); border-color: rgba(255,255,255,0.1); }
-.nav-item:nth-child(7) .nav-icon { background: linear-gradient(145deg, rgba(0,140,255,0.2), rgba(0,140,255,0.05)); border-color: rgba(0,140,255,0.25); }
-.nav-item:nth-child(1) .nav-emoji { animation-delay: 0s; }
-.nav-item:nth-child(2) .nav-emoji { animation-delay: 0.2s; }
-.nav-item:nth-child(3) .nav-emoji { animation-delay: 0.35s; }
-.nav-item:nth-child(4) .nav-emoji { animation-delay: 0.5s; }
-.nav-item:nth-child(5) .nav-emoji { animation-delay: 0.65s; }
-.nav-item:nth-child(6) .nav-emoji { animation-delay: 0.8s; }
-.nav-item:nth-child(7) .nav-emoji { animation-delay: 0.95s; }
-@keyframes navIcoFloat {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-4px) scale(1.12); }
-}
-@keyframes navIcoPulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.16); }
-}
-.nav-item:hover .nav-icon { transform: scale(1.08); }
 .nav-item.active .nav-icon {
-  box-shadow: 0 0 20px rgba(0,229,255,0.22);
-  transform: scale(1.04);
+  background: rgba(0,240,255,0.15);
+  border-color: rgba(0,240,255,0.3);
 }
-.nav-label {
-  flex: 1;
-  min-width: 0;
-  line-height: 1.15;
-  font-size: 0.98rem;
-  letter-spacing: -0.2px;
-}
-.nav-sub {
-  display: block;
-  font-size: 0.68rem;
-  font-weight: 500;
-  color: #5c6575;
-  margin-top: 2px;
-  letter-spacing: 0;
-}
-.nav-item.active .nav-sub { color: rgba(0,229,255,0.7); }
-.nav-item .nav-chevron {
-  color: #3a4250;
-  font-size: 1.15rem;
-  font-weight: 300;
-  transition: color 0.2s, transform 0.2s;
-}
-.nav-item.active .nav-chevron {
-  color: #00e5ff;
-  transform: translateX(2px);
-}
-.sidebar-foot {
-  flex-shrink: 0;
-  padding: 12px 14px 16px;
-  border-top: 1px solid rgba(255,255,255,0.06);
-  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.25));
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.sidebar-foot-btn {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 11px 12px;
-  border-radius: 14px;
-  border: 1px solid transparent;
-  font-family: inherit;
-  font-weight: 700;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: transform 0.15s, box-shadow 0.2s, filter 0.2s;
-  text-align: left;
-}
-.sidebar-foot-btn:active { transform: scale(0.98); }
-.sidebar-foot-btn .nav-icon {
-  width: 40px; height: 40px;
-  font-size: 1.2rem;
-  border-radius: 12px;
-}
-.sidebar-foot-btn.backup {
-  background: rgba(0,229,255,0.08);
-  border-color: rgba(0,229,255,0.22);
-  color: #7ef0ff;
-}
-.sidebar-foot-btn.backup .nav-icon {
-  background: linear-gradient(145deg, rgba(0,229,255,0.25), rgba(0,229,255,0.06));
-  border-color: rgba(0,229,255,0.3);
-}
-.sidebar-foot-btn.restore {
-  background: rgba(255,0,255,0.07);
-  border-color: rgba(255,0,255,0.2);
-  color: #f0a0ff;
-}
-.sidebar-foot-btn.restore .nav-icon {
-  background: linear-gradient(145deg, rgba(255,0,255,0.2), rgba(255,0,255,0.05));
-  border-color: rgba(255,0,255,0.28);
-}
-.sidebar-foot-hint {
-  color: #4a5260;
-  font-size: 0.68rem;
-  text-align: center;
-  line-height: 1.4;
-  margin: 2px 0 0;
-}
-@media (max-width: 768px) {
-  .sidebar { width: min(88vw, 310px); }
-}
-
 .main-content {
   margin-left: 260px;
   padding: 30px;
@@ -1998,6 +1812,154 @@ body.portal-mode #portalCliente { display: block !important; }
   line-height: 1.5;
 }
 
+
+/* ===== HOME (somente tela inicial) ===== */
+.app-topbar-home {
+  display: none;
+}
+@media (max-width: 768px) {
+  .mobile-topbar { display: none !important; }
+  .app-topbar-home {
+    display: flex;
+    position: sticky;
+    top: 0;
+    z-index: 150;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    padding-top: max(10px, env(safe-area-inset-top));
+    background: rgba(7,9,15,0.96);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .main-content { padding-bottom: 96px !important; }
+  .bottom-nav { display: flex !important; }
+}
+.app-brand-h { display:flex; align-items:center; gap:10px; flex:1; min-width:0; }
+.pick-logo {
+  width: 44px; height: 44px;
+  border-radius: 13px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.brand-text h1 {
+  font-size: 1.02rem; font-weight: 900; letter-spacing: .4px; margin:0; line-height:1.1;
+}
+.brand-text .lp { color:#fff; }
+.brand-text .pro {
+  background: linear-gradient(90deg,#8b5cff,#ff4ecd);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+.brand-text small {
+  display:block; font-size:.5rem; letter-spacing:2.2px; color:#6b7280; font-weight:700; margin-top:2px;
+}
+.ver-pill { font-size:.6rem; color:#39ff14; margin-top:2px; }
+.top-actions { display:flex; gap:8px; }
+.top-btn {
+  width:42px; height:42px; border-radius:12px;
+  border:1.5px solid rgba(0,229,255,.4);
+  background: rgba(8,18,28,.9);
+  color:#00e5ff;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer;
+}
+.top-btn svg { width:20px; height:20px; }
+
+#page-home { padding-bottom: 8px; }
+.home-hero {
+  position: relative;
+  height: 168px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 14px;
+  border: 1px solid rgba(255,255,255,.08);
+  background: #0a0c12 url('hero-guitar.jpg') right 18% center / cover no-repeat;
+}
+.home-hero::before {
+  content:'';
+  position:absolute; inset:0;
+  background: linear-gradient(90deg, rgba(6,8,14,.94) 0%, rgba(6,8,14,.78) 36%, rgba(6,8,14,.18) 68%, rgba(6,8,14,0) 100%);
+}
+.hero-copy { position:relative; z-index:1; padding:22px 18px; max-width:58%; }
+.hero-kicker { font-size:.62rem; letter-spacing:2.6px; color:#a7b0be; font-weight:700; margin-bottom:8px; }
+.hero-copy h2 { font-size:1.55rem; font-weight:800; color:#fff; margin:0 0 10px; letter-spacing:-.5px; }
+.hero-copy p { font-size:.68rem; letter-spacing:1.1px; color:#d5dce6; line-height:1.5; font-weight:600; margin:0; }
+
+.home-tile {
+  display:flex; align-items:center; gap:12px;
+  width:100%; text-align:left; font-family:inherit; color:#fff; cursor:pointer;
+  padding:14px 12px; border-radius:18px;
+  border:1px solid rgba(255,255,255,.07);
+  background: linear-gradient(180deg, #141a24, #0e131c);
+  min-height: 76px;
+}
+.home-tile:active { transform: scale(.985); }
+.home-tile.wide {
+  min-height: 82px; margin-bottom:12px; padding:16px 14px;
+  border-color: rgba(0,229,255,.38);
+  background: linear-gradient(105deg, rgba(0,60,75,.45), #0e131c 58%);
+  box-shadow: 0 0 24px rgba(0,229,255,.08);
+}
+.home-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px; }
+.home-grid .home-tile { min-height: 92px; align-items:flex-start; padding-top:14px; }
+.tile-ico {
+  width:48px; height:48px; border-radius:16px; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+}
+.tile-ico svg { width:24px; height:24px; }
+.tile-body { flex:1; min-width:0; }
+.tile-body strong { display:block; font-size:.95rem; font-weight:800; line-height:1.2; }
+.tile-body span { display:block; font-size:.68rem; color:#8b94a3; margin-top:3px; line-height:1.3; }
+.tile-chevron { color:#4b5568; font-size:1.15rem; margin-left:auto; }
+.wide .tile-chevron { color:#00e5ff; align-self:center; }
+.home-stack { display:flex; flex-direction:column; gap:10px; }
+.home-tile.bak { border-color:rgba(0,229,255,.28); background:linear-gradient(90deg,rgba(0,50,70,.4),#0e131c); }
+.home-tile.res { border-color:rgba(200,50,220,.32); background:linear-gradient(90deg,rgba(70,15,80,.42),#120e18); }
+
+.ico-cyan { background:linear-gradient(160deg,#1ad6ea,#0aa0b8); color:#062026; }
+.ico-purple { background:linear-gradient(160deg,#9b6dff,#6d3ae8); color:#fff; }
+.ico-teal { background:linear-gradient(160deg,#2ee0c5,#12a3b0); color:#062026; }
+.ico-mag { background:linear-gradient(160deg,#d56bff,#9b2edc); color:#fff; }
+.ico-gold { background:linear-gradient(160deg,#f5c14a,#e08a14); color:#2a1800; }
+.ico-vio { background:linear-gradient(160deg,#8a6bff,#5b3ad6); color:#fff; }
+.ico-blue { background:linear-gradient(160deg,#4ec3ff,#1a7fe0); color:#fff; }
+.ico-down { background:linear-gradient(160deg,#2ad4ea,#0e9bb8); color:#062026; }
+.ico-fold { background:linear-gradient(160deg,#e056f5,#a33ae0); color:#fff; }
+
+.bottom-nav {
+  display: none;
+  position: fixed; left:0; right:0; bottom:0; z-index:155;
+  justify-content: space-around; align-items: flex-end;
+  padding: 8px 4px calc(12px + env(safe-area-inset-bottom));
+  background: #07090f;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+.bn-item {
+  flex:1; background:none; border:none; color:#6b7280;
+  display:flex; flex-direction:column; align-items:center; gap:3px;
+  font-family:inherit; font-size:.62rem; font-weight:600; cursor:pointer;
+  padding: 4px 0 2px; position:relative;
+}
+.bn-item svg { width:22px; height:22px; }
+.bn-item.active { color:#00e5ff; }
+.bn-item.active::after {
+  content:''; position:absolute; left:30%; right:30%; bottom:0;
+  height:3px; border-radius:3px; background:#00e5ff; box-shadow:0 0 8px #00e5ff;
+}
+body.portal-mode .app-topbar-home,
+body.portal-mode .bottom-nav { display:none !important; }
+
+
+.pay-opts { display:grid; grid-template-columns:1fr; gap:8px; }
+.pay-opt {
+  width:100%; text-align:left; font-family:inherit; cursor:pointer;
+  padding:12px 14px; border-radius:14px; color:#e8eef6;
+  background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1);
+}
+.pay-opt strong { display:block; font-size:.95rem; }
+.pay-opt small { display:block; color:#8b94a3; margin-top:3px; font-size:.75rem; }
+.pay-opt.on { border-color:rgba(0,229,255,.45); background:rgba(0,229,255,.1); }
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
@@ -2005,6 +1967,25 @@ body.portal-mode #portalCliente { display: block !important; }
 </head>
 <body>
 
+
+<div class="app-topbar-home no-print">
+  <div class="app-brand-h">
+    <img class="pick-logo" src="logo-pick.jpg" alt="" onclick="navigateTo('home')">
+    <div class="brand-text">
+      <h1><span class="lp">LUTHIER</span> <span class="pro">PRO</span></h1>
+      <small>GESTÃO PROFISSIONAL</small>
+      <div class="ver-pill">v28.6 · Pagamento portal</div>
+    </div>
+  </div>
+  <div class="top-actions">
+    <button type="button" class="top-btn" onclick="navigateTo('portal-admin')" aria-label="Portal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 010 18M12 3a15 15 0 000 18"/></svg>
+    </button>
+    <button type="button" class="top-btn" onclick="toggleSidebar()" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</div>
 <div class="mobile-topbar no-print">
   <button type="button" class="menu-btn" onclick="toggleSidebar()" aria-label="Menu">☰</button>
   <div class="brand">LUTHIER PRO</div>
@@ -2015,59 +1996,43 @@ body.portal-mode #portalCliente { display: block !important; }
 <!-- Sidebar -->
 <div class="sidebar" id="appSidebar">
   <div class="logo">
-    <div class="logo-mark">🎸</div>
     <h1>LUTHIER PRO</h1>
-    <span>Gestão inteligente</span>
-    <div id="appVersionBadge">v28.3 · Menu pro</div>
+    <span>Gestão profissional</span>
+    <div id="appVersionBadge" style="margin-top:6px;font-size:0.72rem;color:var(--neon-green);letter-spacing:1px;">v28.6 · Pagamento portal</div>
   </div>
-  <div class="sidebar-nav">
-    <div class="nav-item active" onclick="navigateTo('dashboard')">
-      <div class="nav-icon"><span class="nav-emoji">📊</span></div>
-      <span class="nav-label">Dashboard<span class="nav-sub">Visão geral</span></span>
-      <span class="nav-chevron">›</span>
-    </div>
-    <div class="nav-item" onclick="navigateTo('clientes')">
-      <div class="nav-icon"><span class="nav-emoji">👥</span></div>
-      <span class="nav-label">Clientes<span class="nav-sub">Cadastros e histórico</span></span>
-      <span class="nav-chevron">›</span>
-    </div>
-    <div class="nav-item" onclick="navigateTo('servicos')">
-      <div class="nav-icon"><span class="nav-emoji">🔧</span></div>
-      <span class="nav-label">Nova Entrada<span class="nav-sub">Atendimento completo</span></span>
-      <span class="nav-chevron">›</span>
-    </div>
-    <div class="nav-item" onclick="navigateTo('kanban')">
-      <div class="nav-icon"><span class="nav-emoji">📋</span></div>
-      <span class="nav-label">Kanban<span class="nav-sub">Status dos serviços</span></span>
-      <span class="nav-chevron">›</span>
-    </div>
-    <div class="nav-item" onclick="navigateTo('financeiro')">
-      <div class="nav-icon"><span class="nav-emoji">💰</span></div>
-      <span class="nav-label">Financeiro<span class="nav-sub">Receitas do mês</span></span>
-      <span class="nav-chevron">›</span>
-    </div>
-    <div class="nav-item" onclick="navigateTo('config')">
-      <div class="nav-icon"><span class="nav-emoji">⚙️</span></div>
-      <span class="nav-label">Configurações<span class="nav-sub">Oficina e catálogo</span></span>
-      <span class="nav-chevron">›</span>
-    </div>
-    <div class="nav-item" onclick="navigateTo('portal-admin')">
-      <div class="nav-icon" style="position:relative;"><span class="nav-emoji">🌐</span><span id="agendaBadge" style="display:none;position:absolute;top:-4px;right:-6px;background:#ff2b6e;color:#fff;font-size:0.65rem;font-weight:700;min-width:16px;height:16px;border-radius:8px;line-height:16px;text-align:center;padding:0 3px;z-index:2;">0</span></div>
-      <span class="nav-label">Portal Cliente<span class="nav-sub">Agenda e catálogo</span></span>
-      <span class="nav-chevron">›</span>
-    </div>
+  <div class="nav-item active" onclick="navigateTo('dashboard')">
+    <div class="nav-icon">📊</div>
+    <span>Dashboard</span>
   </div>
-  <div class="sidebar-foot">
-    <button type="button" class="sidebar-foot-btn backup" onclick="gerarBackup()">
-      <div class="nav-icon"><span class="nav-emoji">💾</span></div>
-      <span>Backup</span>
-    </button>
-    <button type="button" class="sidebar-foot-btn restore" onclick="document.getElementById('restoreFile').click()">
-      <div class="nav-icon"><span class="nav-emoji">📂</span></div>
-      <span>Restaurar</span>
-    </button>
+  <div class="nav-item" onclick="navigateTo('clientes')">
+    <div class="nav-icon">👥</div>
+    <span>Clientes</span>
+  </div>
+  <div class="nav-item" onclick="navigateTo('servicos')">
+    <div class="nav-icon">🔧</div>
+    <span>Nova Entrada</span>
+  </div>
+  <div class="nav-item" onclick="navigateTo('kanban')">
+    <div class="nav-icon">📋</div>
+    <span>Kanban</span>
+  </div>
+  <div class="nav-item" onclick="navigateTo('financeiro')">
+    <div class="nav-icon">💰</div>
+    <span>Financeiro</span>
+  </div>
+  <div class="nav-item" onclick="navigateTo('config')">
+    <div class="nav-icon">⚙️</div>
+    <span>Configurações</span>
+  </div>
+  <div class="nav-item" onclick="navigateTo('portal-admin')">
+    <div class="nav-icon" style="position:relative;">🌐<span id="agendaBadge" style="display:none;position:absolute;top:-6px;right:-10px;background:#ff2b6e;color:#fff;font-size:0.65rem;font-weight:700;min-width:16px;height:16px;border-radius:8px;line-height:16px;text-align:center;padding:0 3px;">0</span></div>
+    <span>Portal Cliente</span>
+  </div>
+  <div style="margin-top: auto; padding: 20px; border-top: 1px solid rgba(255,149,0,0.1);">
+    <button class="btn btn-cyan" style="width:100%; margin-bottom:10px;" onclick="gerarBackup()">💾 Backup</button>
+    <button class="btn btn-magenta" style="width:100%;" onclick="document.getElementById('restoreFile').click()">📂 Restaurar</button>
     <input type="file" id="restoreFile" accept=".json" style="display:none" onchange="restaurarBackup(this)">
-    <p class="sidebar-foot-hint">Backup semanal · Local + Firebase</p>
+    <p style="color:#555;font-size:0.72rem;margin-top:12px;text-align:center;line-height:1.35;">Backup semanal recomendado<br>Dados locais + Firebase</p>
   </div>
 </div>
 
@@ -2091,8 +2056,63 @@ body.portal-mode #portalCliente { display: block !important; }
 <div class="main-content">
   <div class="toast-container" id="toastContainer"></div>
 
+
+  <!-- HOME -->
+  <div class="page active" id="page-home">
+    <div class="home-hero">
+      <div class="hero-copy">
+        <div class="hero-kicker">BEM-VINDO</div>
+        <h2>Luthier Pro</h2>
+        <p>ORGANIZAÇÃO, CONTROLE<br>E MAIS TEMPO PARA O<br>QUE IMPORTA: A MÚSICA.</p>
+      </div>
+    </div>
+    <button type="button" class="home-tile wide" onclick="navigateTo('dashboard')">
+      <div class="tile-ico ico-cyan"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="11" width="3.2" height="8" rx="1"/><rect x="10.4" y="6" width="3.2" height="13" rx="1"/><rect x="16.8" y="9" width="3.2" height="10" rx="1"/></svg></div>
+      <div class="tile-body"><strong>Dashboard</strong><span>Visão geral do seu negócio</span></div>
+      <span class="tile-chevron">›</span>
+    </button>
+    <div class="home-grid">
+      <button type="button" class="home-tile" onclick="navigateTo('clientes')">
+        <div class="tile-ico ico-purple"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12a4 4 0 100-8 4 4 0 000 8zm-7 9a7 7 0 0114 0H5z"/></svg></div>
+        <div class="tile-body"><strong>Clientes</strong><span>Cadastros e histórico</span></div>
+      </button>
+      <button type="button" class="home-tile" onclick="navigateTo('servicos')">
+        <div class="tile-ico ico-teal"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 19.6l-6.2-6.2 1.4-1.4 1.4 1.4 1.4-1.4-4.2-4.2-1.4 1.4 1.4 1.4-1.4 1.4L8.2 6.4A5 5 0 104 10.6l6.2 6.2 1.4-1.4-1.4-1.4 1.4-1.4 6.2 6.2c.8.8 2 .8 2.8 0 .8-.8.8-2 0-2.8zM6.5 8.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg></div>
+        <div class="tile-body"><strong>Nova Entrada</strong><span>Registrar atendimento</span></div>
+      </button>
+      <button type="button" class="home-tile" onclick="navigateTo('kanban')">
+        <div class="tile-ico ico-mag"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 3h10a2 2 0 012 2v16l-7-3-7 3V5a2 2 0 012-2zm2 5h6v2H9V8zm0 4h6v2H9v-2z"/></svg></div>
+        <div class="tile-body"><strong>Kanban</strong><span>Acompanhe os serviços</span></div>
+      </button>
+      <button type="button" class="home-tile" onclick="navigateTo('financeiro')">
+        <div class="tile-ico ico-gold"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm1 15.2V19h-2v-1.8c-1.7-.3-3-1.4-3.1-3.2h1.9c.1.8.8 1.4 2.1 1.4 1.1 0 1.9-.5 1.9-1.4 0-.8-.6-1.2-2.1-1.7-2-.6-3.4-1.5-3.4-3.4 0-1.6 1.3-2.8 2.8-3.1V5h2v1.8c1.6.4 2.6 1.7 2.7 3.2h-1.9c0-.7-.6-1.3-1.9-1.3-1.1 0-1.8.5-1.8 1.3 0 .8.7 1.1 2.2 1.6 2 .6 3.4 1.6 3.4 3.5 0 1.6-1.2 2.8-2.9 3.1z"/></svg></div>
+        <div class="tile-body"><strong>Financeiro</strong><span>Contas e recebimentos</span></div>
+      </button>
+      <button type="button" class="home-tile" onclick="navigateTo('config')">
+        <div class="tile-ico ico-vio"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 8.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7zm9.4 3.7l-1.8-1.4.2-1.2.2-1.2 2-1.6-.2-.6-2-3.4-.6-.2-2.4 1-1.1-.6-1.2-.4L13.4 2h-.6l-1.2.1-1.2.4-1.1.6-2.4-1-.6.2-2 3.4-.2.6 2 1.6.2 1.2.2 1.2-1.8 1.4-.4.5.2.6 2 3.4.6.2 2.4-1 1.1.6 1.2.4.9.1h.6l1.2-.1 1.2-.4 1.1-.6 2.4 1 .6-.2 2-3.4.2-.6-2-1.6z"/></svg></div>
+        <div class="tile-body"><strong>Configurações</strong><span>Ajustes do sistema</span></div>
+      </button>
+      <button type="button" class="home-tile" onclick="navigateTo('portal-admin')">
+        <div class="tile-ico ico-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 3 3.8 6 3.8 9s-1.3 6-3.8 9c-2.5-3-3.8-6-3.8-9S9.5 6 12 3z"/></svg></div>
+        <div class="tile-body"><strong>Portal Cliente</strong><span>Atendimentos e serviços</span></div>
+      </button>
+    </div>
+    <div class="home-stack">
+      <button type="button" class="home-tile bak" onclick="gerarBackup()">
+        <div class="tile-ico ico-down"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v11m0 0l-4-4m4 4l4-4"/><path d="M5 18h14"/></svg></div>
+        <div class="tile-body"><strong>Backup</strong><span>Mantenha seus dados seguros</span></div>
+        <span class="tile-chevron">›</span>
+      </button>
+      <button type="button" class="home-tile res" onclick="document.getElementById('restoreFile').click()">
+        <div class="tile-ico ico-fold"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V8a2 2 0 00-2-2h-8l-2-2z"/></svg></div>
+        <div class="tile-body"><strong>Restaurar</strong><span>Recupere seus dados</span></div>
+        <span class="tile-chevron">›</span>
+      </button>
+    </div>
+  </div>
+
   <!-- DASHBOARD -->
-  <div class="page active" id="page-dashboard">
+  <div class="page" id="page-dashboard">
     <div class="page-header">
       <h2 class="neon-text-cyan">Dashboard</h2>
       <p>Visão geral da sua oficina</p>
@@ -2623,7 +2643,7 @@ body.portal-mode #portalCliente { display: block !important; }
         <li>WhatsApp da oficina preenchido</li>
         <li>Fotos comprimidas / limpar fotos se o aparelho encher</li>
       </ul>
-      <p style="color:#666;font-size:0.8rem;margin:0;">Versão <strong id="configVersaoTxt" style="color:var(--neon-cyan);">v28.3</strong> · Uso comercial da sua oficina · Dados sensíveis: proteja o link admin e faça backup.</p>
+      <p style="color:#666;font-size:0.8rem;margin:0;">Versão <strong id="configVersaoTxt" style="color:var(--neon-cyan);">v28.1</strong> · Uso comercial da sua oficina · Dados sensíveis: proteja o link admin e faça backup.</p>
     </div>
   </div>
 
@@ -2652,6 +2672,15 @@ body.portal-mode #portalCliente { display: block !important; }
         <div class="form-group">
           <label class="form-label">Texto de boas-vindas</label>
           <textarea class="form-textarea" id="lojaWelcome" placeholder="Mensagem que aparece no portal..."></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">InfiniteTag (InfinitePay)</label>
+          <input type="text" class="form-input" id="lojaInfiniteTag" placeholder="guita_38">
+          <p style="color:#666;font-size:0.75rem;margin-top:6px;">Sem o $. O cliente escolhe PIX, débito ou crédito no checkout.</p>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Chave PIX (opcional, para mensagem)</label>
+          <input type="text" class="form-input" id="lojaPixChave" placeholder="CPF, e-mail ou aleatória">
         </div>
         <button class="btn btn-cyan" onclick="salvarConfigLoja()">💾 Salvar dados da oficina</button>
       </div>
@@ -2848,13 +2877,31 @@ service cloud.firestore {
         </div>
         <div class="form-group">
           <label class="form-label">Serviço desejado</label>
-          <select class="form-select" id="agServico"></select>
+          <select class="form-select" id="agServico" onchange="atualizarHintsPagamentoPortal()"></select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Como prefere seguir?</label>
+          <input type="hidden" id="agPagamentoModo" value="orcamento">
+          <div class="pay-opts">
+            <button type="button" class="pay-opt on" id="payOptOrc" onclick="escolherPagamentoPortal('orcamento')">
+              <strong>Só orçamento</strong>
+              <small>Sem compromisso — conversamos no WhatsApp</small>
+            </button>
+            <button type="button" class="pay-opt" id="payOptEnt" onclick="escolherPagamentoPortal('entrada')">
+              <strong>Entrada de 30%</strong>
+              <small id="agEntradaHint">Sinal para reservar o horário · PIX, débito ou crédito</small>
+            </button>
+            <button type="button" class="pay-opt" id="payOptTot" onclick="escolherPagamentoPortal('total')">
+              <strong>Pagar valor total</strong>
+              <small id="agTotalHint">PIX, débito ou crédito na InfinitePay</small>
+            </button>
+          </div>
         </div>
         <div class="form-group">
           <label class="form-label">Observações</label>
           <textarea class="form-textarea" id="agObs" placeholder="Descreva o problema ou o que precisa..."></textarea>
         </div>
-        <button type="button" class="btn btn-green" style="width:100%;" onclick="enviarAgendamento()">📱 Enviar pelo WhatsApp</button>
+        <button type="button" class="btn btn-green" style="width:100%;" onclick="enviarAgendamento()">Confirmar</button>
       </div>
     </section>
 
@@ -3147,7 +3194,9 @@ const DB = {
         nome: 'Luthier Pro',
         whatsapp: '',
         cidade: '',
-        welcome: 'Bem-vindo! Confira nossos serviços, agende um horário ou acompanhe o status do seu instrumento.'
+        welcome: 'Bem-vindo! Confira nossos serviços, agende um horário ou acompanhe o status do seu instrumento.',
+        infiniteTag: 'guita_38',
+        pixChave: ''
       };
     }
     if (this.catalogo.length === 0) {
@@ -3161,6 +3210,8 @@ const DB = {
   }
 };
 DB.initDefaults();
+if (DB.loja && !DB.loja.infiniteTag) { DB.loja.infiniteTag = 'guita_38'; DB.save(); }
+
 let chartFaturamento = null, chartStatus = null, chartFinanceiro = null, chartInstrumentos = null, chartMateriais = null;
 let fotosServicoAtual = [];
 let pendingAgendamentoId = null;
@@ -3216,6 +3267,11 @@ function navigateTo(page) {
     const pages = ['dashboard','clientes','servicos','kanban','financeiro','config','portal-admin'];
     if (pages[i] === page) n.classList.add('active');
   });
+  const tabMap = { home:'home', clientes:'clientes', servicos:'servicos', kanban:'kanban' };
+  document.querySelectorAll('.bn-item').forEach(n => {
+    n.classList.toggle('active', n.dataset.bn === (tabMap[page] || ''));
+  });
+  try { window.scrollTo({ top: 0 }); } catch (e) {}
   if (page === 'dashboard') renderDashboard();
   if (page === 'clientes') renderClientes();
   if (page === 'servicos') initPaginaServicos();
@@ -5132,23 +5188,39 @@ function avisarClientePronto(id) {
   const oficina = L.nome || 'nossa oficina';
   const inst = [s.tipoInstrumento, s.modelo].filter(Boolean).join(' ');
   const link = typeof getPortalURL === 'function' ? getPortalURL() : '';
-  const linhas = [
-    'Olá ' + (s.clienteNome || '') + '! 🎸',
-    '',
-    'Seu instrumento ficou *pronto* e já pode ser retirado.',
-    '',
-    '*Ordem de serviço:* ' + cod,
-    inst ? ('*Instrumento:* ' + inst) : null,
-    s.tipoServico ? ('*Serviço:* ' + s.tipoServico) : null,
-    '',
-    'Para acompanhar, use o código *' + cod + '* no portal:',
-    link,
-    '',
-    'Qualquer dúvida, é só responder esta mensagem.',
-    '— ' + oficina
-  ].filter(Boolean);
-  const url = 'https://api.whatsapp.com/send?phone=55' + tel + '&text=' + encodeURIComponent(linhas.join('\n'));
-  window.location.href = url;
+  const total = totalOS(s);
+  const Lpay = DB.loja || {};
+  const pix = Lpay.pixChave || '';
+  (async () => {
+    let payUrl = '';
+    if (total > 0) {
+      try {
+        payUrl = await criarLinkInfinitePay((s.tipoServico || 'Serviço') + ' ' + cod, total, String(s.id));
+      } catch (e) { console.error(e); }
+    }
+    const linhas = [
+      'Olá ' + (s.clienteNome || '') + '! 🎸',
+      '',
+      'Seu instrumento ficou *pronto* e já pode ser retirado.',
+      '',
+      '*Ordem de serviço:* ' + cod,
+      inst ? ('*Instrumento:* ' + inst) : null,
+      s.tipoServico ? ('*Serviço:* ' + s.tipoServico) : null,
+      total ? ('*Valor:* ' + formatMoney(total)) : null,
+      '',
+      payUrl ? 'Para pagar (PIX, débito ou crédito), use este link:' : null,
+      payUrl || null,
+      pix ? ('*Chave PIX:* ' + pix) : null,
+      '',
+      'Para acompanhar, use o código *' + cod + '* no portal:',
+      link,
+      '',
+      'Qualquer dúvida, é só responder esta mensagem.',
+      '— ' + oficina
+    ].filter(Boolean);
+    const url = 'https://api.whatsapp.com/send?phone=55' + tel + '&text=' + encodeURIComponent(linhas.join('\n'));
+    window.location.href = url;
+  })();
 }
 
 function verServico(id) {
@@ -5841,6 +5913,8 @@ function limparTodosDados() {
   DB.agendamentos = [];
   DB.loja = null;
   DB.initDefaults();
+if (DB.loja && !DB.loja.infiniteTag) { DB.loja.infiniteTag = 'guita_38'; DB.save(); }
+
   DB.save();
   showToast('Todos os dados foram limpos!');
   navigateTo('dashboard');
@@ -5994,6 +6068,7 @@ async function sincronizarAgendamentoFirebase(a) {
       telefone: a.telefone || '',
       servico: a.servico || '',
       instrumento: a.instrumento || '',
+      pagamento: a.pagamento || '',
       obs: a.obs || '',
       data: a.data || new Date().toISOString()
     }, { merge: true });
@@ -6025,6 +6100,7 @@ async function buscarNovosAgendamentosFirebase() {
           telefone: d.telefone || '',
           servico: d.servico || '',
           instrumento: d.instrumento || '',
+          pagamento: d.pagamento || '',
           obs: d.obs || '',
           data: d.data || new Date().toISOString(),
           lido: false
@@ -6056,6 +6132,8 @@ async function sincronizarPortalFirebase() {
     whatsapp: wa,
     cidade: L.cidade || '',
     welcome: L.welcome || '',
+    infiniteTag: (L.infiniteTag || 'guita_38').replace(/^\$/, '').trim(),
+    pixChave: L.pixChave || '',
     atualizadoEm: new Date().toISOString()
   });
   await fbDb.collection('portal').doc('catalogo').set({
@@ -6104,7 +6182,9 @@ async function carregarPortalDoFirebase() {
         nome: loja.nome || 'Luthier Pro',
         whatsapp: loja.whatsapp || '',
         cidade: loja.cidade || '',
-        welcome: loja.welcome || ''
+        welcome: loja.welcome || '',
+        infiniteTag: loja.infiniteTag || 'guita_38',
+        pixChave: loja.pixChave || ''
       },
       catalogo: Array.isArray(catData.items) ? catData.items : []
     };
@@ -6171,6 +6251,8 @@ function renderPortalAdmin() {
   set('lojaWhatsapp', L.whatsapp);
   set('lojaCidade', L.cidade);
   set('lojaWelcome', L.welcome);
+  set('lojaInfiniteTag', L.infiniteTag || 'guita_38');
+  set('lojaPixChave', L.pixChave);
   const link = document.getElementById('portalLink');
   if (link) link.value = getPortalURL();
   const cfg = getFirebaseConfigSalva();
@@ -6192,7 +6274,9 @@ async function salvarConfigLoja() {
     nome: (document.getElementById('lojaNome').value || 'Luthier Pro').trim(),
     whatsapp: wa,
     cidade: (document.getElementById('lojaCidade').value || '').trim(),
-    welcome: (document.getElementById('lojaWelcome').value || '').trim()
+    welcome: (document.getElementById('lojaWelcome').value || '').trim(),
+    infiniteTag: (document.getElementById('lojaInfiniteTag').value || 'guita_38').replace(/^\$/, '').trim(),
+    pixChave: (document.getElementById('lojaPixChave').value || '').trim()
   };
   DB.save();
   renderPortalAdmin();
@@ -6226,7 +6310,9 @@ function publicarPortalData() {
       nome: L.nome || 'Luthier Pro',
       whatsapp: String(L.whatsapp).replace(/\D/g, '').replace(/^55/, ''),
       cidade: L.cidade || '',
-      welcome: L.welcome || ''
+      welcome: L.welcome || '',
+      infiniteTag: (L.infiniteTag || 'guita_38').replace(/^\$/, '').trim(),
+      pixChave: L.pixChave || ''
     },
     catalogo: DB.catalogo.map(c => ({
       id: c.id,
@@ -6489,6 +6575,8 @@ async function entrarPortalCliente() {
   if (sel) {
     sel.innerHTML = '<option value="">-- Selecione --</option>' +
       cat.map(c => `<option value="${c.nome}">${c.nome} — ${formatMoney(c.valor)}</option>`).join('');
+    sel.onchange = atualizarHintsPagamentoPortal;
+    atualizarHintsPagamentoPortal();
   }
   portalTab('servicos');
   if (!PORTAL_PUBLIC && !fromFb) {
@@ -6546,6 +6634,67 @@ function agendarDesteServico(nome) {
       if (opt.value === nome) { sel.value = nome; break; }
     }
   }
+  atualizarHintsPagamentoPortal();
+}
+
+
+function getInfiniteTag() {
+  const L = (typeof getPortalLoja === 'function' ? getPortalLoja() : (DB.loja || {})) || {};
+  return String(L.infiniteTag || 'guita_38').replace(/^\$/, '').trim() || 'guita_38';
+}
+function escolherPagamentoPortal(modo) {
+  const hid = document.getElementById('agPagamentoModo');
+  if (hid) hid.value = modo;
+  ['payOptOrc','payOptEnt','payOptTot'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const map = { payOptOrc:'orcamento', payOptEnt:'entrada', payOptTot:'total' };
+    el.classList.toggle('on', map[id] === modo);
+  });
+  atualizarHintsPagamentoPortal();
+}
+function valorServicoCatalogo(nome) {
+  const cat = (typeof getPortalCatalogo === 'function' ? getPortalCatalogo() : DB.catalogo) || [];
+  const c = cat.find(x => x.nome === nome);
+  return Number(c && c.valor) || 0;
+}
+function atualizarHintsPagamentoPortal() {
+  const sel = document.getElementById('agServico');
+  const v = valorServicoCatalogo(sel && sel.value);
+  const ent = document.getElementById('agEntradaHint');
+  const tot = document.getElementById('agTotalHint');
+  if (v > 0) {
+    if (ent) ent.textContent = 'Sinal de ' + formatMoney(v * 0.3) + ' · PIX, débito ou crédito';
+    if (tot) tot.textContent = formatMoney(v) + ' · PIX, débito ou crédito na InfinitePay';
+  }
+}
+async function criarLinkInfinitePay(descricao, valorReais, orderNsu) {
+  const handle = getInfiniteTag();
+  const cents = Math.max(100, Math.round(Number(valorReais) * 100));
+  const payload = {
+    handle,
+    order_nsu: String(orderNsu || ('os-' + Date.now())),
+    redirect_url: (typeof getPortalURL === 'function' ? getPortalURL() : location.href),
+    items: [{ quantity: 1, price: cents, description: String(descricao || 'Serviço luthier').slice(0, 80) }]
+  };
+  const endpoints = [
+    'https://api.checkout.infinitepay.io/links',
+    'https://api.infinitepay.io/invoices/public/checkout/links'
+  ];
+  let lastErr = null;
+  for (const url of endpoints) {
+    try {
+      const r = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+      const j = await r.json();
+      const link = j.url || j.checkout_url;
+      if (link) return link;
+      lastErr = j;
+    } catch (e) { lastErr = e; }
+  }
+  throw lastErr || new Error('Falha ao gerar link InfinitePay');
+}
+function totalOS(s) {
+  return (Number(s.maoObra) || 0) + (Number(s.materiais) || 0);
 }
 
 function enviarAgendamento() {
@@ -6554,6 +6703,7 @@ function enviarAgendamento() {
   if (!nome || !tel) { alert('Preencha nome e WhatsApp.'); return; }
   const servico = document.getElementById('agServico').value;
   const instrumento = document.getElementById('agInstrumento').value.trim();
+  const modo = (document.getElementById('agPagamentoModo') || {}).value || 'orcamento';
   const obs = document.getElementById('agObs').value.trim();
   const L = getPortalLoja();
   let wa = String(L.whatsapp || '').replace(/\D/g, '');
@@ -6562,38 +6712,49 @@ function enviarAgendamento() {
     alert('A oficina ainda não publicou o WhatsApp neste site.\nGere o portal-data.json e envie ao GitHub (ou sincronize o Firebase).');
     return;
   }
+  const valorCat = valorServicoCatalogo(servico);
+  const valorPagar = modo === 'entrada' ? valorCat * 0.3 : (modo === 'total' ? valorCat : 0);
+  const rotuloPag = modo === 'entrada' ? 'Entrada 30% (' + formatMoney(valorPagar) + ')' : (modo === 'total' ? 'Valor total (' + formatMoney(valorPagar) + ')' : 'Só orçamento');
   const novoAgendamento = {
     id: 'ag_' + Date.now(),
-    nome, telefone: tel, servico, instrumento, obs,
-    data: new Date().toISOString(),
-    lido: false
+    nome, telefone: tel, servico, instrumento,
+    pagamento: rotuloPag, modoPagamento: modo, valor: valorCat, valorPagoPedido: valorPagar,
+    obs, data: new Date().toISOString(), lido: false
   };
-  try {
-    DB.agendamentos.push(novoAgendamento);
-    DB.save();
-  } catch (e) { /* cliente pode não ter storage */ }
+  try { DB.agendamentos.push(novoAgendamento); DB.save(); } catch (e) {}
 
-  // Envia pro Firebase para a oficina ver no Portal (outro aparelho)
   (async () => {
-    try {
-      await sincronizarAgendamentoFirebase(novoAgendamento);
-    } catch (e) {
-      console.error('Falha ao gravar agendamento no Firebase', e);
+    let payUrl = '';
+    if (modo !== 'orcamento' && valorPagar > 0) {
+      try {
+        payUrl = await criarLinkInfinitePay((servico || 'Serviço') + ' — ' + rotuloPag, valorPagar, novoAgendamento.id);
+        novoAgendamento.linkPagamento = payUrl;
+      } catch (e) {
+        console.error(e);
+        alert('Não deu para abrir o checkout agora. Vamos seguir no WhatsApp e a oficina envia o link.');
+      }
+    }
+    try { await sincronizarAgendamentoFirebase(novoAgendamento); } catch (e) { console.error(e); }
+
+    const linhas = [
+      'Olá! Gostaria de agendar um serviço.',
+      '',
+      '*Nome:* ' + nome,
+      '*WhatsApp:* ' + tel
+    ];
+    if (instrumento) linhas.push('*Instrumento:* ' + instrumento);
+    if (servico) linhas.push('*Serviço:* ' + servico);
+    linhas.push('*Pagamento:* ' + rotuloPag);
+    if (payUrl) linhas.push('*Link:* ' + payUrl);
+    if (obs) linhas.push('*Obs:* ' + obs);
+    const waUrl = 'https://api.whatsapp.com/send?phone=55' + wa + '&text=' + encodeURIComponent(linhas.join('\n'));
+    if (payUrl) {
+      window.open(waUrl, '_blank');
+      window.location.href = payUrl;
+    } else {
+      window.location.href = waUrl;
     }
   })();
-
-  const linhas = [
-    'Olá! Gostaria de agendar um serviço.',
-    '',
-    '*Nome:* ' + nome,
-    '*WhatsApp:* ' + tel
-  ];
-  if (instrumento) linhas.push('*Instrumento:* ' + instrumento);
-  if (servico) linhas.push('*Serviço:* ' + servico);
-  if (obs) linhas.push('*Obs:* ' + obs);
-  const texto = encodeURIComponent(linhas.join('\n'));
-  const url = 'https://api.whatsapp.com/send?phone=55' + wa + '&text=' + texto;
-  window.location.href = url;
 }
 
 function codigoOS(servicoId) {
@@ -6707,6 +6868,15 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 </script>
+
+
+<nav class="bottom-nav no-print" id="bottomNav">
+  <button type="button" class="bn-item active" data-bn="home" onclick="navigateTo('home')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5L3 12h3v8h5v-6h2v6h5v-8h3z"/></svg>Início</button>
+  <button type="button" class="bn-item" data-bn="clientes" onclick="navigateTo('clientes')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12a4 4 0 100-8 4 4 0 000 8zm-7 9a7 7 0 0114 0H5z"/></svg>Clientes</button>
+  <button type="button" class="bn-item" data-bn="servicos" onclick="navigateTo('servicos')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 7l-4-4-2 2 4 4 2-2zM3 21l7-1 9.5-9.5-4-4L6 16l-3 5z"/></svg>Serviços</button>
+  <button type="button" class="bn-item" data-bn="kanban" onclick="navigateTo('kanban')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 4h14a1 1 0 011 1v16l-8-3-8 3V5a1 1 0 011-1z"/></svg>Agenda</button>
+  <button type="button" class="bn-item" data-bn="more" onclick="toggleSidebar()"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="6" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="18" cy="12" r="2"/></svg>Mais</button>
+</nav>
 
 </body>
 </html>
